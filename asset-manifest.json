@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ticket-generator/static/css/main.f855e6bc.css",
+    "main.js": "/ticket-generator/static/js/main.8a9f4d0e.js",
+    "static/js/453.e3caea7b.chunk.js": "/ticket-generator/static/js/453.e3caea7b.chunk.js",
+    "static/media/logo.svg": "/ticket-generator/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/ticket-generator/index.html",
+    "main.f855e6bc.css.map": "/ticket-generator/static/css/main.f855e6bc.css.map",
+    "main.8a9f4d0e.js.map": "/ticket-generator/static/js/main.8a9f4d0e.js.map",
+    "453.e3caea7b.chunk.js.map": "/ticket-generator/static/js/453.e3caea7b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.8a9f4d0e.js"
+  ]
+}
