@@ -1,5 +1,4 @@
 import { Roboto_Mono } from "next/font/google";
-import Barcode from "react-barcode";
 import { useTicket } from "../TicketContext";
 import TicketBarcode from "./TicketBarcode";
 import moment from "moment";

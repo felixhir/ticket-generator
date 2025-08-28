@@ -1,19 +1,6 @@
 import DatePicker from "react-datepicker";
 import { useTicket } from "../TicketContext";
 
-interface SidebarProps {
-    data: {
-        tour: string;
-        band: string;
-        venue: string;
-        address: string;
-        datetime: string;
-        seatType: string;
-        barcode: string;
-    };
-    setData: (data: any) => void;
-}
-
 export default function Sidebar() {
     const { data, setData } = useTicket();
 
