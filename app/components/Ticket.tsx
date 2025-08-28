@@ -25,18 +25,26 @@ export default function Ticket() {
                         </div>
                     )}
                 </div>
-                <div className="px-1 flex flex-1 flex-col justify-between h-full text-white bg-gray-800">
+                <div className="relative px-1 flex flex-1 flex-col justify-between h-full text-white bg-gray-800">
 
-                    <div>
-                        <p className="text-[10px]">
-                            {data.tour}
-                        </p>{data.band}</div>
-                    <div>
-                        <div>{data.venue}</div>
-                        <div className="whitespace-pre-line text-[10px]">{data.address}</div>
+                    <img
+                        src="./poster.jpeg"
+                        className="absolute top-[2px] bottom-[2px] left-1/2 -translate-x-1/2 h-[calc(100%-4px)] object-cover"
+                    />
+
+
+                    <div className="z-10">
+                        <div>
+                            <p className="text-[10px]">
+                                {data.tour}
+                            </p>{data.band}</div>
+                        <div>
+                            <div>{data.venue}</div>
+                            <div className="whitespace-pre-line text-[10px]">{data.address}</div>
+                        </div>
+                        <div>{moment(data.datetime).format("dddd, DD. MMM YYYY, HH:mm")} Uhr</div>
+                        <div>{data.seatType}</div>
                     </div>
-                    <div>{moment(data.datetime).format("dddd, DD. MMM YYYY, HH:mm")} Uhr</div>
-                    <div>{data.seatType}</div>
                 </div>
 
             </div>
