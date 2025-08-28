@@ -12,6 +12,7 @@
   "dependencies": {
     "next": "15.5.0",
     "react": "19.1.0",
+    "react-barcode": "^1.6.1",
     "react-dom": "19.1.0"
   },
   "devDependencies": {
