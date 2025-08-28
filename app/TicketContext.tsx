@@ -1,0 +1,43 @@
+import { useState, useContext, createContext } from "react";
+
+interface TicketData {
+    tour: string;
+    band: string;
+    venue: string;
+    address: string;
+    datetime: Date | null;
+    seatType: string;
+    barcode: string;
+}
+
+const TicketContext = createContext<{
+    data: TicketData;
+    setData: (d: Partial<TicketData>) => void;
+} | null>(null);
+
+export function TicketProvider({ children }: { children: React.ReactNode }) {
+    const [data, setDataState] = useState<TicketData>({
+        tour: "Final World Tour",
+        band: "Slayer",
+        venue: "Hanns-Martin-Schleyer-Halle",
+        address: "Mercedesstraße 69\n70372 Stuttgart",
+        datetime: new Date('2019-08-03T21:00:00.000Z'),
+        seatType: "standing ticket",
+        barcode: "My Event",
+    });
+
+    const setData = (d: Partial<TicketData>) =>
+        setDataState((prev) => ({ ...prev, ...d }));
+
+    return (
+        <TicketContext.Provider value={{ data, setData }}>
+            {children}
+        </TicketContext.Provider>
+    );
+}
+
+export const useTicket = () => {
+    const ctx = useContext(TicketContext);
+    if (!ctx) throw new Error("useTicket must be used inside TicketProvider");
+    return ctx;
+};
