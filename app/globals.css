@@ -6,11 +6,34 @@
   color: black;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: 'Work Sans';
-  --font-mono: var(--font-geist-mono);
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Ticket und Kinder sichtbar machen */
+  #ticket,
+  #ticket * {
+    visibility: visible !important;
+  }
+
+  /* Ticket auf Seite positionieren */
+  #ticket {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 20cm !important;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

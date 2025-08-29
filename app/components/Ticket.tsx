@@ -13,7 +13,7 @@ export default function Ticket() {
     const { data } = useTicket();
 
     return (
-        <div className={`shadow-lg w-[760px] h-[300px] flex flex-col text-white text-[15px] ${robotoMono.className}`}>
+        <div id="ticket" className={`shadow-lg w-[760px] h-[300px] flex flex-col text-white text-[15px] ${robotoMono.className}`}>
             <div className=" bg-orange-400 h-[3rem] font-bold p-1 flex items-center">
                 Some Brand
             </div>

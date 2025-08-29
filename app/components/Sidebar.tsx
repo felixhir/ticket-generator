@@ -1,5 +1,6 @@
 import DatePicker from "react-datepicker";
 import { useTicket } from "../TicketContext";
+import { Printer } from "lucide-react";
 
 export default function Sidebar() {
     const { data, setData } = useTicket();
@@ -70,6 +71,13 @@ export default function Sidebar() {
                     className="w-full border p-1 rounded"
                 />
             </label>
+
+            <button
+                onClick={() => window.print()}
+                className="mt-auto flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+                <Printer className="w-4 h-4 mr-2" />Print
+            </button>
 
         </div>
     );
