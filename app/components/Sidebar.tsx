@@ -52,6 +52,17 @@ export default function Sidebar({ ticketCount, setTicketCount }: any) {
                 <DatePicker className="border p-1" showTimeInput={true} selected={data.datetime} onChange={(date) => setData({ datetime: date })}></DatePicker>
             </label>
 
+            <label>
+                <span>Price</span>
+                <input
+                    type="number"
+                    step="0.1"
+                    value={data.price}
+                    onChange={(e) => setData({ price: Number(e.target.value) })}
+                    className="w-full border p-1 rounded"
+                />
+            </label>
+
             <label className="flex flex-col">
                 <span>Area</span>
                 <input
