@@ -5,7 +5,7 @@ export default function Sidebar() {
     const { data, setData } = useTicket();
 
     return (
-        <div className="w-64 bg-gray-200 border-l p-4 flex flex-col text-black space-y-4 overflow-y-auto">
+        <div className="bg-gray-200 border-l p-4 h-full flex flex-col text-black space-y-4 overflow-y-auto">
             <label className="flex flex-col">
                 <span>Tour</span>
                 <input
