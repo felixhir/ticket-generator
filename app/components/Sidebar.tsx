@@ -6,7 +6,7 @@ export default function Sidebar({ ticketCount, setTicketCount }: any) {
     const { data, setData } = useTicket();
 
     return (
-        <div className="bg-gray-200 border-l p-4 h-full flex flex-col text-black space-y-4 overflow-y-auto">
+        <div className="bg-gray-200 border-l p-4 h-full flex flex-col text-black space-y-2 overflow-y-auto">
             <label className="flex flex-col">
                 <span>Tour</span>
                 <input
@@ -69,7 +69,7 @@ export default function Sidebar({ ticketCount, setTicketCount }: any) {
                     type="text"
                     value={data.seatType}
                     onChange={(e) => setData({ seatType: e.target.value })}
-                    className="border p-1"
+                    className="border p-1 rounded"
                 />
             </label>
 
@@ -79,6 +79,19 @@ export default function Sidebar({ ticketCount, setTicketCount }: any) {
                     type="text"
                     value={data.barcode || ""}
                     onChange={(e) => setData({ barcode: e.target.value })}
+                    className="w-full border p-1 rounded"
+                />
+            </label>
+
+            <label>
+                <span>Background</span>
+                <input
+                    type="file"
+                    onChange={(e) => {
+                        if (e) {
+                            setData({ background: URL.createObjectURL(e.target.files![0]) })
+                        }
+                    }}
                     className="w-full border p-1 rounded"
                 />
             </label>

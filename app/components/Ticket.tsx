@@ -29,10 +29,11 @@ export default function Ticket() {
                 </div>
 
                 <div className="relative px-1 flex flex-1 flex-col  h-full text-white bg-gray-800 text-[4mm]">
-                    <img
-                        src="./poster.jpeg"
+                    {data.background && <img
+                        src={data.background}
                         className="absolute top-[2px] bottom-[2px] left-1/2 -translate-x-1/2 h-[calc(100%-4px)] object-cover"
                     />
+                    }
 
                     <div className="z-10 flex flex-col h-full justify-between">
                         <div>

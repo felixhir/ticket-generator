@@ -9,6 +9,7 @@ interface TicketData {
     seatType: string;
     barcode: string;
     price: number;
+    background: string | null;
 }
 
 const TicketContext = createContext<{
@@ -26,6 +27,7 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         seatType: "standing ticket",
         barcode: "My Event",
         price: 69.00,
+        background: null
     });
 
     const setData = (d: Partial<TicketData>) =>
