@@ -2,7 +2,7 @@ import DatePicker from "react-datepicker";
 import { useTicket } from "../TicketContext";
 import { Printer } from "lucide-react";
 
-export default function Sidebar() {
+export default function Sidebar({ ticketCount, setTicketCount }: any) {
     const { data, setData } = useTicket();
 
     return (
@@ -72,13 +72,24 @@ export default function Sidebar() {
                 />
             </label>
 
-            <button
-                onClick={() => window.print()}
-                className="mt-auto flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-                <Printer className="w-4 h-4 mr-2" />Print
-            </button>
-
+            <div className="mt-auto p-2 flex flex-col gap-2">
+                <label className="text-sm font-medium">Tickets per page</label>
+                <select
+                    value={ticketCount}
+                    onChange={(e) => setTicketCount(Number(e.target.value))}
+                    className="border p-1 rounded"
+                >
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                </select>
+                <button
+                    onClick={() => window.print()}
+                    className="mt-auto flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                    <Printer className="w-4 h-4 mr-2" />Print
+                </button>
+            </div>
         </div>
     );
 }

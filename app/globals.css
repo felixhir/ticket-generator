@@ -21,18 +21,9 @@
     visibility: hidden !important;
   }
 
-  /* Ticket und Kinder sichtbar machen */
-  #ticket,
-  #ticket * {
+  #print-wrapper,
+  #print-wrapper * {
     visibility: visible !important;
-  }
-
-  /* Ticket auf Seite positionieren */
-  #ticket {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 20cm !important;
   }
 }
 
