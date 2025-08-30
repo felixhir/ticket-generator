@@ -1,5 +1,11 @@
 import { useState, useContext, createContext } from "react";
 
+export enum currency {
+    EUR,
+    USD,
+    SEK
+}
+
 interface TicketData {
     tour: string;
     band: string;
@@ -9,6 +15,7 @@ interface TicketData {
     seatType: string;
     barcode: string;
     price: number;
+    currency: currency,
     background: string | null;
 }
 
@@ -27,7 +34,8 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         seatType: "standing ticket",
         barcode: "My Event",
         price: 69.00,
-        background: null
+        background: null,
+        currency: currency.EUR
     });
 
     const setData = (d: Partial<TicketData>) =>

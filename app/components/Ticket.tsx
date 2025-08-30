@@ -1,5 +1,5 @@
 import { Roboto_Mono } from "next/font/google";
-import { useTicket } from "../TicketContext";
+import { currency, useTicket } from "../TicketContext";
 import TicketBarcode from "./TicketBarcode";
 import moment from "moment";
 
@@ -12,6 +12,13 @@ const robotoMono = Roboto_Mono({
 
 export default function Ticket() {
     const { data } = useTicket();
+
+    const formatCurrency = (value: number, curr: currency) => {
+        switch (curr) {
+            case currency.SEK: return value.toFixed(0)
+            default: return value.toFixed(2)
+        }
+    }
 
     return (
         <div id="ticket" className={`shadow-lg w-[760px] h-[300px] flex flex-col text-white text-[15px] ${robotoMono.className}`}>
@@ -45,13 +52,11 @@ export default function Ticket() {
                             <p className="whitespace-pre-line text-[2mm]">{data.address}</p>
                         </div>
                         <p>{moment(data.datetime).format("dddd, DD. MMM YYYY, HH:mm")} Uhr</p>
-                        <p>{data.price.toFixed(2)} EUR</p>
+                        <p>{formatCurrency(data.price, data.currency)} {currency[data.currency]}</p>
                         <p>{data.seatType}</p>
                     </div>
                 </div>
-
             </div>
-
         </div>
     );
 }
