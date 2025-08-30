@@ -8,7 +8,8 @@
         "deploy": "next build && cd . > out/.nojekyll && gh-pages -d out --dotfiles",
         "start": "next start",
         "lint": "eslint",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "prepare": "husky"
     },
     "dependencies": {
         "lucide-react": "^0.542.0",
