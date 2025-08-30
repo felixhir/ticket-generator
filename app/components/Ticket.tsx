@@ -1,14 +1,14 @@
+import moment from "moment";
 import { Roboto_Mono } from "next/font/google";
 import { currency, useTicket } from "../TicketContext";
 import TicketBarcode from "./TicketBarcode";
-import moment from "moment";
+
 
 
 const robotoMono = Roboto_Mono({
     subsets: ["latin"],
     weight: ["400", "700"],
 });
-
 
 export default function Ticket() {
     const { data } = useTicket();
@@ -35,10 +35,10 @@ export default function Ticket() {
                     )}
                 </div>
 
-                <div className="relative px-1 flex flex-1 flex-col  h-full text-white bg-gray-800 text-[4mm]">
+                <div className="relative px-1 flex flex-1 flex-col  h-full text-white text-[4mm] {}" style={{ backgroundColor: data.bgColor }}>
                     {data.background && <img
                         src={data.background}
-                        className="absolute top-[2px] bottom-[2px] left-1/2 -translate-x-1/2 h-[calc(100%-4px)] object-cover"
+                        className="absolute top-[2px] bottom-[2px] left-3/5 -translate-x-1/2 h-[calc(100%-4px)] object-cover [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]"
                     />
                     }
 

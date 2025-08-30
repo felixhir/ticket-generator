@@ -6,6 +6,8 @@ export enum currency {
     SEK
 }
 
+export const defaultBgColor = "#333333";
+
 interface TicketData {
     tour: string;
     band: string;
@@ -17,6 +19,7 @@ interface TicketData {
     price: number;
     currency: currency,
     background: string | null;
+    bgColor: string;
 }
 
 const TicketContext = createContext<{
@@ -35,7 +38,8 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         barcode: "My Event",
         price: 69.00,
         background: null,
-        currency: currency.EUR
+        currency: currency.EUR,
+        bgColor: defaultBgColor,
     });
 
     const setData = (d: Partial<TicketData>) =>

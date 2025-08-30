@@ -1,9 +1,29 @@
+import { Printer, Trash, Upload } from "lucide-react";
+import { useEffect } from "react";
+import { HexColorInput } from "react-colorful";
 import DatePicker from "react-datepicker";
-import { currency, useTicket } from "../TicketContext";
-import { Printer, Trash } from "lucide-react";
+import { extractAverageColor } from "../functions/extractAverageColor";
+import { currency, defaultBgColor, useTicket } from "../TicketContext";
+import PopoverPicker from "./PopoverPicker";
 
 export default function Sidebar({ ticketCount, setTicketCount }: any) {
     const { data, setData } = useTicket();
+
+    useEffect(() => {
+        if (!data.background) {
+            setData({ bgColor: defaultBgColor });
+            return;
+        }
+
+        const img = new Image();
+        img.src = data.background;
+        img.onload = () => {
+            const color = extractAverageColor(img);
+            setData({ bgColor: color });
+        };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data.background]);
 
     return (
         <div className="bg-gray-200 border-l p-4 h-full flex flex-col text-black space-y-2 overflow-y-auto">
@@ -90,22 +110,36 @@ export default function Sidebar({ ticketCount, setTicketCount }: any) {
                 />
             </label>
 
-            <label>
+            <div>
                 <span>Background</span>
                 <div className="flex w-full gap-2">
-                    <input
-                        type="file"
-                        accept=".jpeg,.png,.jpg"
-                        onChange={(e) => {
-                            if (e) {
-                                setData({ background: URL.createObjectURL(e.target.files![0]) })
-                            }
-                        }}
-                        className="w-full border p-1 rounded"
-                    />
-                    <button disabled={!data.background}><Trash color={!data.background ? "gray" : "red"} onClick={() => setData({ background: null })}></Trash></button>
+                    <div>
+                        <label
+                            className="block w-full p-1 text-center bg-gray-300 rounded cursor-pointer hover:bg-gray-400"
+                        >
+                            <input
+                                type="file"
+                                accept=".jpeg,.png,.jpg"
+                                onChange={(e) => {
+                                    if (e.target.files && e.target.files[0]) {
+                                        setData({ background: URL.createObjectURL(e.target.files[0]) });
+                                    }
+                                }}
+                                className="hidden"
+                                id="background-upload"
+                            />
+                            <Upload></Upload>
+                        </label>
+                    </div>
+                    <button disabled={!data.background} className="block p-1 text-center bg-gray-300 rounded cursor-pointer hover:bg-gray-400"><Trash color={!data.background ? "gray" : "red"} onClick={() => setData({ background: null })}></Trash></button>
+                    <PopoverPicker color={data.bgColor} onChange={(e: string) => setData({ bgColor: e })}></PopoverPicker>
+                    <HexColorInput color={data.bgColor} onChange={(e) => setData({ bgColor: e })} className="p-1 border rounded w-[3cm]"></HexColorInput>
                 </div>
-            </label>
+            </div>
+
+            <div className="flex gap-2 items-center">
+
+            </div>
 
             <div className="mt-auto">
                 <div className="p-2 flex flex-1 items-center gap-2">
