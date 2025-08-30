@@ -4,7 +4,12 @@ import DatePicker from 'react-datepicker'
 
 import { useTicket } from '../TicketContext'
 
-export default function Sidebar({ ticketCount, setTicketCount }: any) {
+interface SidebarProps {
+    ticketCount: number
+    setTicketCount: (count: number) => void
+}
+
+export default function Sidebar({ ticketCount, setTicketCount }: SidebarProps) {
     const { data, setData } = useTicket()
 
     return (
