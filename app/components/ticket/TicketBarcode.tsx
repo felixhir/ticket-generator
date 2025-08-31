@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Barcode from 'react-barcode'
 
-import { useTicket } from '../TicketContext'
+import { useTicket } from '../../TicketContext'
 
 export default function TicketBarcode() {
     const { data } = useTicket()

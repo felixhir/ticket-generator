@@ -2,7 +2,7 @@ import moment from 'moment'
 
 import { Roboto_Mono } from 'next/font/google'
 
-import { currency, useTicket } from '../TicketContext'
+import { currency, useTicket } from '../../TicketContext'
 import TicketBarcode from './TicketBarcode'
 
 const robotoMono = Roboto_Mono({

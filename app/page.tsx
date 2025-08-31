@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 import { TicketProvider } from './TicketContext'
-import Sidebar from './components/Sidebar'
-import Ticket from './components/Ticket'
+import Sidebar from './components/sidebar/Sidebar'
+import Ticket from './components/ticket/Ticket'
 
 export default function Home() {
     const [ticketCount, setTicketCount] = useState(1)

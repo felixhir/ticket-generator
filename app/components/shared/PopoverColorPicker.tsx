@@ -1,8 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 
-import useClickOutside from '../functions/useClickOutside'
-import Popover from './Popover'
+import useClickOutside from '../../functions/useClickOutside'
 
 interface PopoverPickerProps {
     color: string
@@ -25,10 +24,11 @@ export default function PopoverColorPicker({ color, onChange }: PopoverPickerPro
                 style={{ backgroundColor: isOpen ? 'transparent' : color }}
                 onClick={() => toggle()}
             />
-
-            <Popover isOpen={isOpen} ref={popover}>
-                <HexColorPicker color={color} onChange={onChange} />
-            </Popover>
+            {isOpen && (
+                <div className='absolute left-0 border-r-8 shadow-sm bottom-[calc(100%+2px)]' ref={popover}>
+                    <HexColorPicker color={color} onChange={onChange} />
+                </div>
+            )}
         </div>
     )
 }
