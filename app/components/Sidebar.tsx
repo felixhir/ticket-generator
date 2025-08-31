@@ -6,8 +6,7 @@ import DatePicker from 'react-datepicker'
 
 import { currency, defaultBgColor, useTicket } from '../TicketContext'
 import { extractAverageColor } from '../functions/extractAverageColor'
-import PopoverPicker from './PopoverPicker'
-import './Sidebar.css'
+import PopoverColorPicker from './PopoverColorPicker'
 
 interface SidebarProps {
     ticketCount: number
@@ -130,10 +129,10 @@ export default function Sidebar({ ticketCount, setTicketCount }: SidebarProps) {
                             onClick={() => setData({ background: null })}
                         ></Trash>
                     </button>
-                    <PopoverPicker
+                    <PopoverColorPicker
                         color={data.bgColor}
                         onChange={(e: string) => setData({ bgColor: e })}
-                    ></PopoverPicker>
+                    ></PopoverColorPicker>
                     <HexColorInput
                         color={data.bgColor}
                         onChange={e => setData({ bgColor: e })}
