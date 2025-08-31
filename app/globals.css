@@ -16,6 +16,10 @@
         background-color: var(--ticket-bg);
     }
 
+    .ticket-bg-color {
+        background-color: var(--ticket-bg-color);
+    }
+
     .ticket-text {
         color: var(--ticket-text);
     }
@@ -91,24 +95,26 @@
     --ticket-width: 760px;
     --ticket-height: 300px;
     --ticket-bg: white;
+    --ticket-bg-color: #333333;
+    /* Dynamic background color controlled by user input */
     --ticket-text: black;
     --ticket-text-alt: white;
     --ticket-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
     /* Ticket Header */
     --ticket-header-bg: #fb923c;
-    --ticket-header-height: 3rem;
+    --ticket-header-height: 48px;
     --ticket-header-text: black;
 
     /* Ticket Typography */
     --ticket-font-size: 15px;
-    --ticket-font-size-large: 4mm;
-    --ticket-font-size-small: 2mm;
+    --ticket-font-size-large: 15px;
+    --ticket-font-size-small: 8px;
 
     /* Ticket Spacing */
-    --ticket-padding: 0.5rem;
-    --ticket-padding-content: 0.5rem;
-    --ticket-padding-inner: 0.25rem;
+    --ticket-padding: 8px;
+    --ticket-padding-content: 8px;
+    --ticket-padding-inner: 4px;
 
     /* Ticket Barcode */
     --ticket-barcode-width: 75px;

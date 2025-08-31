@@ -40,8 +40,7 @@ export default function Ticket() {
                 </div>
 
                 <div
-                    className='ticket-padding-inner ticket-font-size-large relative flex flex-1 flex-col h-full'
-                    style={{ backgroundColor: data.useBackground ? data.bgColor : 'var(--ticket-bg)' }}
+                    className={`ticket-padding-inner ticket-font-size-large relative flex flex-1 flex-col h-full ${data.useBackground ? 'ticket-bg-color' : 'ticket-bg'}`}
                 >
                     {data.useBackground && data.background && (
                         <img

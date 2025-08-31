@@ -3,7 +3,7 @@ import { Printer } from 'lucide-react'
 import { useState } from 'react'
 
 import SidebarContentSection from './SidebarContentSection'
-import SidebarStylingSection from './SidebarStylingSection'
+import SidebarStylingSection from './styling/SidebarStylingSection'
 
 interface SidebarProps {
     ticketCount: number
@@ -40,7 +40,7 @@ export default function Sidebar({ ticketCount, setTicketCount }: SidebarProps) {
             </div>
 
             {/* Tab Content */}
-            <div className='flex-1 space-y-2'>
+            <div className='flex-1 space-y-2 mb-10'>
                 {activeTab === 'content' && <SidebarContentSection />}
                 {activeTab === 'styling' && <SidebarStylingSection />}
             </div>
