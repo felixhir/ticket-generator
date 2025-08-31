@@ -7,5 +7,5 @@ label {
 input,
 textarea,
 select {
-    @apply text-sm rounded-lg p-2 border;
+    @apply text-sm rounded-lg p-2 border dark:bg-gray-800;
 }

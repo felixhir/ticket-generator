@@ -51,9 +51,9 @@ export default function Home() {
 
                 <button
                     onClick={() => window.open('https://github.com/felixhir/ticket-generator', '_blank')}
-                    className='absolute left-4 bottom-4 transition-transform transform hover:scale-110 cursor-pointer'
+                    className='absolute left-4 bottom-4 transition-transform transform hover:scale-110 cursor-pointer dark:bg-white rounded-full'
                 >
-                    <Image src='/github.svg' alt='' width='50' height='50'></Image>
+                    <Image src='github.svg' className='-mt-[1px]' alt='Github Icon' width='50' height='50'></Image>
                 </button>
                 <button
                     className='absolute right-84 bottom-4 transition-transform transform hover:scale-110 cursor-pointer border rounded-full h-9 w-9 flex items-center justify-center'
