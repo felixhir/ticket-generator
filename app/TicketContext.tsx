@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from 'react'
 
 export enum currency {
     EUR,
@@ -6,54 +6,49 @@ export enum currency {
     SEK
 }
 
-export const defaultBgColor = "#333333";
+export const defaultBgColor = '#333333'
 
 interface TicketData {
-    tour: string;
-    band: string;
-    venue: string;
-    address: string;
-    datetime: Date | null;
-    seatType: string;
-    barcode: string;
-    price: number;
-    currency: currency,
-    background: string | null;
-    bgColor: string;
+    tour: string
+    band: string
+    venue: string
+    address: string
+    datetime: Date | null
+    seatType: string
+    barcode: string
+    price: number
+    background: string | null
+    currency: currency
+    bgColor: string
 }
 
 const TicketContext = createContext<{
-    data: TicketData;
-    setData: (d: Partial<TicketData>) => void;
-} | null>(null);
+    data: TicketData
+    setData: (d: Partial<TicketData>) => void
+} | null>(null)
 
 export function TicketProvider({ children }: { children: React.ReactNode }) {
     const [data, setDataState] = useState<TicketData>({
-        tour: "Final World Tour",
-        band: "Slayer",
-        venue: "Hanns-Martin-Schleyer-Halle",
-        address: "Mercedesstraße 69\n70372 Stuttgart",
+        tour: 'Final World Tour',
+        band: 'Slayer',
+        venue: 'Hanns-Martin-Schleyer-Halle',
+        address: 'Mercedesstraße 69\n70372 Stuttgart',
         datetime: new Date('2019-08-03T21:00:00.000Z'),
-        seatType: "standing ticket",
-        barcode: "My Event",
-        price: 69.00,
+        seatType: 'standing ticket',
+        barcode: 'My Event',
+        price: 69.0,
         background: null,
         currency: currency.EUR,
-        bgColor: defaultBgColor,
-    });
+        bgColor: defaultBgColor
+    })
 
-    const setData = (d: Partial<TicketData>) =>
-        setDataState((prev) => ({ ...prev, ...d }));
+    const setData = (d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d }))
 
-    return (
-        <TicketContext.Provider value={{ data, setData }}>
-            {children}
-        </TicketContext.Provider>
-    );
+    return <TicketContext.Provider value={{ data, setData }}>{children}</TicketContext.Provider>
 }
 
 export const useTicket = () => {
-    const ctx = useContext(TicketContext);
-    if (!ctx) throw new Error("useTicket must be used inside TicketProvider");
-    return ctx;
-};
+    const ctx = useContext(TicketContext)
+    if (!ctx) throw new Error('useTicket must be used inside TicketProvider')
+    return ctx
+}
