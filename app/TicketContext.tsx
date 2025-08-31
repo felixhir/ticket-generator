@@ -20,6 +20,7 @@ interface TicketData {
     background: string | null
     currency: currency
     bgColor: string
+    useBackground: boolean
 }
 
 const TicketContext = createContext<{
@@ -39,7 +40,8 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         price: 69.0,
         background: null,
         currency: currency.EUR,
-        bgColor: defaultBgColor
+        bgColor: defaultBgColor,
+        useBackground: true
     })
 
     const setData = (d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d }))

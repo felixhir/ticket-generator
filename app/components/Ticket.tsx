@@ -25,7 +25,7 @@ export default function Ticket() {
     return (
         <div
             id='ticket'
-            className={`shadow-lg w-[760px] h-[300px] bg-white flex flex-col text-white text-[15px] ${robotoMono.className}`}
+            className={`shadow-lg w-[760px] h-[300px] bg-white flex flex-col text-[15px] ${robotoMono.className} ${data.useBackground ? 'text-white' : 'text-black'}`}
         >
             <div className=' bg-orange-400 h-[3rem] font-bold p-1 flex items-center'>Some Brand</div>
             <div className='p-2 flex flex-1'>
@@ -39,9 +39,9 @@ export default function Ticket() {
 
                 <div
                     className='relative px-1 flex flex-1 flex-col h-full text-[4mm]'
-                    style={{ backgroundColor: data.bgColor }}
+                    style={{ backgroundColor: data.useBackground ? data.bgColor : 'white' }}
                 >
-                    {data.background && (
+                    {data.useBackground && data.background && (
                         <img
                             src={data.background}
                             className='absolute top-[2px] bottom-[2px] left-3/5 -translate-x-1/2 h-[calc(100%-4px)] object-cover [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]'

@@ -100,6 +100,11 @@ export default function Sidebar({ ticketCount, setTicketCount }: SidebarProps) {
             <div>
                 <label>Background</label>
                 <div className='flex w-full gap-2 items-center'>
+                    <input
+                        type='checkbox'
+                        checked={data.useBackground}
+                        onChange={e => setData({ useBackground: e.target.checked })}
+                    ></input>
                     <div>
                         <label className='block w-full p-1 text-center bg-gray-300 dark:bg-gray-600 rounded cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700'>
                             <input
