@@ -25,7 +25,7 @@ export default function Ticket() {
     return (
         <div
             id='ticket'
-            className={`shadow-lg w-[760px] h-[300px] flex flex-col text-white text-[15px] ${robotoMono.className}`}
+            className={`shadow-lg w-[760px] h-[300px] bg-white flex flex-col text-white text-[15px] ${robotoMono.className}`}
         >
             <div className=' bg-orange-400 h-[3rem] font-bold p-1 flex items-center'>Some Brand</div>
             <div className='p-2 flex flex-1'>
@@ -38,7 +38,7 @@ export default function Ticket() {
                 </div>
 
                 <div
-                    className='relative px-1 flex flex-1 flex-col  h-full text-white text-[4mm]'
+                    className='relative px-1 flex flex-1 flex-col h-full text-[4mm]'
                     style={{ backgroundColor: data.bgColor }}
                 >
                     {data.background && (

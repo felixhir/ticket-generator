@@ -1,9 +1,12 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
-    color: black;
+    --background: #f9fafb;
+    --sidebar: white;
+    --color: #1e2939;
+    --accent: #2b7fff;
 }
 
 @media print {
@@ -27,15 +30,15 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
+[data-theme='dark'] {
+    --background: #101828;
+    --sidebar: #1e2939;
+    --color: #f3f4f6;
+    --accent: #51a2ff;
 }
 
 body {
     background: var(--background);
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--color);
+    accent-color: var(--accent);
 }

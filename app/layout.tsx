@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { Work_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
 import './globals.css'
 
-const workSans = Work_Sans({
+const inter = Inter({
     subsets: ['latin'],
     weight: ['400', '700']
 })
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body className={`${workSans.className}`}>{children}</body>
+            <body className={`${inter.className}`}>{children}</body>
         </html>
     )
 }
