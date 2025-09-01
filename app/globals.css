@@ -2,11 +2,127 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* Custom Ticket Utilities */
+@layer utilities {
+    .ticket-width {
+        width: var(--ticket-width);
+    }
+
+    .ticket-height {
+        height: var(--ticket-height);
+    }
+
+    .ticket-bg {
+        background-color: var(--ticket-bg);
+    }
+
+    .ticket-bg-color {
+        background-color: var(--ticket-bg-color);
+    }
+
+    .ticket-text {
+        color: var(--ticket-text);
+    }
+
+    .ticket-text-alt {
+        color: var(--ticket-text-alt);
+    }
+
+    .ticket-shadow {
+        box-shadow: var(--ticket-shadow);
+    }
+
+    .ticket-font-size {
+        font-size: var(--ticket-font-size);
+    }
+
+    .ticket-font-size-large {
+        font-size: var(--ticket-font-size-large);
+    }
+
+    .ticket-font-size-small {
+        font-size: var(--ticket-font-size-small);
+    }
+
+    .ticket-header-bg {
+        background-color: var(--ticket-header-bg);
+    }
+
+    .ticket-header-text {
+        color: var(--ticket-header-text);
+    }
+
+    .ticket-header-height {
+        height: var(--ticket-header-height);
+    }
+
+    .ticket-padding {
+        padding: var(--ticket-padding);
+    }
+
+    .ticket-padding-content {
+        padding: var(--ticket-padding-content);
+    }
+
+    .ticket-padding-inner {
+        padding-left: var(--ticket-padding-inner);
+        padding-right: var(--ticket-padding-inner);
+    }
+
+    .ticket-barcode-width {
+        width: var(--ticket-barcode-width);
+    }
+
+    .ticket-barcode-text-size {
+        font-size: var(--ticket-barcode-text-size);
+    }
+
+    .ticket-barcode-max-width {
+        max-width: var(--ticket-barcode-max-width);
+    }
+}
+
+/* Custom variant for dark theme - handled via CSS selectors below */
+
 :root {
     --background: #f9fafb;
     --sidebar: white;
     --color: #1e2939;
     --accent: #2b7fff;
+
+    /* Ticket Variables - Independent of app theme */
+    /* These variables control the ticket appearance and are not affected by dark/light mode */
+    --ticket-width: 760px;
+    --ticket-height: 300px;
+    --ticket-bg: white;
+    --ticket-bg-color: #333333;
+    /* Dynamic background color controlled by user input */
+    --ticket-text: black;
+    --ticket-text-alt: white;
+    --ticket-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    /* Ticket Header */
+    --ticket-header-bg: #fb923c;
+    --ticket-header-height: 48px;
+    --ticket-header-text: black;
+
+    /* Ticket Typography */
+    --ticket-font-size: 15px;
+    --ticket-font-size-large: 15px;
+    --ticket-font-size-small: 8px;
+
+    /* Ticket Spacing */
+    --ticket-padding: 8px;
+    --ticket-padding-content: 8px;
+    --ticket-padding-inner: 4px;
+
+    /* Ticket Barcode */
+    --ticket-barcode-width: 75px;
+    --ticket-barcode-max-width: 180px;
+    --ticket-barcode-height: 30px;
+    --ticket-barcode-color: #000000;
+    --ticket-barcode-bg: transparent;
+    --ticket-barcode-text-size: 12px;
 }
 
 @media print {
@@ -41,4 +157,14 @@ body {
     background: var(--background);
     color: var(--color);
     accent-color: var(--accent);
+}
+
+label {
+    @apply text-sm font-medium flex flex-col;
+}
+
+input,
+textarea,
+select {
+    @apply text-sm rounded-lg p-2 border dark:bg-gray-800;
 }

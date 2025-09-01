@@ -2,7 +2,7 @@ import moment from 'moment'
 
 import { Roboto_Mono } from 'next/font/google'
 
-import { currency, useTicket } from '../TicketContext'
+import { currency, useTicket } from '../../TicketContext'
 import TicketBarcode from './TicketBarcode'
 
 const robotoMono = Roboto_Mono({
@@ -25,11 +25,13 @@ export default function Ticket() {
     return (
         <div
             id='ticket'
-            className={`shadow-lg w-[760px] h-[300px] bg-white flex flex-col text-[15px] ${robotoMono.className} ${data.useBackground ? 'text-white' : 'text-black'}`}
+            className={`ticket-width ticket-height ticket-bg ticket-shadow ticket-font-size flex flex-col ${robotoMono.className} ${data.useBackground ? 'ticket-text-alt' : 'ticket-text'}`}
         >
-            <div className=' bg-orange-400 h-[3rem] font-bold p-1 flex items-center'>Some Brand</div>
-            <div className='p-2 flex flex-1'>
-                <div className='w-[75px] flex items-center justify-center'>
+            <div className='ticket-header-bg ticket-header-height ticket-header-text ticket-padding font-bold flex items-center'>
+                Some Brand
+            </div>
+            <div className='ticket-padding-content flex flex-1'>
+                <div className='ticket-barcode-width flex items-center justify-center'>
                     {data.barcode && (
                         <div className='rotate-270 text-black flex flex-col items-center w-[180px] over'>
                             <TicketBarcode></TicketBarcode>
@@ -38,8 +40,7 @@ export default function Ticket() {
                 </div>
 
                 <div
-                    className='relative px-1 flex flex-1 flex-col h-full text-[4mm]'
-                    style={{ backgroundColor: data.useBackground ? data.bgColor : 'white' }}
+                    className={`ticket-padding-inner ticket-font-size-large relative flex flex-1 flex-col h-full ${data.useBackground ? 'ticket-bg-color' : 'ticket-bg'}`}
                 >
                     {data.useBackground && data.background && (
                         <img
@@ -50,12 +51,12 @@ export default function Ticket() {
 
                     <div className='z-10 flex flex-col h-full justify-between'>
                         <div>
-                            <p className='text-[2mm]'>{data.tour}</p>
+                            <p className='ticket-font-size-small'>{data.tour}</p>
                             <p>{data.band}</p>
                         </div>
                         <div>
                             <p>{data.venue}</p>
-                            <p className='whitespace-pre-line text-[2mm]'>{data.address}</p>
+                            <p className='ticket-font-size-small whitespace-pre-line'>{data.address}</p>
                         </div>
                         <p>{moment(data.datetime).format('dddd, DD. MMM YYYY, HH:mm')} Uhr</p>
                         <p>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 
 export enum currency {
     EUR,
@@ -19,7 +19,6 @@ interface TicketData {
     price: number
     background: string | null
     currency: currency
-    bgColor: string
     useBackground: boolean
 }
 
@@ -40,11 +39,10 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         price: 69.0,
         background: null,
         currency: currency.EUR,
-        bgColor: defaultBgColor,
         useBackground: true
     })
 
-    const setData = (d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d }))
+    const setData = useCallback((d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d })), [setDataState])
 
     return <TicketContext.Provider value={{ data, setData }}>{children}</TicketContext.Provider>
 }
