@@ -1,9 +1,12 @@
-import moment from 'moment'
-
 import { Roboto_Mono } from 'next/font/google'
 
-import { currency, useTicket } from '../../TicketContext'
-import TicketBarcode from './TicketBarcode'
+import { useTicket } from '../../TicketContext'
+import ConcertInfo from '../building-blocks/ConcertInfo'
+import Date from '../building-blocks/Date'
+import Location from '../building-blocks/Location'
+import Price from '../building-blocks/Price'
+import Seating from '../building-blocks/Seating'
+import TicketBarcode from '../building-blocks/TicketBarcode'
 
 const robotoMono = Roboto_Mono({
     subsets: ['latin'],
@@ -12,15 +15,6 @@ const robotoMono = Roboto_Mono({
 
 export default function Ticket() {
     const { data } = useTicket()
-
-    const formatCurrency = (value: number, curr: currency) => {
-        switch (curr) {
-            case currency.SEK:
-                return value.toFixed(0)
-            default:
-                return value.toFixed(2)
-        }
-    }
 
     return (
         <div
@@ -50,19 +44,11 @@ export default function Ticket() {
                     )}
 
                     <div className='z-10 flex flex-col h-full justify-between'>
-                        <div>
-                            <p className='ticket-font-size-small'>{data.tour}</p>
-                            <p>{data.band}</p>
-                        </div>
-                        <div>
-                            <p>{data.venue}</p>
-                            <p className='ticket-font-size-small whitespace-pre-line'>{data.address}</p>
-                        </div>
-                        <p>{moment(data.datetime).format('dddd, DD. MMM YYYY, HH:mm')} Uhr</p>
-                        <p>
-                            {formatCurrency(data.price, data.currency)} {currency[data.currency]}
-                        </p>
-                        <p>{data.seatType}</p>
+                        <ConcertInfo />
+                        <Location />
+                        <Date />
+                        <Price />
+                        <Seating />
                     </div>
                 </div>
             </div>
