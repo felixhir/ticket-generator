@@ -82,6 +82,10 @@
     }
 }
 
+.vertical-text {
+    writing-mode: sideways-lr;
+}
+
 /* Custom variant for dark theme - handled via CSS selectors below */
 
 :root {

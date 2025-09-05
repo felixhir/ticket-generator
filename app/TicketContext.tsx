@@ -9,6 +9,7 @@ export enum currency {
 export const defaultBgColor = '#333333'
 
 interface TicketData {
+    brand: string
     tour: string
     band: string
     venue: string
@@ -20,6 +21,7 @@ interface TicketData {
     background: string | null
     currency: currency
     useBackground: boolean
+    layout: 'default' | 'compact'
 }
 
 const TicketContext = createContext<{
@@ -29,6 +31,7 @@ const TicketContext = createContext<{
 
 export function TicketProvider({ children }: { children: React.ReactNode }) {
     const [data, setDataState] = useState<TicketData>({
+        brand: 'Some Brand',
         tour: 'Final World Tour',
         band: 'Slayer',
         venue: 'Hanns-Martin-Schleyer-Halle',
@@ -39,7 +42,8 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         price: 69.0,
         background: null,
         currency: currency.EUR,
-        useBackground: true
+        useBackground: true,
+        layout: 'default'
     })
 
     const setData = useCallback((d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d })), [setDataState])
