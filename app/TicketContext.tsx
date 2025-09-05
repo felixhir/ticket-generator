@@ -9,6 +9,7 @@ export enum currency {
 export const defaultBgColor = '#333333'
 
 interface TicketData {
+    brand: string
     tour: string
     band: string
     venue: string
@@ -30,6 +31,7 @@ const TicketContext = createContext<{
 
 export function TicketProvider({ children }: { children: React.ReactNode }) {
     const [data, setDataState] = useState<TicketData>({
+        brand: 'Some Brand',
         tour: 'Final World Tour',
         band: 'Slayer',
         venue: 'Hanns-Martin-Schleyer-Halle',

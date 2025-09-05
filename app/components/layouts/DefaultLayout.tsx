@@ -13,7 +13,7 @@ export default function DefaultLayout() {
     return (
         <div className='flex h-full flex-col'>
             <div className='ticket-header-bg ticket-header-height ticket-header-text ticket-padding font-bold flex items-center'>
-                Some Brand
+                {data.brand}
             </div>
             <div className='ticket-padding-content flex flex-1'>
                 <div className='ticket-barcode-width flex items-center justify-center'>

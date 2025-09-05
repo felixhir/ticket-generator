@@ -13,7 +13,7 @@ export default function CompactLayout() {
     return (
         <div className='flex h-full'>
             <div className='ticket-header-bg vertical-text ticket-header-text ticket-padding font-bold flex items-center justify-center h-full'>
-                Some Brand
+                {data.brand}
             </div>
 
             <div className='ticket-padding-content'>
