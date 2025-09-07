@@ -1,20 +1,22 @@
 import { currency, useTicket } from '@/app/TicketContext'
 
+import { useMemo } from 'react'
+
 export default function Price() {
     const { data } = useTicket()
 
-    const formatCurrency = (value: number, curr: currency) => {
-        switch (curr) {
+    const formattedValue = useMemo(() => {
+        switch (data.currency) {
             case currency.SEK:
-                return value.toFixed(0)
+                return data.price.toFixed(0)
             default:
-                return value.toFixed(2)
+                return data.price.toFixed(2)
         }
-    }
+    }, [data.price, data.currency])
 
     return (
         <p>
-            {formatCurrency(data.price, data.currency)} {currency[data.currency]}
+            {formattedValue} {currency[data.currency]}
         </p>
     )
 }
