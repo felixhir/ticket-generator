@@ -1,22 +1,20 @@
 import { useTicket } from '@/app/TicketContext'
 
-import ConcertInfo from '../building-blocks/ConcertInfo'
-import Date from '../building-blocks/Date'
-import Location from '../building-blocks/Location'
-import Price from '../building-blocks/Price'
-import Seating from '../building-blocks/Seating'
-import TicketBarcode from '../building-blocks/TicketBarcode'
+import ConcertInfo from '../../building-blocks/ConcertInfo'
+import Date from '../../building-blocks/Date'
+import Location from '../../building-blocks/Location'
+import Price from '../../building-blocks/Price'
+import Seating from '../../building-blocks/Seating'
+import TicketBarcode from '../../building-blocks/TicketBarcode'
 
 export default function DefaultLayout() {
     const { data } = useTicket()
 
     return (
         <div className='flex h-full flex-col'>
-            <div className='ticket-header-bg ticket-header-height ticket-header-text ticket-padding font-bold flex items-center'>
-                {data.brand}
-            </div>
-            <div className='ticket-padding-content flex flex-1'>
-                <div className='ticket-barcode-width flex items-center justify-center'>
+            <div className='bg-ticket-primary h-12 text-ticket-dark p-2 font-bold flex items-center'>{data.brand}</div>
+            <div className='p-2 flex flex-1'>
+                <div className='w-[75px] flex items-center justify-center'>
                     {data.barcode && (
                         <div className='rotate-270 text-black flex flex-col items-center w-[180px] over'>
                             <TicketBarcode></TicketBarcode>
@@ -24,9 +22,7 @@ export default function DefaultLayout() {
                     )}
                 </div>
 
-                <div
-                    className={`ticket-padding-inner ticket-font-size-large relative flex flex-1 flex-col h-full ${data.useBackground ? 'ticket-bg-color' : 'ticket-bg'}`}
-                >
+                <div className='px-1 text-[15px] relative flex flex-1 flex-col h-full bg-ticket-background'>
                     {data.useBackground && data.background && (
                         <img
                             src={data.background}
@@ -34,7 +30,7 @@ export default function DefaultLayout() {
                         />
                     )}
 
-                    <div className='z-10 flex flex-col h-full justify-between'>
+                    <div className='z-10 flex flex-col h-full justify-between bg-ticket-background'>
                         <ConcertInfo />
                         <Location />
                         <Date />

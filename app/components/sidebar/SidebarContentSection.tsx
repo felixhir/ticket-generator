@@ -1,3 +1,5 @@
+'use client'
+
 import DatePicker from 'react-datepicker'
 
 import { currency, useTicket } from '../../TicketContext'

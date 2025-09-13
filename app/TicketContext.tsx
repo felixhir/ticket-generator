@@ -6,8 +6,6 @@ export enum currency {
     SEK
 }
 
-export const defaultBgColor = '#333333'
-
 interface TicketData {
     brand: string
     tour: string
@@ -21,6 +19,7 @@ interface TicketData {
     background: string | null
     currency: currency
     useBackground: boolean
+    ticketCount: number
     layout: 'default' | 'compact'
 }
 
@@ -43,7 +42,8 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         background: null,
         currency: currency.EUR,
         useBackground: true,
-        layout: 'default'
+        layout: 'default',
+        ticketCount: 1
     })
 
     const setData = useCallback((d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d })), [setDataState])
