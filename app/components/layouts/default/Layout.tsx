@@ -12,7 +12,7 @@ export default function DefaultLayout() {
 
     return (
         <div className='flex h-full flex-col'>
-            <div className='ticket-primary-bg h-12 ticket-secondary p-2 font-bold flex items-center'>{data.brand}</div>
+            <div className='bg-ticket-primary h-12 text-ticket-dark p-2 font-bold flex items-center'>{data.brand}</div>
             <div className='p-2 flex flex-1'>
                 <div className='w-[75px] flex items-center justify-center'>
                     {data.barcode && (
@@ -22,9 +22,7 @@ export default function DefaultLayout() {
                     )}
                 </div>
 
-                <div
-                    className={`px-1 text-[15px] relative flex flex-1 flex-col h-full ${data.useBackground ? 'ticket-tertiary-bg' : 'ticket-bg'}`}
-                >
+                <div className='px-1 text-[15px] relative flex flex-1 flex-col h-full bg-ticket-background'>
                     {data.useBackground && data.background && (
                         <img
                             src={data.background}
@@ -32,7 +30,7 @@ export default function DefaultLayout() {
                         />
                     )}
 
-                    <div className='z-10 flex flex-col h-full justify-between'>
+                    <div className='z-10 flex flex-col h-full justify-between bg-ticket-background'>
                         <ConcertInfo />
                         <Location />
                         <Date />

@@ -1,65 +1,18 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
-/* Custom Ticket Utilities */
-@layer utilities {
-    .ticket-bg {
-        background-color: var(--background-color);
-    }
-
-    .ticket-bg-muted {
-        background-color: var(--background-color-muted);
-    }
-
-    .ticket-primary {
-        color: var(--primary-color);
-    }
-
-    .ticket-primary-muted {
-        color: var(--primary-color-muted);
-    }
-
-    .ticket-primary-bg {
-        background-color: var(--primary-color);
-    }
-
-    .ticket-primary-bg-muted {
-        background-color: var(--primary-color-muted);
-    }
-
-    .ticket-secondary {
-        color: var(--secondary-color);
-    }
-
-    .ticket-secondary-muted {
-        color: var(--secondary-color-muted);
-    }
-
-    .ticket-secondary-bg {
-        background-color: var(--secondary-color);
-    }
-
-    .ticket-secondary-bg-muted {
-        background-color: var(--secondary-color-muted);
-    }
-
-    .ticket-tertiary {
-        color: var(--tertiary-color);
-    }
-
-    .ticket-tertiary-muted {
-        color: var(--tertiary-color-muted);
-    }
-
-    .ticket-tertiary-bg {
-        background-color: var(--tertiary-color);
-    }
-
-    .ticket-tertiary-bg-muted {
-        background-color: var(--tertiary-color-muted);
-    }
+@theme {
+    --color-ticket-primary: var(--ticket-primary);
+    --color-ticket-primary-muted: var(--ticket-primary-muted);
+    --color-ticket-secondary: var(--ticket-secondary);
+    --color-ticket-secondary-muted: var(--ticket-secondary-muted);
+    --color-ticket-tertiary: var(--ticket-tertiary);
+    --color-ticket-tertiary-muted: var(--ticket-tertiary-muted);
+    --color-ticket-light: var(--ticket-light);
+    --color-ticket-dark: var(--ticket-dark);
+    --color-ticket-background: var(--ticket-background);
 }
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 .vertical-text {
     writing-mode: sideways-lr;
@@ -73,18 +26,16 @@
     --color: #1e2939;
     --accent: #2b7fff;
 
-    /* Ticket Color Variables - Simple atomic colors */
-    --background-color: #ffffff;
-    --background-color-muted: color-mix(in srgb, var(--background-color) 70%, transparent);
-
-    --primary-color: #fb923c;
-    --primary-color-muted: color-mix(in srgb, var(--primary-color) 70%, transparent);
-
-    --secondary-color: #000000;
-    --secondary-color-muted: color-mix(in srgb, var(--secondary-color) 70%, transparent);
-
-    --tertiary-color: #333333;
-    --tertiary-color-muted: color-mix(in srgb, var(--tertiary-color) 70%, transparent);
+    /* Ticket Color Variables */
+    --ticket-primary: #daab2d;
+    --ticket-primary-muted: color-mix(in srgb, var(--ticket-primary) 70%, transparent);
+    --ticket-secondary: #a57a03;
+    --ticket-secondary-muted: color-mix(in srgb, var(--ticket-secondary) 70%, transparent);
+    --ticket-tertiary: #400128;
+    --ticket-tertiary-muted: color-mix(in srgb, var(--ticket-tertiary) 70%, transparent);
+    --ticket-light: #ffffff;
+    --ticket-dark: #020b13;
+    --ticket-background: #262626;
 }
 
 @media print {

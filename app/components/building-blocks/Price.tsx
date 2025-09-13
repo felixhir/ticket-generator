@@ -15,7 +15,7 @@ export default function Price() {
     }, [data.price, data.currency])
 
     return (
-        <p>
+        <p className='text-ticket-light'>
             {formattedValue} {currency[data.currency]}
         </p>
     )

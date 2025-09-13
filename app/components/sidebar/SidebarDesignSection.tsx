@@ -11,17 +11,17 @@ import PopoverColorPicker from '../shared/PopoverColorPicker'
 export default function SidebarDesignSection() {
     return (
         <div className='space-y-12'>
-            {/* Colors */}
             <Subsection title='Colors'>
                 <div className='space-y-2'>
-                    <CSSVariableColorInput variable='--primary-color' label='Primary Color' />
-                    <CSSVariableColorInput variable='--secondary-color' label='Secondary Color' />
-                    <CSSVariableColorInput variable='--tertiary-color' label='Tertiary Color' />
-                    <CSSVariableColorInput variable='--background-color' label='Background Color' />
+                    <CSSVariableColorInput variable='--ticket-primary' label='Primary' />
+                    <CSSVariableColorInput variable='--ticket-secondary' label='Secondary' />
+                    <CSSVariableColorInput variable='--ticket-tertiary' label='Tertiary' />
+                    <CSSVariableColorInput variable='--ticket-light' label='Light' />
+                    <CSSVariableColorInput variable='--ticket-dark' label='Dark' />
+                    <CSSVariableColorInput variable='--ticket-background' label='Background' />
                 </div>
             </Subsection>
 
-            {/* Layout */}
             <Subsection title='Layout'>
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                     <LayoutOption layout='default' label='Standard' icon={<DefaultLayoutIcon />} />

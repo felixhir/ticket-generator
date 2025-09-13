@@ -4,5 +4,5 @@ import moment from 'moment'
 export default function Date() {
     const { data } = useTicket()
 
-    return <p>{moment(data.datetime).format('dddd, DD. MMM YYYY, HH:mm')}</p>
+    return <p className='text-ticket-light'>{moment(data.datetime).format('dddd, DD. MMM YYYY, HH:mm')}</p>
 }

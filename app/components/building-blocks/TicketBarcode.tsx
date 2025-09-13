@@ -17,10 +17,10 @@ export default function TicketBarcode() {
         if (typeof window !== 'undefined') {
             const root = getComputedStyle(document.documentElement)
             setCssVars({
-                maxWidth: 180, // Fixed size, no longer from CSS variable
-                height: 30, // Fixed size, no longer from CSS variable
-                color: root.getPropertyValue('--secondary-color') || '#000000',
-                background: root.getPropertyValue('--background-color') || 'transparent'
+                maxWidth: 180,
+                height: 30,
+                color: root.getPropertyValue('--ticket-light') || '#000000',
+                background: root.getPropertyValue('--ticket-background') || 'transparent'
             })
         }
     }, [])
@@ -57,7 +57,7 @@ export default function TicketBarcode() {
                     className='-m-2.5'
                 />
             </div>
-            <p className='text-[12px] max-w-[180px] z-10 text-center truncate'>{value}</p>
+            <p className='text-[12px] max-w-[180px] z-10 text-center truncate text-ticket-light'>{value}</p>
         </div>
     )
 }

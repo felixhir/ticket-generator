@@ -59,7 +59,7 @@ export default function PopoverColorPicker({ variable }: PopoverPickerProps) {
                 onClick={() => toggle()}
             />
             {isOpen && (
-                <div className='absolute left-0 border-r-8 shadow-sm bottom-[calc(100%+2px)]' ref={popover}>
+                <div className='absolute right-0 border-r-8 shadow-sm bottom-[calc(100%+2px)]' ref={popover}>
                     <HexColorPicker color={value} onChange={updateValue} />
                 </div>
             )}
