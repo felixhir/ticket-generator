@@ -1,26 +1,23 @@
 html {
-    --s: 140px;
+    --s: 100px;
     /* control the size*/
     --c1: var(--ticket-secondary);
     --c2: var(--ticket-background);
 
-    --_g: #0000 52%, var(--c1) 54% 57%, #0000 59%;
+    --_g:
+        var(--c2) 6% 14%, var(--c1) 16% 24%, var(--c2) 26% 34%, var(--c1) 36% 44%, var(--c2) 46% 54%, var(--c1) 56% 64%,
+        var(--c2) 66% 74%, var(--c1) 76% 84%, var(--c2) 86% 94%;
 }
 
 #default-layout .background-gradient {
     background:
         linear-gradient(to right, var(--c2) 0%, transparent 100%),
-        radial-gradient(farthest-side at -33.33% 50%, var(--_g)) 0 calc(var(--s) / 2),
-        radial-gradient(farthest-side at 50% 133.33%, var(--_g)) calc(var(--s) / 2) 0,
-        radial-gradient(farthest-side at 133.33% 50%, var(--_g)),
-        radial-gradient(farthest-side at 50% -33.33%, var(--_g)),
-        var(--c2);
+        radial-gradient(100% 100% at 100% 0, var(--c1) 4%, var(--_g), #0008 96%, #0000),
+        radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--c1) 96%) var(--c1);
     background-size:
         100% 100%,
-        calc(var(--s) / 4.667) var(--s),
-        var(--s) calc(var(--s) / 4.667),
-        calc(var(--s) / 4.667) var(--s),
-        var(--s) calc(var(--s) / 4.667);
+        var(--s) var(--s),
+        var(--s) var(--s);
 }
 
 #default-layout .barcode-gradient {
