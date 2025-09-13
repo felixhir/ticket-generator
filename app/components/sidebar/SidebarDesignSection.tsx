@@ -1,3 +1,5 @@
+'use client'
+
 import { useTicket } from '@/app/TicketContext'
 
 import { useCallback } from 'react'
