@@ -1,9 +1,23 @@
-import { useEffect, useState } from 'react'
+import getFontSize, { FontSize } from '@/app/functions/getFontSize'
+
+import { useEffect, useMemo, useState } from 'react'
 import Barcode from 'react-barcode'
 
 import { useTicket } from '../../TicketContext'
 
-export default function TicketBarcode() {
+interface TicketBarcodeProps {
+    colorCssVar?: string
+    backgroundCssVar?: string
+    textFontSize?: FontSize
+    textColorCssVar?: string
+}
+
+export default function TicketBarcode({
+    colorCssVar = '--ticket-light',
+    backgroundCssVar = '--ticket-background',
+    textFontSize = 'sm',
+    textColorCssVar = 'ticket-light'
+}: TicketBarcodeProps) {
     const { data } = useTicket()
     const value = data.barcode
     const [cssVars, setCssVars] = useState({
@@ -13,17 +27,19 @@ export default function TicketBarcode() {
         background: 'transparent'
     })
 
+    const textFontSizeCss = useMemo(() => getFontSize(textFontSize), [textFontSize])
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const root = getComputedStyle(document.documentElement)
             setCssVars({
                 maxWidth: 180,
                 height: 30,
-                color: root.getPropertyValue('--ticket-light') || '#000000',
-                background: root.getPropertyValue('--ticket-background') || 'transparent'
+                color: root.getPropertyValue(colorCssVar) || '#000000',
+                background: root.getPropertyValue(backgroundCssVar) || 'transparent'
             })
         }
-    }, [])
+    }, [colorCssVar, backgroundCssVar])
 
     if (!value) return null
 
@@ -57,7 +73,9 @@ export default function TicketBarcode() {
                     className='-m-2.5'
                 />
             </div>
-            <p className='text-[12px] max-w-[180px] z-10 text-center truncate text-ticket-light'>{value}</p>
+            <p className={`${textFontSizeCss} max-w-[180px] z-10 text-center truncate text-${textColorCssVar}`}>
+                {value}
+            </p>
         </div>
     )
 }

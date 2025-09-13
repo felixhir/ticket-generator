@@ -1,8 +1,14 @@
 import { currency, useTicket } from '@/app/TicketContext'
+import getFontSize, { FontSize } from '@/app/functions/getFontSize'
 
 import { useMemo } from 'react'
 
-export default function Price() {
+interface PriceProps {
+    fontSize?: FontSize
+    colorCssVar?: string
+}
+
+export default function Price({ fontSize = 'sm', colorCssVar = 'ticket-light' }: PriceProps) {
     const { data } = useTicket()
 
     const formattedValue = useMemo(() => {
@@ -14,8 +20,10 @@ export default function Price() {
         }
     }, [data.price, data.currency])
 
+    const fontSizeCss = useMemo(() => getFontSize(fontSize), [fontSize])
+
     return (
-        <p className='text-ticket-light'>
+        <p className={`${fontSizeCss} text-${colorCssVar}`}>
             {formattedValue} {currency[data.currency]}
         </p>
     )

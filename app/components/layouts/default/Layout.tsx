@@ -1,4 +1,8 @@
+'use client'
+
 import { useTicket } from '@/app/TicketContext'
+
+import { Roboto } from 'next/font/google'
 
 import ConcertInfo from '../../building-blocks/ConcertInfo'
 import Date from '../../building-blocks/Date'
@@ -6,23 +10,20 @@ import Location from '../../building-blocks/Location'
 import Price from '../../building-blocks/Price'
 import Seating from '../../building-blocks/Seating'
 import TicketBarcode from '../../building-blocks/TicketBarcode'
+import './styles.css'
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '500', '700']
+})
 
 export default function DefaultLayout() {
     const { data } = useTicket()
 
     return (
-        <div className='flex h-full flex-col'>
-            <div className='bg-ticket-primary h-12 text-ticket-dark p-2 font-bold flex items-center'>{data.brand}</div>
-            <div className='p-2 flex flex-1'>
-                <div className='w-[75px] flex items-center justify-center'>
-                    {data.barcode && (
-                        <div className='rotate-270 text-black flex flex-col items-center w-[180px] over'>
-                            <TicketBarcode></TicketBarcode>
-                        </div>
-                    )}
-                </div>
-
-                <div className='px-1 text-[15px] relative flex flex-1 flex-col h-full bg-ticket-background'>
+        <div id='default-layout' className={`flex h-full flex-col ${roboto.className}`}>
+            <div className='flex flex-1'>
+                <div className='p-2 px-1 text-[15px] relative flex flex-1 flex-col h-full background-gradient slanted-main'>
                     {data.useBackground && data.background && (
                         <img
                             src={data.background}
@@ -30,14 +31,29 @@ export default function DefaultLayout() {
                         />
                     )}
 
-                    <div className='z-10 flex flex-col h-full justify-between bg-ticket-background'>
-                        <ConcertInfo />
-                        <Location />
-                        <Date />
-                        <Price />
-                        <Seating />
+                    <div className='z-10 p-6 flex flex-col h-full justify-between'>
+                        <ConcertInfo bandFontSize='xl' tourFontSize='md' />
+                        <div className='grid grid-cols-2 gap-4'>
+                            <div className='flex flex-col gap-2'>
+                                <Date fontSize='md' />
+                                <Location venueFontSize='md' addressFontSize='sm' />
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <Seating fontSize='md' />
+                                <Price fontSize='md' />
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                {data.barcode && (
+                    <div className='relative w-[110px] bg-ticket-secondary-muted slanted-side barcode-gradient'>
+                        <div className='absolute top-1/2 -right-14 -translate-y-1/2 rotate-270'>
+                            <TicketBarcode />
+                        </div>
+                        <div></div>
+                    </div>
+                )}
             </div>
         </div>
     )

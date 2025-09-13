@@ -1,7 +1,17 @@
 import { useTicket } from '@/app/TicketContext'
+import getFontSize, { FontSize } from '@/app/functions/getFontSize'
 
-export default function Seating() {
+import { useMemo } from 'react'
+
+interface SeatingProps {
+    fontSize?: FontSize
+    colorCssVar?: string
+}
+
+export default function Seating({ fontSize = 'sm', colorCssVar = 'ticket-light' }: SeatingProps) {
     const { data } = useTicket()
 
-    return <p className='text-ticket-light'>{data.seatType}</p>
+    const fontSizeCss = useMemo(() => getFontSize(fontSize), [fontSize])
+
+    return <p className={`${fontSizeCss} text-${colorCssVar}`}>{data.seatType}</p>
 }

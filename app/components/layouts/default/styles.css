@@ -1,0 +1,103 @@
+#default-layout .background-gradient {
+    background-color: var(--ticket-background);
+    opacity: 0.8;
+    background-image:
+        linear-gradient(to right, var(--ticket-background), transparent),
+        linear-gradient(
+            30deg,
+            var(--ticket-primary) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--ticket-primary) 87.5%,
+            var(--ticket-primary)
+        ),
+        linear-gradient(
+            150deg,
+            var(--ticket-primary) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--ticket-primary) 87.5%,
+            var(--ticket-primary)
+        ),
+        linear-gradient(
+            30deg,
+            var(--ticket-primary) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--ticket-primary) 87.5%,
+            var(--ticket-primary)
+        ),
+        linear-gradient(
+            150deg,
+            var(--ticket-primary) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--ticket-primary) 87.5%,
+            var(--ticket-primary)
+        ),
+        linear-gradient(
+            60deg,
+            var(--ticket-secondary) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            var(--ticket-secondary) 75%,
+            var(--ticket-secondary)
+        ),
+        linear-gradient(
+            60deg,
+            var(--ticket-secondary) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            var(--ticket-secondary) 75%,
+            var(--ticket-secondary)
+        );
+    background-size:
+        100% 100%,
+        40px 70px,
+        40px 70px,
+        40px 70px,
+        40px 70px,
+        40px 70px,
+        40px 70px;
+    background-position:
+        0 0,
+        0 0,
+        0 0,
+        20px 36px,
+        20px 36px,
+        0 0,
+        20px 36px;
+}
+
+#default-layout .barcode-gradient {
+    background-color: var(--ticket-secondary);
+    opacity: 0.8;
+    background-image:
+        radial-gradient(var(--ticket-primary) 0.5px, transparent 0.5px),
+        radial-gradient(var(--ticket-primary) 0.5px, var(--ticket-background) 0.5px);
+    background-size: 20px 20px;
+    background-position:
+        0 0,
+        10px 10px;
+}
+
+#default-layout .slanted-main {
+    clip-path: polygon(
+        0 0,
+        calc(100% - 35px) 0,
+        calc(100% - 25px) 15%,
+        calc(100% - 30px) 30%,
+        calc(100% - 20px) 45%,
+        calc(100% - 25px) 60%,
+        calc(100% - 15px) 75%,
+        calc(100% - 20px) 90%,
+        100% 100%,
+        0 100%
+    );
+}
+
+#default-layout .slanted-side {
+    clip-path: polygon(35px 0, 100% 0, 100% 100%, 0 100%, 20px 90%, 15px 75%, 25px 60%, 20px 45%, 30px 30%, 25px 15%);
+    margin-left: -50px;
+    position: relative;
+}

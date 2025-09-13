@@ -1,12 +1,32 @@
-import { useTicket } from '@/app/TicketContext'
+'use client'
 
-export default function ConcertInfo() {
+import { useTicket } from '@/app/TicketContext'
+import getFontSize, { FontSize } from '@/app/functions/getFontSize'
+
+import { useMemo } from 'react'
+
+interface ConcertInfoProps {
+    tourFontSize?: FontSize
+    bandFontSize?: FontSize
+    tourColorCssVar?: string
+    bandColorCssVar?: string
+}
+
+export default function ConcertInfo({
+    tourFontSize = 'sm',
+    bandFontSize = 'md',
+    tourColorCssVar = 'ticket-light',
+    bandColorCssVar = 'ticket-light'
+}: ConcertInfoProps) {
     const { data } = useTicket()
 
+    const tourCss = useMemo(() => getFontSize(tourFontSize), [tourFontSize])
+    const bandCss = useMemo(() => getFontSize(bandFontSize), [bandFontSize])
+
     return (
-        <div className='text-ticket-light'>
-            <p className='text-[8px]'>{data.tour}</p>
-            <p>{data.band}</p>
+        <div>
+            <p className={`${tourCss} text-${tourColorCssVar} font-semibold`}>{data.tour}</p>
+            <p className={`${bandCss} text-${bandColorCssVar} font-bold`}>{data.band}</p>
         </div>
     )
 }

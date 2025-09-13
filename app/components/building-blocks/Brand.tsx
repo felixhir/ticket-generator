@@ -1,22 +1,21 @@
 import { useTicket } from '@/app/TicketContext'
 import getFontSize, { FontSize } from '@/app/functions/getFontSize'
-import moment from 'moment'
 
 import { useMemo } from 'react'
 
-interface DateProps {
+interface BrandProps {
     fontSize?: FontSize
     colorCssVar?: string
 }
 
-export default function Date({ fontSize = 'sm', colorCssVar = 'ticket-light' }: DateProps) {
+export default function Brand({ fontSize = 'sm', colorCssVar = 'ticket-light' }: BrandProps) {
     const { data } = useTicket()
 
     const fontSizeCss = useMemo(() => getFontSize(fontSize), [fontSize])
 
     return (
-        <p className={`${fontSizeCss} text-${colorCssVar}`}>
-            {moment(data.datetime).format('dddd, DD. MMM YYYY, HH:mm')}
-        </p>
+        <div className={`text-${colorCssVar}`}>
+            <p className={fontSizeCss}>{data.brand}</p>
+        </div>
     )
 }
