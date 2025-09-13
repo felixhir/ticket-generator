@@ -1,23 +1,23 @@
 import { useTicket } from '@/app/TicketContext'
 
-import ConcertInfo from '../building-blocks/ConcertInfo'
-import Date from '../building-blocks/Date'
-import Location from '../building-blocks/Location'
-import Price from '../building-blocks/Price'
-import Seating from '../building-blocks/Seating'
-import TicketBarcode from '../building-blocks/TicketBarcode'
+import ConcertInfo from '../../building-blocks/ConcertInfo'
+import Date from '../../building-blocks/Date'
+import Location from '../../building-blocks/Location'
+import Price from '../../building-blocks/Price'
+import Seating from '../../building-blocks/Seating'
+import TicketBarcode from '../../building-blocks/TicketBarcode'
 
 export default function CompactLayout() {
     const { data } = useTicket()
 
     return (
         <div className='flex h-full'>
-            <div className='ticket-header-bg vertical-text ticket-header-text ticket-padding font-bold flex items-center justify-center h-full'>
+            <div className='ticket-primary-bg vertical-text ticket-secondary p-2 font-bold flex items-center justify-center h-full'>
                 {data.brand}
             </div>
 
-            <div className='ticket-padding-content'>
-                <div className='ticket-padding-inner ticket-font-size-large ticket-text h-full space-y-4'>
+            <div className='p-2'>
+                <div className='px-1 text-[15px] ticket-secondary h-full space-y-4'>
                     <ConcertInfo />
                     <Location />
                     <Date />

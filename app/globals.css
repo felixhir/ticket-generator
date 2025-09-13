@@ -4,81 +4,60 @@
 
 /* Custom Ticket Utilities */
 @layer utilities {
-    .ticket-width {
-        width: var(--ticket-width);
-    }
-
-    .ticket-height {
-        height: var(--ticket-height);
-    }
-
     .ticket-bg {
-        background-color: var(--ticket-bg);
+        background-color: var(--background-color);
     }
 
-    .ticket-bg-color {
-        background-color: var(--ticket-bg-color);
+    .ticket-bg-muted {
+        background-color: var(--background-color-muted);
     }
 
-    .ticket-text {
-        color: var(--ticket-text);
+    .ticket-primary {
+        color: var(--primary-color);
     }
 
-    .ticket-text-alt {
-        color: var(--ticket-text-alt);
+    .ticket-primary-muted {
+        color: var(--primary-color-muted);
     }
 
-    .ticket-shadow {
-        box-shadow: var(--ticket-shadow);
+    .ticket-primary-bg {
+        background-color: var(--primary-color);
     }
 
-    .ticket-font-size {
-        font-size: var(--ticket-font-size);
+    .ticket-primary-bg-muted {
+        background-color: var(--primary-color-muted);
     }
 
-    .ticket-font-size-large {
-        font-size: var(--ticket-font-size-large);
+    .ticket-secondary {
+        color: var(--secondary-color);
     }
 
-    .ticket-font-size-small {
-        font-size: var(--ticket-font-size-small);
+    .ticket-secondary-muted {
+        color: var(--secondary-color-muted);
     }
 
-    .ticket-header-bg {
-        background-color: var(--ticket-header-bg);
+    .ticket-secondary-bg {
+        background-color: var(--secondary-color);
     }
 
-    .ticket-header-text {
-        color: var(--ticket-header-text);
+    .ticket-secondary-bg-muted {
+        background-color: var(--secondary-color-muted);
     }
 
-    .ticket-header-height {
-        height: var(--ticket-header-height);
+    .ticket-tertiary {
+        color: var(--tertiary-color);
     }
 
-    .ticket-padding {
-        padding: var(--ticket-padding);
+    .ticket-tertiary-muted {
+        color: var(--tertiary-color-muted);
     }
 
-    .ticket-padding-content {
-        padding: var(--ticket-padding-content);
+    .ticket-tertiary-bg {
+        background-color: var(--tertiary-color);
     }
 
-    .ticket-padding-inner {
-        padding-left: var(--ticket-padding-inner);
-        padding-right: var(--ticket-padding-inner);
-    }
-
-    .ticket-barcode-width {
-        width: var(--ticket-barcode-width);
-    }
-
-    .ticket-barcode-text-size {
-        font-size: var(--ticket-barcode-text-size);
-    }
-
-    .ticket-barcode-max-width {
-        max-width: var(--ticket-barcode-max-width);
+    .ticket-tertiary-bg-muted {
+        background-color: var(--tertiary-color-muted);
     }
 }
 
@@ -94,39 +73,18 @@
     --color: #1e2939;
     --accent: #2b7fff;
 
-    /* Ticket Variables - Independent of app theme */
-    /* These variables control the ticket appearance and are not affected by dark/light mode */
-    --ticket-width: 760px;
-    --ticket-height: 300px;
-    --ticket-bg: white;
-    --ticket-bg-color: #333333;
-    /* Dynamic background color controlled by user input */
-    --ticket-text: black;
-    --ticket-text-alt: white;
-    --ticket-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    /* Ticket Color Variables - Simple atomic colors */
+    --background-color: #ffffff;
+    --background-color-muted: color-mix(in srgb, var(--background-color) 70%, transparent);
 
-    /* Ticket Header */
-    --ticket-header-bg: #fb923c;
-    --ticket-header-height: 48px;
-    --ticket-header-text: black;
+    --primary-color: #fb923c;
+    --primary-color-muted: color-mix(in srgb, var(--primary-color) 70%, transparent);
 
-    /* Ticket Typography */
-    --ticket-font-size: 15px;
-    --ticket-font-size-large: 15px;
-    --ticket-font-size-small: 8px;
+    --secondary-color: #000000;
+    --secondary-color-muted: color-mix(in srgb, var(--secondary-color) 70%, transparent);
 
-    /* Ticket Spacing */
-    --ticket-padding: 8px;
-    --ticket-padding-content: 8px;
-    --ticket-padding-inner: 4px;
-
-    /* Ticket Barcode */
-    --ticket-barcode-width: 75px;
-    --ticket-barcode-max-width: 180px;
-    --ticket-barcode-height: 30px;
-    --ticket-barcode-color: #000000;
-    --ticket-barcode-bg: transparent;
-    --ticket-barcode-text-size: 12px;
+    --tertiary-color: #333333;
+    --tertiary-color-muted: color-mix(in srgb, var(--tertiary-color) 70%, transparent);
 }
 
 @media print {

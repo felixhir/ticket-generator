@@ -6,7 +6,7 @@ export default function Location() {
     return (
         <div>
             <p>{data.venue}</p>
-            <p className='ticket-font-size-small whitespace-pre-line'>{data.address}</p>
+            <p className='text-[8px] whitespace-pre-line'>{data.address}</p>
         </div>
     )
 }

@@ -5,7 +5,7 @@ export default function ConcertInfo() {
 
     return (
         <div>
-            <p className='ticket-font-size-small'>{data.tour}</p>
+            <p className='text-[8px]'>{data.tour}</p>
             <p>{data.band}</p>
         </div>
     )

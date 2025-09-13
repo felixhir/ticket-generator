@@ -1,8 +1,8 @@
 import { Roboto_Mono } from 'next/font/google'
 
 import { useTicket } from '../../TicketContext'
-import CompactLayout from '../layouts/CompactLayout'
-import DefaultLayout from '../layouts/DefaultLayout'
+import CompactLayout from '../layouts/compact/Layout'
+import DefaultLayout from '../layouts/default/Layout'
 
 const robotoMono = Roboto_Mono({
     subsets: ['latin'],
@@ -24,7 +24,7 @@ export default function Ticket() {
     return (
         <div
             id='ticket'
-            className={`ticket-width ticket-height ticket-bg ticket-shadow ticket-font-size flex flex-col ${robotoMono.className} ${data.useBackground ? 'ticket-text-alt' : 'ticket-text'}`}
+            className={`${data.layout === 'compact' ? 'w-[450px]' : 'w-[760px]'} h-[300px] ticket-bg shadow-lg text-[15px] flex flex-col ${robotoMono.className} ${data.useBackground ? 'text-white' : 'ticket-secondary'}`}
         >
             {renderLayout()}
         </div>
