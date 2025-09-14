@@ -17,7 +17,7 @@ export default function ThemeToggle() {
 
     return (
         <button
-            className='absolute right-84 bottom-4 transition-transform transform hover:scale-110 cursor-pointer border rounded-full h-9 w-9 flex items-center justify-center'
+            className='transition-transform transform hover:scale-110 cursor-pointer border rounded-full h-9 w-9 flex items-center justify-center'
             onClick={() => toggle(!isDarkMode)}
         >
             {isDarkMode ? <Sun></Sun> : <Moon></Moon>}
