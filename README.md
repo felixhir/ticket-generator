@@ -14,14 +14,3 @@ npm run dev
 ```
 
 See the result on http://localhost:3000
-
-## Deployment
-
-The site is published under GitHub Pages utilizing the corresponding `gh-pages` branch.
-With the proper access you can simply deploy running
-
-```
-npm run deploy
-```
-
-(Maybe one day I will setup a proper build-pipeline :D)
