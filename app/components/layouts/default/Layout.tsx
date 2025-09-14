@@ -24,7 +24,7 @@ export default function DefaultLayout() {
         <div id='default-layout' className={`flex h-full flex-col ${roboto.className}`}>
             <div className='flex flex-1'>
                 <div className='p-2 px-1 text-[15px] relative flex flex-1 flex-col h-full background-gradient slanted-main'>
-                    {data.useBackground && data.background && (
+                    {data.background && (
                         <img
                             src={data.background}
                             className='absolute top-[2px] bottom-[2px] left-3/5 -translate-x-1/2 h-[calc(100%-4px)] object-cover [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]'

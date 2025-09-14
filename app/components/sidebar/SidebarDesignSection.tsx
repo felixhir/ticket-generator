@@ -1,8 +1,11 @@
 'use client'
 
 import { useTicket } from '@/app/TicketContext'
+import { extractAverageColor } from '@/app/functions/extractAverageColor'
+import { useUpdateCSSVariable } from '@/app/functions/useUpdateCSSVariable'
+import { Trash, Upload } from 'lucide-react'
 
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
 import CompactLayoutIcon from '../layouts/compact/Icon'
 import DefaultLayoutIcon from '../layouts/default/Icon'
@@ -18,7 +21,7 @@ export default function SidebarDesignSection() {
                     <CSSVariableColorInput variable='--ticket-tertiary' label='Tertiary' />
                     <CSSVariableColorInput variable='--ticket-light' label='Light' />
                     <CSSVariableColorInput variable='--ticket-dark' label='Dark' />
-                    <CSSVariableColorInput variable='--ticket-background' label='Background' />
+                    <BackgroundInput />
                 </div>
             </Subsection>
 
@@ -41,12 +44,73 @@ function Subsection({ title, children }: { title: string; children: React.ReactN
     )
 }
 
-function CSSVariableColorInput({ variable, label }: { variable: string; label: string }) {
+function CSSVariableColorInput({
+    variable,
+    label,
+    children
+}: {
+    variable: string
+    label: string
+    children?: React.ReactNode
+}) {
     return (
-        <div className='flex justify-between gap-2'>
+        <div className='flex justify-between items-center gap-2'>
             <label className='text-sm font-semibold text-gray-200'>{label}</label>
-            <PopoverColorPicker variable={variable} />
+            <div className='flex gap-2 items-center'>
+                {children}
+                <PopoverColorPicker variable={variable} />
+            </div>
         </div>
+    )
+}
+
+function BackgroundInput() {
+    const { data, setData } = useTicket()
+    const updateCSSVariable = useUpdateCSSVariable('--ticket-background')
+
+    useEffect(() => {
+        if (!data.background) {
+            return
+        }
+
+        const img = new Image()
+        img.src = data.background
+        img.onload = () => {
+            const color = extractAverageColor(img)
+            updateCSSVariable(color)
+        }
+    }, [data.background, updateCSSVariable])
+
+    return (
+        <CSSVariableColorInput variable='--ticket-background' label='Background'>
+            <>
+                <div>
+                    <label className='block w-full p-1 text-center bg-gray-300 dark:bg-gray-600 rounded cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700'>
+                        <input
+                            type='file'
+                            accept='.jpeg,.png,.jpg'
+                            onChange={e => {
+                                if (e.target.files && e.target.files[0]) {
+                                    setData({ background: URL.createObjectURL(e.target.files[0]) })
+                                }
+                            }}
+                            className='hidden'
+                            id='background-upload'
+                        />
+                        <Upload />
+                    </label>
+                </div>
+                <button
+                    disabled={!data.background}
+                    className={`block p-1 text-center bg-gray-300 dark:bg-gray-600 rounded ${!!data.background ? 'cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700' : ''}`}
+                >
+                    <Trash
+                        color={!data.background ? 'gray' : 'red'}
+                        onClick={() => setData({ background: null })}
+                    ></Trash>
+                </button>
+            </>
+        </CSSVariableColorInput>
     )
 }
 
