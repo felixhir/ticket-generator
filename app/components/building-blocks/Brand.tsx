@@ -4,16 +4,16 @@ import getTicketTextColor, { TicketColor } from '@/app/functions/getTicketTextCo
 
 import { useMemo } from 'react'
 
-interface SeatingProps {
+interface BrandProps {
     fontSize?: FontSize
     textColor?: TicketColor
 }
 
-export default function Seating({ fontSize = 'sm', textColor = 'text-light' }: SeatingProps) {
+export default function Brand({ fontSize = 'sm', textColor = 'text-light' }: BrandProps) {
     const { data } = useTicket()
 
     const fontSizeCss = useMemo(() => getFontSize(fontSize), [fontSize])
     const colorCss = useMemo(() => getTicketTextColor(textColor), [textColor])
 
-    return <p className={`${fontSizeCss} ${colorCss}`}>{data.seatType}</p>
+    return <p className={`${colorCss} ${fontSizeCss}`}>{data.brand}</p>
 }

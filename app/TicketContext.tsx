@@ -18,7 +18,6 @@ interface TicketData {
     price: number
     background: string | null
     currency: currency
-    useBackground: boolean
     ticketCount: number
     layout: 'default' | 'compact'
 }
@@ -41,7 +40,6 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         price: 69.0,
         background: null,
         currency: currency.EUR,
-        useBackground: true,
         layout: 'default',
         ticketCount: 1
     })

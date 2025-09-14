@@ -7,8 +7,8 @@
     --color-ticket-secondary-muted: var(--ticket-secondary-muted);
     --color-ticket-tertiary: var(--ticket-tertiary);
     --color-ticket-tertiary-muted: var(--ticket-tertiary-muted);
-    --color-ticket-light: var(--ticket-light);
-    --color-ticket-dark: var(--ticket-dark);
+    --color-ticket-text-light: var(--ticket-text-light);
+    --color-ticket-text-dark: var(--ticket-text-dark);
     --color-ticket-background: var(--ticket-background);
 }
 
@@ -33,8 +33,8 @@
     --ticket-secondary-muted: color-mix(in srgb, var(--ticket-secondary) 70%, transparent);
     --ticket-tertiary: #400128;
     --ticket-tertiary-muted: color-mix(in srgb, var(--ticket-tertiary) 70%, transparent);
-    --ticket-light: #ffffff;
-    --ticket-dark: #020b13;
+    --ticket-text-light: #ffffff;
+    --ticket-text-dark: #020b13;
     --ticket-background: #262626;
 }
 

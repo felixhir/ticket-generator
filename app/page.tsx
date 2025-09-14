@@ -26,8 +26,12 @@ export default function Home() {
 
                 <Sidebar />
 
-                <GitHubButton />
-                <ThemeToggle />
+                <div className='absolute left-4 bottom-4'>
+                    <GitHubButton />
+                </div>
+                <div className='absolute right-84 bottom-4'>
+                    <ThemeToggle />
+                </div>
             </div>
         </TicketProvider>
     )
