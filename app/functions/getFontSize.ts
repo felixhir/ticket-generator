@@ -6,7 +6,7 @@
  * @param size - The size to get the font size for
  * @returns The font size
  */
-export default function getFontSize(size: 'sm' | 'md' | 'lg' | 'xl' | '2xl') {
+export default function getFontSize(size: FontSize) {
     switch (size) {
         case 'sm':
             return 'text-[8px]'

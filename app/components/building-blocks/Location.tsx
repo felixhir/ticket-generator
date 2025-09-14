@@ -1,30 +1,30 @@
 import { useTicket } from '@/app/TicketContext'
 import getFontSize, { FontSize } from '@/app/functions/getFontSize'
+import getTicketTextColor, { TicketColor } from '@/app/functions/getTicketTextColor'
 
 import { useMemo } from 'react'
 
 interface LocationProps {
     venueFontSize?: FontSize
     addressFontSize?: FontSize
-    venueColorCssVar?: string
-    addressColorCssVar?: string
+    textColor?: TicketColor
 }
 
 export default function Location({
     venueFontSize = 'sm',
     addressFontSize = 'sm',
-    venueColorCssVar = 'ticket-text-light',
-    addressColorCssVar = 'ticket-text-light'
+    textColor = 'text-light'
 }: LocationProps) {
     const { data } = useTicket()
 
     const venueCss = useMemo(() => getFontSize(venueFontSize), [venueFontSize])
     const addressCss = useMemo(() => getFontSize(addressFontSize), [addressFontSize])
+    const colorCss = useMemo(() => getTicketTextColor(textColor), [textColor])
 
     return (
-        <div>
-            <p className={`${venueCss} text-${venueColorCssVar}`}>{data.venue}</p>
-            <p className={`${addressCss} text-${addressColorCssVar} whitespace-pre-line`}>{data.address}</p>
+        <div className={`${colorCss}`}>
+            <p className={`${venueCss}`}>{data.venue}</p>
+            <p className={`${addressCss} whitespace-pre-line`}>{data.address}</p>
         </div>
     )
 }

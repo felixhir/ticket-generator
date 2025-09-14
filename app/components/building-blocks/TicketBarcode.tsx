@@ -1,4 +1,5 @@
 import getFontSize, { FontSize } from '@/app/functions/getFontSize'
+import getTicketTextColor, { TicketColor } from '@/app/functions/getTicketTextColor'
 
 import { useEffect, useMemo, useState } from 'react'
 import Barcode from 'react-barcode'
@@ -6,17 +7,15 @@ import Barcode from 'react-barcode'
 import { useTicket } from '../../TicketContext'
 
 interface TicketBarcodeProps {
-    colorCssVar?: string
-    backgroundCssVar?: string
+    textColor?: TicketColor
+    backgroundColor?: TicketColor
     textFontSize?: FontSize
-    textColorCssVar?: string
 }
 
 export default function TicketBarcode({
-    colorCssVar = '--ticket-text-light',
-    backgroundCssVar = '--ticket-background',
-    textFontSize = 'sm',
-    textColorCssVar = 'ticket-text-light'
+    textColor = 'text-light',
+    backgroundColor = 'background',
+    textFontSize = 'sm'
 }: TicketBarcodeProps) {
     const { data } = useTicket()
     const value = data.barcode
@@ -28,6 +27,7 @@ export default function TicketBarcode({
     })
 
     const textFontSizeCss = useMemo(() => getFontSize(textFontSize), [textFontSize])
+    const textColorCss = useMemo(() => getTicketTextColor(textColor), [textColor])
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -35,11 +35,13 @@ export default function TicketBarcode({
             setCssVars({
                 maxWidth: 180,
                 height: 30,
-                color: root.getPropertyValue(colorCssVar) || '#000000',
-                background: root.getPropertyValue(backgroundCssVar) || 'transparent'
+                color: root.getPropertyValue(`--ticket-${textColor}`) || '#000000',
+                background: root.getPropertyValue(`--ticket-${backgroundColor}`) || 'transparent'
             })
         }
-    }, [colorCssVar, backgroundCssVar])
+    }, [textColor, backgroundColor])
+
+    console.log(cssVars)
 
     if (!value) return null
 
@@ -73,9 +75,7 @@ export default function TicketBarcode({
                     className='-m-2.5'
                 />
             </div>
-            <p className={`${textFontSizeCss} max-w-[180px] z-10 text-center truncate text-${textColorCssVar}`}>
-                {value}
-            </p>
+            <p className={`${textFontSizeCss} max-w-[180px] z-10 text-center truncate ${textColorCss}`}>{value}</p>
         </div>
     )
 }
