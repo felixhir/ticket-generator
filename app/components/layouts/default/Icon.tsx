@@ -7,7 +7,14 @@ export default function DefaultLayoutIcon() {
             <rect x='10' y='11' width='100' height='18' rx='6' className='fill-ticket-secondary' />
 
             {Array.from({ length: 10 }).map((_, i) => (
-                <rect key={i} x='15' y={60 + i * 6} width='25' height={2 + (i % 3)} className='fill-ticket-light' />
+                <rect
+                    key={i}
+                    x='15'
+                    y={60 + i * 6}
+                    width='25'
+                    height={2 + (i % 3)}
+                    className='fill-ticket-text-light'
+                />
             ))}
 
             <rect x='60' y='50' width='15' height='60' rx='6' className='fill-ticket-secondary' />

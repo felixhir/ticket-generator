@@ -13,10 +13,10 @@ interface TicketBarcodeProps {
 }
 
 export default function TicketBarcode({
-    colorCssVar = '--ticket-light',
+    colorCssVar = '--ticket-text-light',
     backgroundCssVar = '--ticket-background',
     textFontSize = 'sm',
-    textColorCssVar = 'ticket-light'
+    textColorCssVar = 'ticket-text-light'
 }: TicketBarcodeProps) {
     const { data } = useTicket()
     const value = data.barcode

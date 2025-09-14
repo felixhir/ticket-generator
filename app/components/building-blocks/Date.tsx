@@ -9,7 +9,7 @@ interface DateProps {
     colorCssVar?: string
 }
 
-export default function Date({ fontSize = 'sm', colorCssVar = 'ticket-light' }: DateProps) {
+export default function Date({ fontSize = 'sm', colorCssVar = 'ticket-text-light' }: DateProps) {
     const { data } = useTicket()
 
     const fontSizeCss = useMemo(() => getFontSize(fontSize), [fontSize])

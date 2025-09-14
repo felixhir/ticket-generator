@@ -19,8 +19,8 @@ export default function SidebarDesignSection() {
                     <CSSVariableColorInput variable='--ticket-primary' label='Primary' />
                     <CSSVariableColorInput variable='--ticket-secondary' label='Secondary' />
                     <CSSVariableColorInput variable='--ticket-tertiary' label='Tertiary' />
-                    <CSSVariableColorInput variable='--ticket-light' label='Light' />
-                    <CSSVariableColorInput variable='--ticket-dark' label='Dark' />
+                    <CSSVariableColorInput variable='--ticket-text-light' label='Light' />
+                    <CSSVariableColorInput variable='--ticket-text-dark' label='Dark' />
                     <BackgroundInput />
                 </div>
             </Subsection>

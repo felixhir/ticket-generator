@@ -8,7 +8,7 @@ interface PriceProps {
     colorCssVar?: string
 }
 
-export default function Price({ fontSize = 'sm', colorCssVar = 'ticket-light' }: PriceProps) {
+export default function Price({ fontSize = 'sm', colorCssVar = 'ticket-text-light' }: PriceProps) {
     const { data } = useTicket()
 
     const formattedValue = useMemo(() => {

@@ -13,8 +13,8 @@ interface LocationProps {
 export default function Location({
     venueFontSize = 'sm',
     addressFontSize = 'sm',
-    venueColorCssVar = 'ticket-light',
-    addressColorCssVar = 'ticket-light'
+    venueColorCssVar = 'ticket-text-light',
+    addressColorCssVar = 'ticket-text-light'
 }: LocationProps) {
     const { data } = useTicket()
 

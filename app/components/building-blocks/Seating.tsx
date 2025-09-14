@@ -8,7 +8,7 @@ interface SeatingProps {
     colorCssVar?: string
 }
 
-export default function Seating({ fontSize = 'sm', colorCssVar = 'ticket-light' }: SeatingProps) {
+export default function Seating({ fontSize = 'sm', colorCssVar = 'ticket-text-light' }: SeatingProps) {
     const { data } = useTicket()
 
     const fontSizeCss = useMemo(() => getFontSize(fontSize), [fontSize])

@@ -12,12 +12,12 @@ export default function CompactLayout() {
 
     return (
         <div className='flex h-full'>
-            <div className='bg-ticket-primary vertical-text text-ticket-dark p-2 font-bold flex items-center justify-center h-full'>
+            <div className='bg-ticket-primary vertical-text text-ticket-text-dark p-2 font-bold flex items-center justify-center h-full'>
                 {data.brand}
             </div>
 
             <div className='p-2'>
-                <div className='px-1 text-[15px] text-ticket-dark h-full space-y-4'>
+                <div className='px-1 text-[15px] text-ticket-text-dark h-full space-y-4'>
                     <ConcertInfo />
                     <Location />
                     <Date />

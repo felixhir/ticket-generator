@@ -15,8 +15,8 @@ interface ConcertInfoProps {
 export default function ConcertInfo({
     tourFontSize = 'sm',
     bandFontSize = 'md',
-    tourColorCssVar = 'ticket-light',
-    bandColorCssVar = 'ticket-light'
+    tourColorCssVar = 'ticket-text-light',
+    bandColorCssVar = 'ticket-text-light'
 }: ConcertInfoProps) {
     const { data } = useTicket()
 

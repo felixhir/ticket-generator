@@ -8,7 +8,7 @@ interface BrandProps {
     colorCssVar?: string
 }
 
-export default function Brand({ fontSize = 'sm', colorCssVar = 'ticket-light' }: BrandProps) {
+export default function Brand({ fontSize = 'sm', colorCssVar = 'ticket-text-light' }: BrandProps) {
     const { data } = useTicket()
 
     const fontSizeCss = useMemo(() => getFontSize(fontSize), [fontSize])
