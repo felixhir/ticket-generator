@@ -47,11 +47,10 @@ export default function DefaultLayout() {
                 </div>
 
                 {data.barcode && (
-                    <div className='relative w-[110px] bg-ticket-secondary-muted slanted-side barcode-gradient'>
+                    <div className='relative w-[80px] bg-ticket-secondary-muted slanted-side barcode-gradient'>
                         <div className='absolute top-1/2 -right-14 -translate-y-1/2 rotate-270'>
                             <TicketBarcode />
                         </div>
-                        <div></div>
                     </div>
                 )}
             </div>

@@ -28,24 +28,3 @@
         0 0,
         10px 10px;
 }
-
-#default-layout .slanted-main {
-    clip-path: polygon(
-        0 0,
-        calc(100% - 35px) 0,
-        calc(100% - 25px) 15%,
-        calc(100% - 30px) 30%,
-        calc(100% - 20px) 45%,
-        calc(100% - 25px) 60%,
-        calc(100% - 15px) 75%,
-        calc(100% - 20px) 90%,
-        100% 100%,
-        0 100%
-    );
-}
-
-#default-layout .slanted-side {
-    clip-path: polygon(35px 0, 100% 0, 100% 100%, 0 100%, 20px 90%, 15px 75%, 25px 60%, 20px 45%, 30px 30%, 25px 15%);
-    margin-left: -50px;
-    position: relative;
-}
