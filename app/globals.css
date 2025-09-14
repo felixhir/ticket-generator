@@ -1,86 +1,18 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
-/* Custom Ticket Utilities */
-@layer utilities {
-    .ticket-width {
-        width: var(--ticket-width);
-    }
-
-    .ticket-height {
-        height: var(--ticket-height);
-    }
-
-    .ticket-bg {
-        background-color: var(--ticket-bg);
-    }
-
-    .ticket-bg-color {
-        background-color: var(--ticket-bg-color);
-    }
-
-    .ticket-text {
-        color: var(--ticket-text);
-    }
-
-    .ticket-text-alt {
-        color: var(--ticket-text-alt);
-    }
-
-    .ticket-shadow {
-        box-shadow: var(--ticket-shadow);
-    }
-
-    .ticket-font-size {
-        font-size: var(--ticket-font-size);
-    }
-
-    .ticket-font-size-large {
-        font-size: var(--ticket-font-size-large);
-    }
-
-    .ticket-font-size-small {
-        font-size: var(--ticket-font-size-small);
-    }
-
-    .ticket-header-bg {
-        background-color: var(--ticket-header-bg);
-    }
-
-    .ticket-header-text {
-        color: var(--ticket-header-text);
-    }
-
-    .ticket-header-height {
-        height: var(--ticket-header-height);
-    }
-
-    .ticket-padding {
-        padding: var(--ticket-padding);
-    }
-
-    .ticket-padding-content {
-        padding: var(--ticket-padding-content);
-    }
-
-    .ticket-padding-inner {
-        padding-left: var(--ticket-padding-inner);
-        padding-right: var(--ticket-padding-inner);
-    }
-
-    .ticket-barcode-width {
-        width: var(--ticket-barcode-width);
-    }
-
-    .ticket-barcode-text-size {
-        font-size: var(--ticket-barcode-text-size);
-    }
-
-    .ticket-barcode-max-width {
-        max-width: var(--ticket-barcode-max-width);
-    }
+@theme {
+    --color-ticket-primary: var(--ticket-primary);
+    --color-ticket-primary-muted: var(--ticket-primary-muted);
+    --color-ticket-secondary: var(--ticket-secondary);
+    --color-ticket-secondary-muted: var(--ticket-secondary-muted);
+    --color-ticket-tertiary: var(--ticket-tertiary);
+    --color-ticket-tertiary-muted: var(--ticket-tertiary-muted);
+    --color-ticket-text-light: var(--ticket-text-light);
+    --color-ticket-text-dark: var(--ticket-text-dark);
+    --color-ticket-background: var(--ticket-background);
 }
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 .vertical-text {
     writing-mode: sideways-lr;
@@ -94,39 +26,16 @@
     --color: #1e2939;
     --accent: #2b7fff;
 
-    /* Ticket Variables - Independent of app theme */
-    /* These variables control the ticket appearance and are not affected by dark/light mode */
-    --ticket-width: 760px;
-    --ticket-height: 300px;
-    --ticket-bg: white;
-    --ticket-bg-color: #333333;
-    /* Dynamic background color controlled by user input */
-    --ticket-text: black;
-    --ticket-text-alt: white;
-    --ticket-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-    /* Ticket Header */
-    --ticket-header-bg: #fb923c;
-    --ticket-header-height: 48px;
-    --ticket-header-text: black;
-
-    /* Ticket Typography */
-    --ticket-font-size: 15px;
-    --ticket-font-size-large: 15px;
-    --ticket-font-size-small: 8px;
-
-    /* Ticket Spacing */
-    --ticket-padding: 8px;
-    --ticket-padding-content: 8px;
-    --ticket-padding-inner: 4px;
-
-    /* Ticket Barcode */
-    --ticket-barcode-width: 75px;
-    --ticket-barcode-max-width: 180px;
-    --ticket-barcode-height: 30px;
-    --ticket-barcode-color: #000000;
-    --ticket-barcode-bg: transparent;
-    --ticket-barcode-text-size: 12px;
+    /* Ticket Color Variables */
+    --ticket-primary: #daab2d;
+    --ticket-primary-muted: color-mix(in srgb, var(--ticket-primary) 70%, transparent);
+    --ticket-secondary: #a57a03;
+    --ticket-secondary-muted: color-mix(in srgb, var(--ticket-secondary) 70%, transparent);
+    --ticket-tertiary: #400128;
+    --ticket-tertiary-muted: color-mix(in srgb, var(--ticket-tertiary) 70%, transparent);
+    --ticket-text-light: #ffffff;
+    --ticket-text-dark: #020b13;
+    --ticket-background: #262626;
 }
 
 @media print {
