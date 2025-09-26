@@ -6,7 +6,7 @@ import Ticket from '@/app/components/ticket/Ticket'
 export default function PrintWrapper() {
     const { data } = useTicket()
     return (
-        <div id='print-wrapper' className='h-screen hidden print:flex flex-col justify-between'>
+        <div id='print-wrapper' className='h-screen hidden print:flex flex-col justify-between w-min'>
             {Array.from({ length: data.ticketCount }).map((_, i) => (
                 <div key={i}>
                     <Ticket layout={data.layout} />

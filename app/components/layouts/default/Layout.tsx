@@ -21,16 +21,9 @@ export default function DefaultLayout() {
     const { data } = useTicket()
 
     return (
-        <div id='default-layout' className={`flex h-full flex-col ${roboto.className}`}>
-            <div className='flex flex-1'>
+        <div id='default-layout' className={`${roboto.className} w-[760px] h-[300px]`}>
+            <div className='flex flex-1 h-full'>
                 <div className='p-2 px-1 text-[15px] relative flex flex-1 flex-col h-full background-gradient slanted-main'>
-                    {data.background && (
-                        <img
-                            src={data.background}
-                            className='absolute top-[2px] bottom-[2px] left-3/5 -translate-x-1/2 h-[calc(100%-4px)] object-cover [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]'
-                        />
-                    )}
-
                     <div className='z-10 p-6 flex flex-col h-full justify-between'>
                         <ConcertInfo bandFontSize='xl' tourFontSize='md' />
                         <div className='grid grid-cols-2 gap-4'>

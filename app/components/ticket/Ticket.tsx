@@ -25,12 +25,5 @@ export default function Ticket({ layout }: TicketProps) {
         }
     }, [layout])
 
-    return (
-        <div
-            id='ticket'
-            className={`${data.layout === 'compact' ? 'w-[450px]' : 'w-[760px]'} h-[300px] bg-ticket-background shadow-lg text-[15px] flex flex-col ${robotoMono.className}`}
-        >
-            {renderLayout()}
-        </div>
-    )
+    return <div className={`bg-ticket-background shadow-lg text-[15px] ${robotoMono.className}`}>{renderLayout()}</div>
 }
