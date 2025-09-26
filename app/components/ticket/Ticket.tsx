@@ -2,7 +2,7 @@ import { Roboto_Mono } from 'next/font/google'
 
 import { useCallback } from 'react'
 
-import { useTicket } from '../../TicketContext'
+import { Layout } from '../../TicketContext'
 import CompactLayout from '../layouts/compact/Layout'
 import DefaultLayout from '../layouts/default/Layout'
 
@@ -11,17 +11,19 @@ const robotoMono = Roboto_Mono({
     weight: ['400', '700']
 })
 
-export default function Ticket() {
-    const { data } = useTicket()
+interface TicketProps {
+    layout: Layout
+}
 
+export default function Ticket({ layout }: TicketProps) {
     const renderLayout = useCallback(() => {
-        switch (data.layout) {
+        switch (layout) {
             case 'default':
                 return <DefaultLayout />
             case 'compact':
                 return <CompactLayout />
         }
-    }, [data.layout])
+    }, [layout])
 
     return (
         <div

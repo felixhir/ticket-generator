@@ -8,8 +8,8 @@ export default function PrintWrapper() {
     return (
         <div id='print-wrapper' className='h-screen hidden print:flex flex-col justify-between'>
             {Array.from({ length: data.ticketCount }).map((_, i) => (
-                <div key={i} className='print-ticket'>
-                    <Ticket />
+                <div key={i}>
+                    <Ticket layout={data.layout} />
                 </div>
             ))}
         </div>

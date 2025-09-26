@@ -1,6 +1,6 @@
 'use client'
 
-import { TicketProvider } from './TicketContext'
+import { TicketProvider, useTicket } from './TicketContext'
 import GitHubButton from './components/GitHub'
 import PrintWrapper from './components/PrintWrapper'
 import ThemeToggle from './components/ThemeToggle'
@@ -19,9 +19,7 @@ export default function Home() {
                     <p className='text-base text-gray-600 dark:text-gray-400'>
                         Create personalized tickets as keepsakes
                     </p>
-                    <div className='flex-1 flex items-center justify-center px-4'>
-                        <Ticket />
-                    </div>
+                    <TicketWithData />
                 </div>
 
                 <Sidebar />
@@ -34,5 +32,15 @@ export default function Home() {
                 </div>
             </div>
         </TicketProvider>
+    )
+}
+
+function TicketWithData() {
+    const { data } = useTicket()
+
+    return (
+        <div className='flex-1 flex items-center justify-center px-4'>
+            <Ticket layout={data.layout} />
+        </div>
     )
 }
