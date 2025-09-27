@@ -7,8 +7,7 @@ import { Trash, Upload } from 'lucide-react'
 
 import { useCallback, useEffect } from 'react'
 
-import CompactLayoutIcon from '../layouts/compact/Icon'
-import DefaultLayoutIcon from '../layouts/default/Icon'
+import LayoutIcon from '../layouts/Icon'
 import PopoverColorPicker from '../shared/PopoverColorPicker'
 
 export default function SidebarDesignSection() {
@@ -27,8 +26,8 @@ export default function SidebarDesignSection() {
 
             <Subsection title='Layout'>
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
-                    <LayoutOption layout='default' label='Standard' icon={<DefaultLayoutIcon />} />
-                    <LayoutOption layout='compact' label='Compact' icon={<CompactLayoutIcon />} />
+                    <LayoutOption layout='default' label='Standard' icon={<LayoutIcon layout='default' scale={30} />} />
+                    <LayoutOption layout='compact' label='Compact' icon={<LayoutIcon layout='compact' scale={50} />} />
                 </div>
             </Subsection>
         </div>

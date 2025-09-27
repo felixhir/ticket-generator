@@ -6,6 +6,8 @@ export enum currency {
     SEK
 }
 
+export type Layout = 'default' | 'compact'
+
 interface TicketData {
     brand: string
     tour: string
@@ -19,7 +21,7 @@ interface TicketData {
     background: string | null
     currency: currency
     ticketCount: number
-    layout: 'default' | 'compact'
+    layout: Layout
 }
 
 const TicketContext = createContext<{
