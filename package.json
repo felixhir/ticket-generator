@@ -12,13 +12,13 @@
         "prepare": "husky"
     },
     "dependencies": {
-        "lucide-react": "^0.545.0",
+        "lucide-react": "^0.546.0",
         "moment": "^2.30.1",
-        "next": "15.5.4",
+        "next": "15.5.6",
         "react": "19.2.0",
         "react-barcode": "^1.6.1",
         "react-colorful": "^5.6.1",
-        "react-datepicker": "^8.7.0",
+        "react-datepicker": "^8.8.0",
         "react-dom": "19.2.0",
         "rgb-hex": "^4.1.0"
     },
@@ -30,7 +30,7 @@
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "eslint": "^9",
-        "eslint-config-next": "15.5.4",
+        "eslint-config-next": "15.5.6",
         "gh-pages": "^6.3.0",
         "husky": "^9.1.7",
         "prettier": "^3.6.2",
