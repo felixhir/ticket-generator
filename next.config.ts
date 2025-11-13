@@ -7,10 +7,7 @@ const nextConfig: NextConfig = {
     images: { unoptimized: true },
     basePath: isProd ? '/ticket-generator' : '',
     assetPrefix: isProd ? '/ticket-generator/' : '',
-    trailingSlash: true,
-    publicRuntimeConfig: {
-        basePath: isProd ? '/ticket-generator' : ''
-    }
+    trailingSlash: true
 }
 
 export default nextConfig
