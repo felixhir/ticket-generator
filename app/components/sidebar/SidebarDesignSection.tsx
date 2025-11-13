@@ -1,6 +1,6 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
+import { Layout, useTicket } from '@/app/TicketContext'
 import { extractAverageColor } from '@/app/functions/extractAverageColor'
 import { useUpdateCSSVariable } from '@/app/functions/useUpdateCSSVariable'
 import { Trash, Upload } from 'lucide-react'
@@ -28,6 +28,7 @@ export default function SidebarDesignSection() {
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                     <LayoutOption layout='default' label='Standard' icon={<LayoutIcon layout='default' scale={30} />} />
                     <LayoutOption layout='compact' label='Compact' icon={<LayoutIcon layout='compact' scale={50} />} />
+                    <LayoutOption layout='picture' label='Picture' icon={<LayoutIcon layout='picture' scale={50} />} />
                 </div>
             </Subsection>
         </div>
@@ -113,15 +114,7 @@ function BackgroundInput() {
     )
 }
 
-function LayoutOption({
-    layout,
-    icon,
-    label
-}: {
-    layout: 'default' | 'compact'
-    icon: React.ReactNode
-    label: string
-}) {
+function LayoutOption({ layout, icon, label }: { layout: Layout; icon: React.ReactNode; label: string }) {
     const { data, setData } = useTicket()
 
     const handleClick = useCallback(() => setData({ layout: layout }), [layout, setData])

@@ -1,0 +1,14 @@
+.picture-gradient {
+    --s: 150px; /* control the size*/
+    --c1: #ffffff;
+    --c2: #ebebeb;
+
+    --_g: #0000 8%, var(--c1) 0 17%, #0000 0 58%;
+    background:
+        linear-gradient(135deg, #0000 20.5%, var(--c1) 0 29.5%, #0000 0) 0 calc(var(--s) / 4),
+        linear-gradient(45deg, var(--_g)) calc(var(--s) / 2) 0,
+        linear-gradient(135deg, var(--_g), var(--c1) 0 67%, #0000 0),
+        linear-gradient(45deg, var(--_g), var(--c1) 0 67%, #0000 0 83%, var(--c1) 0 92%, #0000 0),
+        var(--c2);
+    background-size: var(--s) var(--s);
+}

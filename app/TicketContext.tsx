@@ -6,7 +6,7 @@ export enum currency {
     SEK
 }
 
-export type Layout = 'default' | 'compact'
+export type Layout = 'default' | 'compact' | 'picture'
 
 interface TicketData {
     brand: string

@@ -3,6 +3,7 @@ import { Roboto_Mono } from 'next/font/google'
 import { useCallback } from 'react'
 
 import { Layout } from '../../TicketContext'
+import PictureLayout from '../layouts/PictureLayout'
 import CompactLayout from '../layouts/compact/Layout'
 import DefaultLayout from '../layouts/default/Layout'
 
@@ -22,6 +23,10 @@ export default function Ticket({ layout }: TicketProps) {
                 return <DefaultLayout />
             case 'compact':
                 return <CompactLayout />
+            case 'picture':
+                return <PictureLayout />
+            default:
+                return <p>Did you forget to register your Layout in Ticket.tsx? ☹️</p>
         }
     }, [layout])
 
