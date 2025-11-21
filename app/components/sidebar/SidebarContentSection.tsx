@@ -1,5 +1,7 @@
 'use client'
 
+import { Trash, Upload } from 'lucide-react'
+
 import DatePicker from 'react-datepicker'
 
 import { currency, useTicket } from '../../TicketContext'
@@ -10,8 +12,8 @@ export default function SidebarContentSection() {
     return (
         <div className='space-y-2'>
             <label>
-                <span>Brand</span>
-                <input type='text' value={data.brand} onChange={e => setData({ brand: e.target.value })} />
+                <span>Event Title</span>
+                <input type='text' value={data.title} onChange={e => setData({ title: e.target.value })} />
             </label>
 
             <label>
@@ -75,6 +77,42 @@ export default function SidebarContentSection() {
                 <span>Barcode</span>
                 <input type='text' value={data.barcode || ''} onChange={e => setData({ barcode: e.target.value })} />
             </label>
+
+            <ImageInput />
+        </div>
+    )
+}
+
+function ImageInput() {
+    const { data, setData } = useTicket()
+
+    return (
+        <div className='flex justify-between items-center gap-2'>
+            <label className='text-sm font-semibold text-gray-200'>Picture</label>
+            <div className='flex gap-2 items-center'>
+                <div>
+                    <label className='block w-full p-1 text-center bg-gray-300 dark:bg-gray-600 rounded cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700'>
+                        <input
+                            type='file'
+                            accept='.jpeg,.png,.jpg'
+                            onChange={e => {
+                                if (e.target.files && e.target.files[0]) {
+                                    setData({ image: URL.createObjectURL(e.target.files[0]) })
+                                }
+                                e.currentTarget.value = ''
+                            }}
+                            className='hidden'
+                        />
+                        <Upload />
+                    </label>
+                </div>
+                <button
+                    disabled={!data.image}
+                    className={`block p-1 text-center bg-gray-300 dark:bg-gray-600 rounded ${!!data.image ? 'cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700' : ''}`}
+                >
+                    <Trash color={!data.image ? 'gray' : 'red'} onClick={() => setData({ image: null })}></Trash>
+                </button>
+            </div>
         </div>
     )
 }

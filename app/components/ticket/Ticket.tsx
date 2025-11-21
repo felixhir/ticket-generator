@@ -3,9 +3,9 @@ import { Roboto_Mono } from 'next/font/google'
 import { useCallback } from 'react'
 
 import { Layout } from '../../TicketContext'
-import PictureLayout from '../layouts/PictureLayout'
 import CompactLayout from '../layouts/compact/Layout'
 import DefaultLayout from '../layouts/default/Layout'
+import PictureLayout from '../layouts/image/Layout'
 
 const robotoMono = Roboto_Mono({
     subsets: ['latin'],
