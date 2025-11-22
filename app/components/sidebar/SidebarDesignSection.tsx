@@ -1,11 +1,8 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
-import { extractAverageColor } from '@/app/functions/extractAverageColor'
-import { useUpdateCSSVariable } from '@/app/functions/useUpdateCSSVariable'
-import { Trash, Upload } from 'lucide-react'
+import { BackgroundPattern, Layout, useTicket } from '@/app/TicketContext'
 
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 
 import LayoutIcon from '../layouts/Icon'
 import PopoverColorPicker from '../shared/PopoverColorPicker'
@@ -20,7 +17,8 @@ export default function SidebarDesignSection() {
                     <CSSVariableColorInput variable='--ticket-tertiary' label='Tertiary' />
                     <CSSVariableColorInput variable='--ticket-text-light' label='Light' />
                     <CSSVariableColorInput variable='--ticket-text-dark' label='Dark' />
-                    <BackgroundInput />
+                    <CSSVariableColorInput variable='--ticket-background' label='Background' />
+                    <BackgroundSelector />
                 </div>
             </Subsection>
 
@@ -28,6 +26,7 @@ export default function SidebarDesignSection() {
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                     <LayoutOption layout='default' label='Standard' icon={<LayoutIcon layout='default' scale={30} />} />
                     <LayoutOption layout='compact' label='Compact' icon={<LayoutIcon layout='compact' scale={50} />} />
+                    <LayoutOption layout='picture' label='Picture' icon={<LayoutIcon layout='picture' scale={50} />} />
                 </div>
             </Subsection>
         </div>
@@ -63,65 +62,22 @@ function CSSVariableColorInput({
     )
 }
 
-function BackgroundInput() {
+function BackgroundSelector() {
     const { data, setData } = useTicket()
-    const updateCSSVariable = useUpdateCSSVariable('--ticket-background')
-
-    useEffect(() => {
-        if (!data.background) {
-            return
-        }
-
-        const img = new Image()
-        img.src = data.background
-        img.onload = () => {
-            const color = extractAverageColor(img)
-            updateCSSVariable(color)
-        }
-    }, [data.background, updateCSSVariable])
 
     return (
-        <CSSVariableColorInput variable='--ticket-background' label='Background'>
-            <>
-                <div>
-                    <label className='block w-full p-1 text-center bg-gray-300 dark:bg-gray-600 rounded cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700'>
-                        <input
-                            type='file'
-                            accept='.jpeg,.png,.jpg'
-                            onChange={e => {
-                                if (e.target.files && e.target.files[0]) {
-                                    setData({ background: URL.createObjectURL(e.target.files[0]) })
-                                }
-                            }}
-                            className='hidden'
-                            id='background-upload'
-                        />
-                        <Upload />
-                    </label>
-                </div>
-                <button
-                    disabled={!data.background}
-                    className={`block p-1 text-center bg-gray-300 dark:bg-gray-600 rounded ${!!data.background ? 'cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700' : ''}`}
-                >
-                    <Trash
-                        color={!data.background ? 'gray' : 'red'}
-                        onClick={() => setData({ background: null })}
-                    ></Trash>
-                </button>
-            </>
-        </CSSVariableColorInput>
+        <div className='flex justify-between items-center'>
+            <label className='text-sm font-semibold text-gray-200'>Background Pattern</label>
+            <select onChange={e => setData({ backgroundPattern: e.target.value as BackgroundPattern })}>
+                <option value='lines' label='Lines' />
+                <option value='blocks' label='Blocks' />
+                <option value='hearts' label='Hearts' />
+            </select>
+        </div>
     )
 }
 
-function LayoutOption({
-    layout,
-    icon,
-    label
-}: {
-    layout: 'default' | 'compact'
-    icon: React.ReactNode
-    label: string
-}) {
+function LayoutOption({ layout, icon, label }: { layout: Layout; icon: React.ReactNode; label: string }) {
     const { data, setData } = useTicket()
 
     const handleClick = useCallback(() => setData({ layout: layout }), [layout, setData])

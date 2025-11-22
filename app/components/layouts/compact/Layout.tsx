@@ -14,7 +14,7 @@ export default function CompactLayout() {
         <div className='block relative h-[300px] w-[450px]'>
             <div className='flex h-full'>
                 <div className='bg-ticket-primary vertical-text text-ticket-text-dark p-2 font-bold flex items-center justify-center h-full'>
-                    {data.brand}
+                    {data.title}
                 </div>
 
                 <div className='p-2'>

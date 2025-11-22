@@ -6,10 +6,12 @@ export enum currency {
     SEK
 }
 
-export type Layout = 'default' | 'compact'
+export type Layout = 'default' | 'compact' | 'picture'
+
+export type BackgroundPattern = 'lines' | 'blocks' | 'hearts'
 
 interface TicketData {
-    brand: string
+    title: string
     tour: string
     band: string
     venue: string
@@ -18,10 +20,11 @@ interface TicketData {
     seatType: string
     barcode: string
     price: number
-    background: string | null
+    image: string | null
     currency: currency
     ticketCount: number
     layout: Layout
+    backgroundPattern: BackgroundPattern
 }
 
 const TicketContext = createContext<{
@@ -31,7 +34,7 @@ const TicketContext = createContext<{
 
 export function TicketProvider({ children }: { children: React.ReactNode }) {
     const [data, setDataState] = useState<TicketData>({
-        brand: 'Some Brand',
+        title: 'Your Awesome Event',
         tour: 'Final World Tour',
         band: 'Slayer',
         venue: 'Hanns-Martin-Schleyer-Halle',
@@ -40,10 +43,11 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         seatType: 'standing ticket',
         barcode: 'My Event',
         price: 69.0,
-        background: null,
+        image: null,
         currency: currency.EUR,
         layout: 'default',
-        ticketCount: 1
+        ticketCount: 1,
+        backgroundPattern: 'lines'
     })
 
     const setData = useCallback((d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d })), [setDataState])

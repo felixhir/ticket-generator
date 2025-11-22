@@ -5,6 +5,7 @@ import { useCallback } from 'react'
 import { Layout } from '../../TicketContext'
 import CompactLayout from '../layouts/compact/Layout'
 import DefaultLayout from '../layouts/default/Layout'
+import PictureLayout from '../layouts/image/Layout'
 
 const robotoMono = Roboto_Mono({
     subsets: ['latin'],
@@ -22,6 +23,10 @@ export default function Ticket({ layout }: TicketProps) {
                 return <DefaultLayout />
             case 'compact':
                 return <CompactLayout />
+            case 'picture':
+                return <PictureLayout />
+            default:
+                return <p>Did you forget to register your Layout in Ticket.tsx? ☹️</p>
         }
     }, [layout])
 
