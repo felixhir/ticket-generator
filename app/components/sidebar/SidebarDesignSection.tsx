@@ -1,7 +1,6 @@
 'use client'
 
-import { useDesign } from '@/app/contexts/DesignContext'
-import { BackgroundPattern, Layout } from '@/app/contexts/TicketContext'
+import { BackgroundPattern, Layout, useDesign } from '@/app/contexts/DesignContext'
 
 import { useCallback } from 'react'
 
@@ -26,7 +25,6 @@ export default function SidebarDesignSection() {
             <Subsection title='Layout'>
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                     <LayoutOption layout='default' label='Standard' icon={<LayoutIcon layout='default' scale={30} />} />
-                    <LayoutOption layout='compact' label='Compact' icon={<LayoutIcon layout='compact' scale={50} />} />
                     <LayoutOption layout='picture' label='Picture' icon={<LayoutIcon layout='picture' scale={50} />} />
                 </div>
             </Subsection>

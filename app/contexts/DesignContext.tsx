@@ -6,7 +6,7 @@ export enum currency {
     SEK
 }
 
-export type Layout = 'default' | 'compact' | 'picture'
+export type Layout = 'default' | 'picture'
 
 export type BackgroundPattern = 'lines' | 'blocks' | 'hearts'
 

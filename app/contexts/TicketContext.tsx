@@ -6,10 +6,6 @@ export enum currency {
     SEK
 }
 
-export type Layout = 'default' | 'compact' | 'picture'
-
-export type BackgroundPattern = 'lines' | 'blocks' | 'hearts'
-
 interface TicketContent {
     title: string
     tour: string
