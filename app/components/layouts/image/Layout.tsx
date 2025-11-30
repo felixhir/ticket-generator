@@ -2,6 +2,7 @@
 
 import { useDesign } from '@/app/contexts/DesignContext'
 import { useTicket } from '@/app/contexts/TicketContext'
+import { cmToPx } from '@/app/functions/cmToPx'
 
 import { Poppins } from 'next/font/google'
 
@@ -38,11 +39,19 @@ export default function PictureLayout() {
     }, [design.backgroundPattern])
 
     return (
-        <div className={`relative w-[300px] h-[600px] flex flex-col ${pattern}`}>
-            <div className='h-[300px]'>{design.image && <img width={300} src={design.image} />}</div>
+        <div
+            className={`relative  flex flex-col ${pattern}`}
+            style={{ width: cmToPx(design.dimensions.short), height: cmToPx(design.dimensions.long) }}
+        >
+            <div style={{ height: cmToPx(design.dimensions.long / 2) }}>
+                {design.image && <img width={cmToPx(design.dimensions.short)} src={design.image} />}
+            </div>
             <div
-                className='absolute top-[266px] left-[25px] w-15 h-17 bg-ticket-text-dark flex  justify-center'
-                style={{ clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)' }}
+                className='absolute left-[25px] w-15 h-17 bg-ticket-text-dark flex  justify-center'
+                style={{
+                    clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)',
+                    top: cmToPx(design.dimensions.short) - 34
+                }}
             >
                 {data.barcode && <DataMatrix />}
             </div>

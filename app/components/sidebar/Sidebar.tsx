@@ -19,7 +19,7 @@ export default function Sidebar() {
             </div>
 
             {/* Tab Content */}
-            <div className='flex-1 space-y-2 mb-10'>
+            <div className='flex-1 space-y-2 mb-10 overflow-auto'>
                 {activeTab === 'content' && <SidebarContentSection />}
                 {activeTab === 'design' && <SidebarDesignSection />}
             </div>
@@ -43,7 +43,7 @@ function TabButton({ label, active, onClick }: { label: string; active: boolean;
 }
 
 function Footer() {
-    const { design, setData } = useDesign()
+    const { design, setDesign: setData } = useDesign()
     return (
         <div className='flex flex-1 items-center gap-2'>
             <label className='text-sm font-medium'>Tickets per page:</label>

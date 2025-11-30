@@ -1,10 +1,6 @@
 import { createContext, useCallback, useContext, useState } from 'react'
 
-export enum currency {
-    EUR,
-    USD,
-    SEK
-}
+import getLayoutDimensions, { Dimensions } from '../functions/getLayoutDimensions'
 
 export type Layout = 'default' | 'picture'
 
@@ -15,11 +11,12 @@ interface Design {
     ticketCount: number
     layout: Layout
     backgroundPattern: BackgroundPattern
+    dimensions: Dimensions
 }
 
 const DesignContext = createContext<{
     design: Design
-    setData: (d: Partial<Design>) => void
+    setDesign: (d: Partial<Design>) => void
 } | null>(null)
 
 export function DesignProvider({ children }: { children: React.ReactNode }) {
@@ -27,12 +24,21 @@ export function DesignProvider({ children }: { children: React.ReactNode }) {
         image: null,
         layout: 'default',
         ticketCount: 1,
-        backgroundPattern: 'lines'
+        backgroundPattern: 'lines',
+        dimensions: getLayoutDimensions('default')
     })
 
-    const setData = useCallback((d: Partial<Design>) => setDataState(prev => ({ ...prev, ...d })), [setDataState])
+    const setData = useCallback((d: Partial<Design>) => {
+        setDataState(prev => {
+            const newData = { ...prev, ...d }
+            if (d.layout) {
+                newData.dimensions = getLayoutDimensions(d.layout)
+            }
+            return newData
+        })
+    }, [])
 
-    return <DesignContext.Provider value={{ design: data, setData }}>{children}</DesignContext.Provider>
+    return <DesignContext.Provider value={{ design: data, setDesign: setData }}>{children}</DesignContext.Provider>
 }
 
 export const useDesign = () => {

@@ -8,8 +8,41 @@ import LayoutIcon from '../layouts/Icon'
 import PopoverColorPicker from '../shared/PopoverColorPicker'
 
 export default function SidebarDesignSection() {
+    const { design, setDesign } = useDesign()
+
     return (
         <div className='space-y-12'>
+            <Subsection title='Design'>
+                <div className='flex gap-4'>
+                    <label className='flex flex-1'>
+                        <span>Short Side (cm)</span>
+                        <input
+                            type='number'
+                            onChange={e => {
+                                const value = parseFloat(e.target.value)
+                                if (isNaN(value)) return
+                                setDesign({ dimensions: { long: design.dimensions.long, short: value } })
+                            }}
+                            value={useDesign().design.dimensions.short}
+                            className='w-full'
+                        />
+                    </label>
+                    <label className='flex flex-1'>
+                        <span>Long Side(cm)</span>
+                        <input
+                            type='number'
+                            onChange={e => {
+                                const value = parseFloat(e.target.value)
+                                if (isNaN(value)) return
+                                setDesign({ dimensions: { short: design.dimensions.short, long: value } })
+                            }}
+                            value={useDesign().design.dimensions.long}
+                            className='w-full'
+                        />
+                    </label>
+                </div>
+            </Subsection>
+
             <Subsection title='Colors'>
                 <div className='space-y-2'>
                     <CSSVariableColorInput variable='--ticket-primary' label='Primary' />
@@ -62,7 +95,7 @@ function CSSVariableColorInput({
 }
 
 function BackgroundSelector() {
-    const { setData } = useDesign()
+    const { setDesign: setData } = useDesign()
 
     return (
         <div className='flex justify-between items-center'>
@@ -77,7 +110,7 @@ function BackgroundSelector() {
 }
 
 function LayoutOption({ layout, icon, label }: { layout: Layout; icon: React.ReactNode; label: string }) {
-    const { design, setData } = useDesign()
+    const { design, setDesign: setData } = useDesign()
 
     const handleClick = useCallback(() => setData({ layout: layout }), [layout, setData])
 

@@ -85,7 +85,7 @@ export default function SidebarContentSection() {
 }
 
 function ImageInput() {
-    const { design, setData } = useDesign()
+    const { design, setDesign: setData } = useDesign()
 
     return (
         <div className='flex justify-between items-center gap-2'>
