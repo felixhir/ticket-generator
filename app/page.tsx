@@ -6,7 +6,7 @@ import ThemeToggle from './components/ThemeToggle'
 import Sidebar from './components/sidebar/Sidebar'
 import Ticket from './components/ticket/Ticket'
 import { DesignProvider, useDesign } from './contexts/DesignContext'
-import { TicketProvider, useTicket } from './contexts/TicketContext'
+import { TicketProvider } from './contexts/TicketContext'
 
 export default function Home() {
     return (

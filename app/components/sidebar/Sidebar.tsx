@@ -1,7 +1,6 @@
 'use client'
 
 import { useDesign } from '@/app/contexts/DesignContext'
-import { useTicket } from '@/app/contexts/TicketContext'
 import { Printer } from 'lucide-react'
 
 import { useState } from 'react'

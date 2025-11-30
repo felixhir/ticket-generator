@@ -1,7 +1,7 @@
 'use client'
 
 import { useDesign } from '@/app/contexts/DesignContext'
-import { BackgroundPattern, Layout, useTicket } from '@/app/contexts/TicketContext'
+import { BackgroundPattern, Layout } from '@/app/contexts/TicketContext'
 
 import { useCallback } from 'react'
 
@@ -64,7 +64,7 @@ function CSSVariableColorInput({
 }
 
 function BackgroundSelector() {
-    const { design, setData } = useDesign()
+    const { setData } = useDesign()
 
     return (
         <div className='flex justify-between items-center'>

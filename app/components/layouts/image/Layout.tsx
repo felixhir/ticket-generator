@@ -3,7 +3,7 @@
 import { useDesign } from '@/app/contexts/DesignContext'
 import { useTicket } from '@/app/contexts/TicketContext'
 
-import { Poppins, Roboto } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 
 import { useMemo } from 'react'
 
