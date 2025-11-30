@@ -1,6 +1,6 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
+import { useTicket } from '@/app/contexts/TicketContext'
 
 import { Roboto } from 'next/font/google'
 
@@ -40,7 +40,7 @@ export default function DefaultLayout() {
                 </div>
 
                 {data.barcode && (
-                    <div className='relative w-[80px] bg-ticket-secondary-muted slanted-side barcode-gradient'>
+                    <div className='relative w-20 bg-ticket-secondary-muted slanted-side barcode-gradient'>
                         <div className='absolute top-1/2 -right-14 -translate-y-1/2 rotate-270'>
                             <TicketBarcode />
                         </div>

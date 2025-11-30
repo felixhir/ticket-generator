@@ -1,6 +1,6 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
+import { useTicket } from '@/app/contexts/TicketContext'
 import getTicketTextColor, { TicketColor } from '@/app/functions/getTicketTextColor'
 
 import { useMemo } from 'react'

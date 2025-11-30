@@ -1,4 +1,4 @@
-import { useTicket } from '@/app/TicketContext'
+import { useTicket } from '@/app/contexts/TicketContext'
 import bwipjs from '@bwip-js/browser'
 
 import { useEffect, useState } from 'react'

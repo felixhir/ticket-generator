@@ -1,6 +1,7 @@
 'use client'
 
-import { BackgroundPattern, Layout, useTicket } from '@/app/TicketContext'
+import { useDesign } from '@/app/contexts/DesignContext'
+import { BackgroundPattern, Layout, useTicket } from '@/app/contexts/TicketContext'
 
 import { useCallback } from 'react'
 
@@ -63,7 +64,7 @@ function CSSVariableColorInput({
 }
 
 function BackgroundSelector() {
-    const { data, setData } = useTicket()
+    const { design, setData } = useDesign()
 
     return (
         <div className='flex justify-between items-center'>
@@ -78,13 +79,13 @@ function BackgroundSelector() {
 }
 
 function LayoutOption({ layout, icon, label }: { layout: Layout; icon: React.ReactNode; label: string }) {
-    const { data, setData } = useTicket()
+    const { design, setData } = useDesign()
 
     const handleClick = useCallback(() => setData({ layout: layout }), [layout, setData])
 
     return (
         <button
-            className={`flex items-center flex-col p-2 cursor-pointer gap-2 rounded-xl ${data.layout === layout ? 'border-blue-600 border-3' : 'border-2'}`}
+            className={`flex items-center flex-col p-2 cursor-pointer gap-2 rounded-xl ${design.layout === layout ? 'border-blue-600 border-3' : 'border-2'}`}
             onClick={handleClick}
         >
             {icon}

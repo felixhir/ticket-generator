@@ -2,7 +2,7 @@ import { Roboto_Mono } from 'next/font/google'
 
 import { useCallback } from 'react'
 
-import { Layout } from '../../TicketContext'
+import { Layout } from '../../contexts/TicketContext'
 import CompactLayout from '../layouts/compact/Layout'
 import DefaultLayout from '../layouts/default/Layout'
 import PictureLayout from '../layouts/image/Layout'

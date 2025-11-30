@@ -1,6 +1,7 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
+import { useDesign } from '@/app/contexts/DesignContext'
+import { useTicket } from '@/app/contexts/TicketContext'
 
 import { Poppins, Roboto } from 'next/font/google'
 
@@ -21,9 +22,10 @@ const poppins = Poppins({
 
 export default function PictureLayout() {
     const { data } = useTicket()
+    const { design } = useDesign()
 
     const pattern = useMemo(() => {
-        switch (data.backgroundPattern) {
+        switch (design.backgroundPattern) {
             case 'lines':
                 return 'bg-lines'
             case 'blocks':
@@ -33,11 +35,11 @@ export default function PictureLayout() {
             default:
                 return 'bg-lines'
         }
-    }, [data.backgroundPattern])
+    }, [design.backgroundPattern])
 
     return (
         <div className={`relative w-[300px] h-[600px] flex flex-col ${pattern}`}>
-            <div className='h-[300px]'>{data.image && <img width={300} src={data.image} />}</div>
+            <div className='h-[300px]'>{design.image && <img width={300} src={design.image} />}</div>
             <div
                 className='absolute top-[266px] left-[25px] w-15 h-17 bg-ticket-text-dark flex  justify-center'
                 style={{ clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)' }}

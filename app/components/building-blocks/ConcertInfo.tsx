@@ -1,6 +1,6 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
+import { useTicket } from '@/app/contexts/TicketContext'
 import getFontSize, { FontSize } from '@/app/functions/getFontSize'
 import getTicketTextColor, { TicketColor } from '@/app/functions/getTicketTextColor'
 

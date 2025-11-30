@@ -10,7 +10,7 @@ export type Layout = 'default' | 'compact' | 'picture'
 
 export type BackgroundPattern = 'lines' | 'blocks' | 'hearts'
 
-interface TicketData {
+interface TicketContent {
     title: string
     tour: string
     band: string
@@ -20,20 +20,16 @@ interface TicketData {
     seatType: string
     barcode: string
     price: number
-    image: string | null
     currency: currency
-    ticketCount: number
-    layout: Layout
-    backgroundPattern: BackgroundPattern
 }
 
 const TicketContext = createContext<{
-    data: TicketData
-    setData: (d: Partial<TicketData>) => void
+    data: TicketContent
+    setData: (d: Partial<TicketContent>) => void
 } | null>(null)
 
 export function TicketProvider({ children }: { children: React.ReactNode }) {
-    const [data, setDataState] = useState<TicketData>({
+    const [data, setDataState] = useState<TicketContent>({
         title: 'Your Awesome Event',
         tour: 'Final World Tour',
         band: 'Slayer',
@@ -43,14 +39,13 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         seatType: 'standing ticket',
         barcode: 'My Event',
         price: 69.0,
-        image: null,
-        currency: currency.EUR,
-        layout: 'default',
-        ticketCount: 1,
-        backgroundPattern: 'lines'
+        currency: currency.EUR
     })
 
-    const setData = useCallback((d: Partial<TicketData>) => setDataState(prev => ({ ...prev, ...d })), [setDataState])
+    const setData = useCallback(
+        (d: Partial<TicketContent>) => setDataState(prev => ({ ...prev, ...d })),
+        [setDataState]
+    )
 
     return <TicketContext.Provider value={{ data, setData }}>{children}</TicketContext.Provider>
 }

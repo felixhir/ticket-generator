@@ -1,4 +1,4 @@
-import { useTicket } from '@/app/TicketContext'
+import { useTicket } from '@/app/contexts/TicketContext'
 
 import ConcertInfo from '../../building-blocks/ConcertInfo'
 import Date from '../../building-blocks/Date'
