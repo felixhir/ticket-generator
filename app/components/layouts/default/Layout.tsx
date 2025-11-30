@@ -26,7 +26,7 @@ export default function DefaultLayout() {
     return (
         <div
             id='default-layout'
-            className={`${roboto.className} w-[760px] h-[300px]`}
+            className={roboto.className}
             style={{ height: cmToPx(design.dimensions.short), width: cmToPx(design.dimensions.long) }}
         >
             <div className='flex flex-1 h-full'>

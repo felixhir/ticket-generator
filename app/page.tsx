@@ -43,7 +43,9 @@ function TicketWithData() {
 
     return (
         <div className='flex-1 flex items-center justify-center px-4'>
-            <Ticket layout={data.layout} />
+            <div id='preview-ticket'>
+                <Ticket layout={data.layout} />
+            </div>
         </div>
     )
 }
