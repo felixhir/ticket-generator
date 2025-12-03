@@ -1,4 +1,9 @@
-@import url(https://db.onlinewebfonts.com/c/fa6db9175696f50a2566ed77580e4460?family=Extenda+30+Deca);
+@font-face {
+    font-family: 'Extenda 30 Deca';
+    src: url('https://db.onlinewebfonts.com/t/fa6db9175696f50a2566ed77580e4460.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .extenda {
     font-family: 'Extenda 30 Deca', sans-serif;

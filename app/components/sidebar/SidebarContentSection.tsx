@@ -1,10 +1,11 @@
 'use client'
 
+import { useDesign } from '@/app/contexts/DesignContext'
 import { Trash, Upload } from 'lucide-react'
 
 import DatePicker from 'react-datepicker'
 
-import { currency, useTicket } from '../../TicketContext'
+import { currency, useTicket } from '../../contexts/TicketContext'
 
 export default function SidebarContentSection() {
     const { data, setData } = useTicket()
@@ -84,7 +85,7 @@ export default function SidebarContentSection() {
 }
 
 function ImageInput() {
-    const { data, setData } = useTicket()
+    const { design, setDesign: setData } = useDesign()
 
     return (
         <div className='flex justify-between items-center gap-2'>
@@ -107,10 +108,10 @@ function ImageInput() {
                     </label>
                 </div>
                 <button
-                    disabled={!data.image}
-                    className={`block p-1 text-center bg-gray-300 dark:bg-gray-600 rounded ${!!data.image ? 'cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700' : ''}`}
+                    disabled={!design.image}
+                    className={`block p-1 text-center bg-gray-300 dark:bg-gray-600 rounded ${!!design.image ? 'cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700' : ''}`}
                 >
-                    <Trash color={!data.image ? 'gray' : 'red'} onClick={() => setData({ image: null })}></Trash>
+                    <Trash color={!design.image ? 'gray' : 'red'} onClick={() => setData({ image: null })}></Trash>
                 </button>
             </div>
         </div>

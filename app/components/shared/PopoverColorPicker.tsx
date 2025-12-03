@@ -69,7 +69,7 @@ export default function PopoverColorPicker({ variable }: PopoverPickerProps) {
                 }
             }
 
-            setValue(colorValue)
+            setTimeout(() => setValue(colorValue), 0)
         }
     }, [variable])
 

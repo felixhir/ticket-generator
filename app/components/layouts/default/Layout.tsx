@@ -1,6 +1,8 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
+import { useDesign } from '@/app/contexts/DesignContext'
+import { useTicket } from '@/app/contexts/TicketContext'
+import { cmToPx } from '@/app/functions/cmToPx'
 
 import { Roboto } from 'next/font/google'
 
@@ -19,9 +21,14 @@ const roboto = Roboto({
 
 export default function DefaultLayout() {
     const { data } = useTicket()
+    const { design } = useDesign()
 
     return (
-        <div id='default-layout' className={`${roboto.className} w-[760px] h-[300px]`}>
+        <div
+            id='default-layout'
+            className={roboto.className}
+            style={{ height: cmToPx(design.dimensions.short), width: cmToPx(design.dimensions.long) }}
+        >
             <div className='flex flex-1 h-full'>
                 <div className='p-2 px-1 text-[15px] relative flex flex-1 flex-col h-full background-gradient slanted-main'>
                     <div className='z-10 p-6 flex flex-col h-full justify-between'>
@@ -40,7 +47,7 @@ export default function DefaultLayout() {
                 </div>
 
                 {data.barcode && (
-                    <div className='relative w-[80px] bg-ticket-secondary-muted slanted-side barcode-gradient'>
+                    <div className='relative w-20 bg-ticket-secondary-muted slanted-side barcode-gradient'>
                         <div className='absolute top-1/2 -right-14 -translate-y-1/2 rotate-270'>
                             <TicketBarcode />
                         </div>

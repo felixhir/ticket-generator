@@ -1,15 +1,16 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
 import Ticket from '@/app/components/ticket/Ticket'
 
+import { useDesign } from '../contexts/DesignContext'
+
 export default function PrintWrapper() {
-    const { data } = useTicket()
+    const { design } = useDesign()
     return (
         <div id='print-wrapper' className='h-screen hidden print:flex flex-col justify-between w-min'>
-            {Array.from({ length: data.ticketCount }).map((_, i) => (
+            {Array.from({ length: design.ticketCount }).map((_, i) => (
                 <div key={i}>
-                    <Ticket layout={data.layout} />
+                    <Ticket layout={design.layout} />
                 </div>
             ))}
         </div>

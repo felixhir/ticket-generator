@@ -4,7 +4,7 @@ import getTicketTextColor, { TicketColor } from '@/app/functions/getTicketTextCo
 import { useMemo } from 'react'
 import Barcode from 'react-barcode'
 
-import { useTicket } from '../../TicketContext'
+import { useTicket } from '../../contexts/TicketContext'
 
 interface TicketBarcodeProps {
     textColor?: TicketColor

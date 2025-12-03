@@ -1,6 +1,6 @@
 'use client'
 
-import { BackgroundPattern, Layout, useTicket } from '@/app/TicketContext'
+import { BackgroundPattern, Layout, useDesign } from '@/app/contexts/DesignContext'
 
 import { useCallback } from 'react'
 
@@ -8,8 +8,41 @@ import LayoutIcon from '../layouts/Icon'
 import PopoverColorPicker from '../shared/PopoverColorPicker'
 
 export default function SidebarDesignSection() {
+    const { design, setDesign } = useDesign()
+
     return (
         <div className='space-y-12'>
+            <Subsection title='Design'>
+                <div className='flex gap-4'>
+                    <label className='flex flex-1'>
+                        <span>Short Side (cm)</span>
+                        <input
+                            type='number'
+                            onChange={e => {
+                                const value = parseFloat(e.target.value)
+                                if (isNaN(value)) return
+                                setDesign({ dimensions: { long: design.dimensions.long, short: value } })
+                            }}
+                            value={useDesign().design.dimensions.short}
+                            className='w-full'
+                        />
+                    </label>
+                    <label className='flex flex-1'>
+                        <span>Long Side(cm)</span>
+                        <input
+                            type='number'
+                            onChange={e => {
+                                const value = parseFloat(e.target.value)
+                                if (isNaN(value)) return
+                                setDesign({ dimensions: { short: design.dimensions.short, long: value } })
+                            }}
+                            value={useDesign().design.dimensions.long}
+                            className='w-full'
+                        />
+                    </label>
+                </div>
+            </Subsection>
+
             <Subsection title='Colors'>
                 <div className='space-y-2'>
                     <CSSVariableColorInput variable='--ticket-primary' label='Primary' />
@@ -25,7 +58,6 @@ export default function SidebarDesignSection() {
             <Subsection title='Layout'>
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                     <LayoutOption layout='default' label='Standard' icon={<LayoutIcon layout='default' scale={30} />} />
-                    <LayoutOption layout='compact' label='Compact' icon={<LayoutIcon layout='compact' scale={50} />} />
                     <LayoutOption layout='picture' label='Picture' icon={<LayoutIcon layout='picture' scale={50} />} />
                 </div>
             </Subsection>
@@ -63,7 +95,7 @@ function CSSVariableColorInput({
 }
 
 function BackgroundSelector() {
-    const { data, setData } = useTicket()
+    const { setDesign: setData } = useDesign()
 
     return (
         <div className='flex justify-between items-center'>
@@ -78,13 +110,13 @@ function BackgroundSelector() {
 }
 
 function LayoutOption({ layout, icon, label }: { layout: Layout; icon: React.ReactNode; label: string }) {
-    const { data, setData } = useTicket()
+    const { design, setDesign: setData } = useDesign()
 
     const handleClick = useCallback(() => setData({ layout: layout }), [layout, setData])
 
     return (
         <button
-            className={`flex items-center flex-col p-2 cursor-pointer gap-2 rounded-xl ${data.layout === layout ? 'border-blue-600 border-3' : 'border-2'}`}
+            className={`flex items-center flex-col p-2 cursor-pointer gap-2 rounded-xl ${design.layout === layout ? 'border-blue-600 border-3' : 'border-2'}`}
             onClick={handleClick}
         >
             {icon}

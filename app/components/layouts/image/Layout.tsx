@@ -1,8 +1,10 @@
 'use client'
 
-import { useTicket } from '@/app/TicketContext'
+import { useDesign } from '@/app/contexts/DesignContext'
+import { useTicket } from '@/app/contexts/TicketContext'
+import { cmToPx } from '@/app/functions/cmToPx'
 
-import { Poppins, Roboto } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 
 import { useMemo } from 'react'
 
@@ -21,9 +23,10 @@ const poppins = Poppins({
 
 export default function PictureLayout() {
     const { data } = useTicket()
+    const { design } = useDesign()
 
     const pattern = useMemo(() => {
-        switch (data.backgroundPattern) {
+        switch (design.backgroundPattern) {
             case 'lines':
                 return 'bg-lines'
             case 'blocks':
@@ -33,14 +36,22 @@ export default function PictureLayout() {
             default:
                 return 'bg-lines'
         }
-    }, [data.backgroundPattern])
+    }, [design.backgroundPattern])
 
     return (
-        <div className={`relative w-[300px] h-[600px] flex flex-col ${pattern}`}>
-            <div className='h-[300px]'>{data.image && <img width={300} src={data.image} />}</div>
+        <div
+            className={`relative  flex flex-col ${pattern}`}
+            style={{ width: cmToPx(design.dimensions.short), height: cmToPx(design.dimensions.long) }}
+        >
+            <div style={{ height: cmToPx(design.dimensions.long / 2) }}>
+                {design.image && <img width={cmToPx(design.dimensions.short)} src={design.image} />}
+            </div>
             <div
-                className='absolute top-[266px] left-[25px] w-15 h-17 bg-ticket-text-dark flex  justify-center'
-                style={{ clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)' }}
+                className='absolute left-[25px] w-15 h-17 bg-ticket-text-dark flex  justify-center'
+                style={{
+                    clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)',
+                    top: cmToPx(design.dimensions.short) - 34
+                }}
             >
                 {data.barcode && <DataMatrix />}
             </div>
