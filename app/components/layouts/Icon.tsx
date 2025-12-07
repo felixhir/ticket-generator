@@ -1,4 +1,4 @@
-import { Layout } from '@/app/contexts/TicketContext'
+import { Layout } from '@/app/contexts/DesignContext'
 
 import Ticket from '../ticket/Ticket'
 
