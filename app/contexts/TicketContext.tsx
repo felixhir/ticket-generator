@@ -8,8 +8,7 @@ export enum currency {
 
 interface TicketContent {
     title: string
-    tour: string
-    band: string
+    subtitle: string
     venue: string
     address: string
     datetime: Date | null
@@ -27,8 +26,7 @@ const TicketContext = createContext<{
 export function TicketProvider({ children }: { children: React.ReactNode }) {
     const [data, setDataState] = useState<TicketContent>({
         title: 'Your Awesome Event',
-        tour: 'Final World Tour',
-        band: 'Slayer',
+        subtitle: 'Final World Tour',
         venue: 'Hanns-Martin-Schleyer-Halle',
         address: 'Mercedesstraße 69\n70372 Stuttgart',
         datetime: new Date('2019-08-03T21:00:00.000Z'),

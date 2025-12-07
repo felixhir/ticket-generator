@@ -13,18 +13,13 @@ export default function SidebarContentSection() {
     return (
         <div className='space-y-2'>
             <label>
-                <span>Event Title</span>
+                <span>Title</span>
                 <input type='text' value={data.title} onChange={e => setData({ title: e.target.value })} />
             </label>
 
             <label>
-                <span>Tour</span>
-                <input type='text' value={data.tour} onChange={e => setData({ tour: e.target.value })} />
-            </label>
-
-            <label>
-                <span>Band</span>
-                <input type='text' value={data.band} onChange={e => setData({ band: e.target.value })} />
+                <span>Subtitle</span>
+                <input type='text' value={data.subtitle} onChange={e => setData({ subtitle: e.target.value })} />
             </label>
 
             <label>

@@ -6,7 +6,7 @@ import { cmToPx } from '@/app/functions/cmToPx'
 
 import { Roboto } from 'next/font/google'
 
-import ConcertInfo from '../../building-blocks/ConcertInfo'
+import CombinedTitle from '../../building-blocks/CombinedTitle'
 import Date from '../../building-blocks/Date'
 import Location from '../../building-blocks/Location'
 import Price from '../../building-blocks/Price'
@@ -32,7 +32,7 @@ export default function DefaultLayout() {
             <div className='flex flex-1 h-full'>
                 <div className='p-2 px-1 text-[15px] relative flex flex-1 flex-col h-full background-gradient slanted-main'>
                     <div className='z-10 p-6 flex flex-col h-full justify-between'>
-                        <ConcertInfo bandFontSize='xl' tourFontSize='md' />
+                        <CombinedTitle titleFontSize='xl' subtitleFontSize='md' />
                         <div className='grid grid-cols-2 gap-4'>
                             <div className='flex flex-col gap-2'>
                                 <Date fontSize='md' />
