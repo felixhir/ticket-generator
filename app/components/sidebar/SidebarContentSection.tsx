@@ -41,9 +41,13 @@ export default function SidebarContentSection() {
                 <span>Time</span>
                 <DatePicker
                     className='w-full'
-                    showTimeInput={true}
+                    showTimeInput
                     selected={data.datetime}
                     onChange={date => setData({ datetime: date })}
+                    showMonthDropdown
+                    showYearDropdown
+                    popperPlacement='left'
+                    dropdownMode='select'
                 ></DatePicker>
             </label>
 
