@@ -1,0 +1,55 @@
+/* Patterns taken from https://css-pattern.com/ */
+
+:root {
+    --color-1: var(--ticket-primary);
+    --color-2: var(--ticket-secondary);
+
+    --s: 100px;
+}
+
+.bg-blocks {
+    --_g: #0000 8%, var(--color-1) 0 17%, #0000 0 58%;
+    background:
+        linear-gradient(135deg, #0000 20.5%, var(--color-1) 0 29.5%, #0000 0) 0 calc(var(--s) / 4),
+        linear-gradient(45deg, var(--_g)) calc(var(--s) / 2) 0,
+        linear-gradient(135deg, var(--_g), var(--color-1) 0 67%, #0000 0),
+        linear-gradient(45deg, var(--_g), var(--color-1) 0 67%, #0000 0 83%, var(--color-1) 0 92%, #0000 0),
+        var(--color-2);
+    background-size: var(--s) var(--s);
+}
+
+.bg-hearts {
+    --_g: 80%, var(--color-2) 25.4%, #0000 26%;
+    background:
+        radial-gradient(at 80% var(--_g)),
+        radial-gradient(at 20% var(--_g)),
+        conic-gradient(from -45deg at 50% 41%, var(--color-2) 90deg, var(--color-1) 0) calc(var(--s) / 2) 0;
+    background-size: var(--s) var(--s);
+}
+
+.bg-lines {
+    --_s: calc(2 * var(--s)) calc(2 * var(--s));
+    --_g: 35.36% 35.36% at;
+    --_c: #0000 66%, var(--color-2) 68% 70%, #0000 72%;
+    background:
+        radial-gradient(var(--_g) 100% 25%, var(--_c)) var(--s) var(--s) / var(--_s),
+        radial-gradient(var(--_g) 0 75%, var(--_c)) var(--s) var(--s) / var(--_s),
+        radial-gradient(var(--_g) 100% 25%, var(--_c)) 0 0 / var(--_s),
+        radial-gradient(var(--_g) 0 75%, var(--_c)) 0 0 / var(--_s),
+        repeating-conic-gradient(var(--color-1) 0 25%, #0000 0 50%) 0 0 / var(--_s),
+        radial-gradient(var(--_c)) 0 calc(var(--s) / 2) / var(--s) var(--s) var(--color-1);
+}
+
+.bg-waves {
+    --_g:
+        var(--color-1) 6% 14%, var(--color-2) 16% 24%, var(--color-1) 26% 34%, var(--color-2) 36% 44%,
+        var(--color-1) 46% 54%, var(--color-2) 56% 64%, var(--color-1) 66% 74%, var(--color-2) 76% 84%,
+        var(--color-1) 86% 94%;
+
+    background:
+        radial-gradient(100% 100% at 100% 0, var(--color-2) 4%, var(--_g), #0008 96%, #0000),
+        radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--color-2) 96%);
+    background-size:
+        var(--s) var(--s),
+        var(--s) var(--s);
+}

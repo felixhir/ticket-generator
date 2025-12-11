@@ -88,7 +88,7 @@ function ImageInput() {
 
     return (
         <div className='flex justify-between items-center gap-2'>
-            <label className='text-sm font-semibold text-gray-200'>Picture</label>
+            <label className='text-sm font-semibold'>Picture</label>
             <div className='flex gap-2 items-center'>
                 <div>
                     <label className='block w-full p-1 text-center bg-gray-300 dark:bg-gray-600 rounded cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700'>

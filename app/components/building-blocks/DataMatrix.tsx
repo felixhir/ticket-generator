@@ -7,13 +7,13 @@ export default function DataMatrix() {
     const { data } = useTicket()
     const value = data.barcode
 
-    const [color, setColor] = useState('#FFFFFF')
+    const [color, setColor] = useState('#000000')
 
     useEffect(() => {
         const target = document.documentElement
 
         const observer = new MutationObserver(() => {
-            const newColor = getComputedStyle(target).getPropertyValue('--ticket-text-light')
+            const newColor = getComputedStyle(target).getPropertyValue('--ticket-text-dark')
             setColor(newColor)
         })
 

@@ -4,7 +4,12 @@ import getLayoutDimensions, { Dimensions } from '../functions/getLayoutDimension
 
 export type Layout = 'default' | 'picture'
 
-export type BackgroundPattern = 'lines' | 'blocks' | 'hearts'
+export enum BackgroundPattern {
+    Waves = 'Waves',
+    Lines = 'Lines',
+    Blocks = 'Blocks',
+    Hearts = 'Hearts'
+}
 
 interface Design {
     image: string | null
@@ -24,7 +29,7 @@ export function DesignProvider({ children }: { children: React.ReactNode }) {
         image: null,
         layout: 'default',
         ticketCount: 1,
-        backgroundPattern: 'lines',
+        backgroundPattern: BackgroundPattern.Waves,
         dimensions: getLayoutDimensions('default')
     })
 

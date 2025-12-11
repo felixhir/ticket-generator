@@ -3,8 +3,11 @@
 import { useDesign } from '@/app/contexts/DesignContext'
 import { useTicket } from '@/app/contexts/TicketContext'
 import { cmToPx } from '@/app/functions/cmToPx'
+import getPatternClass from '@/app/functions/getPatternClass'
 
 import { Roboto } from 'next/font/google'
+
+import { useMemo } from 'react'
 
 import CombinedTitle from '../../building-blocks/CombinedTitle'
 import Date from '../../building-blocks/Date'
@@ -12,6 +15,7 @@ import Location from '../../building-blocks/Location'
 import Price from '../../building-blocks/Price'
 import Seating from '../../building-blocks/Seating'
 import TicketBarcode from '../../building-blocks/TicketBarcode'
+import '../patterns.css'
 import './styles.css'
 
 const roboto = Roboto({
@@ -23,10 +27,12 @@ export default function DefaultLayout() {
     const { data } = useTicket()
     const { design } = useDesign()
 
+    const pattern = useMemo(() => getPatternClass(design.backgroundPattern), [design.backgroundPattern])
+
     return (
         <div
             id='default-layout'
-            className={roboto.className}
+            className={`${roboto.className} bg-fade ${pattern}`}
             style={{ height: cmToPx(design.dimensions.short), width: cmToPx(design.dimensions.long) }}
         >
             <div className='flex flex-1 h-full'>

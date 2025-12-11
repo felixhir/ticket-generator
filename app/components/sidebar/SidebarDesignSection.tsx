@@ -11,7 +11,7 @@ export default function SidebarDesignSection() {
     const { design, setDesign } = useDesign()
 
     return (
-        <div className='space-y-12'>
+        <div className='space-y-6'>
             <Subsection title='Design'>
                 <div className='flex gap-4'>
                     <label className='flex flex-1'>
@@ -52,6 +52,16 @@ export default function SidebarDesignSection() {
                     <CSSVariableColorInput variable='--ticket-text-dark' label='Dark' />
                     <CSSVariableColorInput variable='--ticket-background' label='Background' />
                     <BackgroundSelector />
+                    <label>
+                        <span>Pattern Size</span>
+                        <input
+                            type='range'
+                            max={200}
+                            min={10}
+                            step={1}
+                            onChange={e => document.documentElement.style.setProperty('--s', `${e.target.value}px`)}
+                        ></input>
+                    </label>
                 </div>
             </Subsection>
 
@@ -68,7 +78,7 @@ export default function SidebarDesignSection() {
 function Subsection({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <div className='space-y-4'>
-            <h3 className='text-md font-semibold text-gray-200 border-b border-gray-700 pb-1'>{title}</h3>
+            <h3 className='text-md font-semibold border-b border-gray-700 pb-1'>{title}</h3>
             {children}
         </div>
     )
@@ -85,7 +95,7 @@ function CSSVariableColorInput({
 }) {
     return (
         <div className='flex justify-between items-center gap-2'>
-            <label className='text-sm font-semibold text-gray-200'>{label}</label>
+            <label className='text-sm font-semibold '>{label}</label>
             <div className='flex gap-2 items-center'>
                 {children}
                 <PopoverColorPicker variable={variable} />
@@ -99,11 +109,11 @@ function BackgroundSelector() {
 
     return (
         <div className='flex justify-between items-center'>
-            <label className='text-sm font-semibold text-gray-200'>Background Pattern</label>
+            <label className='text-sm font-semibold'>Background Pattern</label>
             <select onChange={e => setData({ backgroundPattern: e.target.value as BackgroundPattern })}>
-                <option value='lines' label='Lines' />
-                <option value='blocks' label='Blocks' />
-                <option value='hearts' label='Hearts' />
+                {Object.values(BackgroundPattern).map(pattern => (
+                    <option key={pattern} value={pattern} label={pattern} />
+                ))}
             </select>
         </div>
     )

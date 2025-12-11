@@ -27,7 +27,7 @@
     --accent: #2b7fff;
 
     /* Ticket Color Variables */
-    --ticket-primary: #daab2d;
+    --ticket-primary: #262626;
     --ticket-primary-muted: color-mix(in srgb, var(--ticket-primary) 70%, transparent);
     --ticket-secondary: #a57a03;
     --ticket-secondary-muted: color-mix(in srgb, var(--ticket-secondary) 70%, transparent);
