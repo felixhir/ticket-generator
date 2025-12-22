@@ -17,6 +17,7 @@ interface Design {
     layout: Layout
     backgroundPattern: BackgroundPattern
     dimensions: Dimensions
+    bandLogo?: string
 }
 
 const DesignContext = createContext<{
