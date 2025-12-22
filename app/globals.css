@@ -36,6 +36,8 @@
     --ticket-text-light: #ffffff;
     --ticket-text-dark: #020b13;
     --ticket-background: #262626;
+
+    --logo-size: 1;
 }
 
 @media print {

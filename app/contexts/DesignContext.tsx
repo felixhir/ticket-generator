@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useState } from 'react'
 
 import getLayoutDimensions, { Dimensions } from '../functions/getLayoutDimensions'
 
-export type Layout = 'default' | 'picture'
+export type Layout = 'default' | 'picture' | 'band'
 
 export enum BackgroundPattern {
     Waves = 'Waves',
@@ -18,6 +18,10 @@ interface Design {
     backgroundPattern: BackgroundPattern
     dimensions: Dimensions
     bandLogo?: string
+    logoDimensions: {
+        width: number
+        height: number
+    }
 }
 
 const DesignContext = createContext<{
@@ -31,7 +35,11 @@ export function DesignProvider({ children }: { children: React.ReactNode }) {
         layout: 'default',
         ticketCount: 1,
         backgroundPattern: BackgroundPattern.Waves,
-        dimensions: getLayoutDimensions('default')
+        dimensions: getLayoutDimensions('default'),
+        logoDimensions: {
+            width: 0,
+            height: 0
+        }
     })
 
     const setData = useCallback((d: Partial<Design>) => {

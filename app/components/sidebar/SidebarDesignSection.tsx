@@ -69,6 +69,16 @@ export default function SidebarDesignSection() {
             <Subsection title='Images'>
                 <ImageInput propertyName='image' />
                 <ImageInput propertyName='bandLogo' useGrayScale={true} />
+                <label>
+                    <span>Logo Size</span>
+                    <input
+                        type='range'
+                        max={2}
+                        min={0.1}
+                        step={0.01}
+                        onChange={e => document.documentElement.style.setProperty('--logo-size', `${e.target.value}`)}
+                    ></input>
+                </label>
             </Subsection>
 
             <Subsection title='Layout'>
@@ -155,7 +165,8 @@ function ImageInput({ propertyName, useGrayScale = false }: { propertyName: stri
             const reader = new FileReader()
             reader.onload = e => {
                 const imageSrc = e.target?.result as string
-                toGrayScale(imageSrc).then(url => setData({ [propertyName]: url }))
+                setData({ [propertyName]: imageSrc })
+                // toGrayScale(imageSrc).then(url => setData({ [propertyName]: url }))
             }
             reader.readAsDataURL(file)
         } else {
@@ -198,51 +209,4 @@ function ImageInput({ propertyName, useGrayScale = false }: { propertyName: stri
             </div>
         </div>
     )
-}
-
-async function toGrayScale(imageSrc: string): Promise<string> {
-    return new Promise(resolve => {
-        const img = new Image()
-        img.src = imageSrc
-
-        img.onload = () => {
-            const canvas = document.createElement('canvas')
-            canvas.width = img.width
-            canvas.height = img.height
-
-            const ctx = canvas.getContext('2d')!
-            ctx.drawImage(img, 0, 0)
-
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-            const data = imageData.data
-
-            for (let i = 0; i < data.length; i += 4) {
-                const r = gammaCorrect(data[i])
-                const g = gammaCorrect(data[i + 1])
-                const b = gammaCorrect(data[i + 2])
-
-                const lum = 0.299 * r + 0.587 * g + 0.114 * b // linear luminance
-
-                data[i] = 255
-                data[i + 1] = 255
-                data[i + 2] = 255
-                const scale = 2 // brightens overall alpha
-                data[i + 3] = Math.min(255, Math.round(inverseGamma(lum) * scale))
-            }
-
-            ctx.putImageData(imageData, 0, 0)
-            resolve(canvas.toDataURL())
-        }
-    })
-}
-
-function gammaCorrect(value: number): number {
-    // Convert 0..255 to linear 0..1
-    const v = value / 255
-    return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)
-}
-
-function inverseGamma(value: number): number {
-    // Convert linear 0..1 back to 0..255
-    return value <= 0.0031308 ? value * 12.92 * 255 : (1.055 * Math.pow(value, 1 / 2.4) - 0.055) * 255
 }

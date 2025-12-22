@@ -1,7 +1,5 @@
 'use client'
 
-import { useDesign } from '@/app/contexts/DesignContext'
-
 import { useState } from 'react'
 
 import ExportButton from './ExportButton'
@@ -25,7 +23,7 @@ export default function Sidebar() {
             </div>
 
             <div className='mt-auto p-4'>
-                <Footer />
+                <ExportButton />
             </div>
         </div>
     )
@@ -39,25 +37,5 @@ function TabButton({ label, active, onClick }: { label: string; active: boolean;
         >
             {label}
         </button>
-    )
-}
-
-function Footer() {
-    const { design, setDesign: setData } = useDesign()
-
-    return (
-        <div className='flex flex-1 items-center gap-2'>
-            <label className='text-sm font-medium'>Tickets per page:</label>
-            <select
-                value={design.ticketCount}
-                onChange={e => setData({ ticketCount: Number(e.target.value) })}
-                className='border p-1 rounded'
-            >
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-            </select>
-            <ExportButton />
-        </div>
     )
 }
