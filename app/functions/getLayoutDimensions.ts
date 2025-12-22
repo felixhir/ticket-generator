@@ -9,6 +9,8 @@ export default function getLayoutDimensions(layout: Layout): Dimensions {
             return { long: 20, short: 7.5 }
         case 'picture':
             return { long: 15, short: 7.5 }
+        case 'band':
+            return { long: 18, short: 7 }
         default:
             throw new Error('Unknown layout type')
     }

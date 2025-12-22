@@ -1,0 +1,3 @@
+.background {
+    background: linear-gradient(90deg, var(--color-ticket-primary-muted) 0%, var(--color-ticket-secondary-muted) 100%);
+}

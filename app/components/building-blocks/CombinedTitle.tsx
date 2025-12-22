@@ -25,7 +25,7 @@ export default function CombinedTitle({
 
     return (
         <div className={`${colorCss}`}>
-            <p className={`${tourCss} font-semibold`}>{data.subtitle}</p>
+            <p className={`${tourCss} font-semibold -mb-2`}>{data.subtitle}</p>
             <p className={`${bandCss} font-bold`}>{data.title}</p>
         </div>
     )

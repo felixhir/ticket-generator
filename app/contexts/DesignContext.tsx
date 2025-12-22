@@ -36,6 +36,7 @@ export function DesignProvider({ children }: { children: React.ReactNode }) {
         ticketCount: 1,
         backgroundPattern: BackgroundPattern.Waves,
         dimensions: getLayoutDimensions('default'),
+        bandLogo: 'slayer.png',
         logoDimensions: {
             width: 0,
             height: 0
