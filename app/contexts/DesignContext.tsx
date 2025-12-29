@@ -2,9 +2,14 @@ import { createContext, useCallback, useContext, useState } from 'react'
 
 import getLayoutDimensions, { Dimensions } from '../functions/getLayoutDimensions'
 
-export type Layout = 'default' | 'picture'
+export type Layout = 'default' | 'picture' | 'band'
 
-export type BackgroundPattern = 'lines' | 'blocks' | 'hearts'
+export enum BackgroundPattern {
+    Waves = 'Waves',
+    Lines = 'Lines',
+    Blocks = 'Blocks',
+    Hearts = 'Hearts'
+}
 
 interface Design {
     image: string | null
@@ -12,6 +17,11 @@ interface Design {
     layout: Layout
     backgroundPattern: BackgroundPattern
     dimensions: Dimensions
+    bandLogo?: string
+    logoDimensions: {
+        width: number
+        height: number
+    }
 }
 
 const DesignContext = createContext<{
@@ -24,8 +34,13 @@ export function DesignProvider({ children }: { children: React.ReactNode }) {
         image: null,
         layout: 'default',
         ticketCount: 1,
-        backgroundPattern: 'lines',
-        dimensions: getLayoutDimensions('default')
+        backgroundPattern: BackgroundPattern.Waves,
+        dimensions: getLayoutDimensions('default'),
+        bandLogo: 'slayer.png',
+        logoDimensions: {
+            width: 0,
+            height: 0
+        }
     })
 
     const setData = useCallback((d: Partial<Design>) => {

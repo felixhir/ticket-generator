@@ -129,6 +129,13 @@ export default function PopoverColorPicker({ variable }: PopoverPickerProps) {
                     ref={popover}
                 >
                     <HexColorPicker color={value} onChange={updateValue} />
+                    <input
+                        type='text'
+                        className='w-full border-none text-center'
+                        value={value}
+                        onChange={e => updateValue(e.target.value)}
+                        maxLength={7}
+                    />
                 </div>
             )}
         </div>

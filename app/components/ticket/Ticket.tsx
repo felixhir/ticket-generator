@@ -4,6 +4,7 @@ import { Roboto_Mono } from 'next/font/google'
 
 import { useCallback } from 'react'
 
+import BandLayout from '../layouts/band/Layout'
 import DefaultLayout from '../layouts/default/Layout'
 import PictureLayout from '../layouts/image/Layout'
 
@@ -23,6 +24,8 @@ export default function Ticket({ layout }: TicketProps) {
                 return <DefaultLayout />
             case 'picture':
                 return <PictureLayout />
+            case 'band':
+                return <BandLayout />
             default:
                 return <p>Did you forget to register your Layout in Ticket.tsx? ☹️</p>
         }

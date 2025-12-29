@@ -1,8 +1,5 @@
 'use client'
 
-import { useDesign } from '@/app/contexts/DesignContext'
-import { Trash, Upload } from 'lucide-react'
-
 import DatePicker from 'react-datepicker'
 
 import { currency, useTicket } from '../../contexts/TicketContext'
@@ -13,18 +10,13 @@ export default function SidebarContentSection() {
     return (
         <div className='space-y-2'>
             <label>
-                <span>Event Title</span>
+                <span>Title</span>
                 <input type='text' value={data.title} onChange={e => setData({ title: e.target.value })} />
             </label>
 
             <label>
-                <span>Tour</span>
-                <input type='text' value={data.tour} onChange={e => setData({ tour: e.target.value })} />
-            </label>
-
-            <label>
-                <span>Band</span>
-                <input type='text' value={data.band} onChange={e => setData({ band: e.target.value })} />
+                <span>Subtitle</span>
+                <input type='text' value={data.subtitle} onChange={e => setData({ subtitle: e.target.value })} />
             </label>
 
             <label>
@@ -46,9 +38,13 @@ export default function SidebarContentSection() {
                 <span>Time</span>
                 <DatePicker
                     className='w-full'
-                    showTimeInput={true}
+                    showTimeInput
                     selected={data.datetime}
                     onChange={date => setData({ datetime: date })}
+                    showMonthDropdown
+                    showYearDropdown
+                    popperPlacement='left'
+                    dropdownMode='select'
                 ></DatePicker>
             </label>
 
@@ -78,42 +74,6 @@ export default function SidebarContentSection() {
                 <span>Barcode</span>
                 <input type='text' value={data.barcode || ''} onChange={e => setData({ barcode: e.target.value })} />
             </label>
-
-            <ImageInput />
-        </div>
-    )
-}
-
-function ImageInput() {
-    const { design, setDesign: setData } = useDesign()
-
-    return (
-        <div className='flex justify-between items-center gap-2'>
-            <label className='text-sm font-semibold text-gray-200'>Picture</label>
-            <div className='flex gap-2 items-center'>
-                <div>
-                    <label className='block w-full p-1 text-center bg-gray-300 dark:bg-gray-600 rounded cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700'>
-                        <input
-                            type='file'
-                            accept='.jpeg,.png,.jpg'
-                            onChange={e => {
-                                if (e.target.files && e.target.files[0]) {
-                                    setData({ image: URL.createObjectURL(e.target.files[0]) })
-                                }
-                                e.currentTarget.value = ''
-                            }}
-                            className='hidden'
-                        />
-                        <Upload />
-                    </label>
-                </div>
-                <button
-                    disabled={!design.image}
-                    className={`block p-1 text-center bg-gray-300 dark:bg-gray-600 rounded ${!!design.image ? 'cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-700' : ''}`}
-                >
-                    <Trash color={!design.image ? 'gray' : 'red'} onClick={() => setData({ image: null })}></Trash>
-                </button>
-            </div>
         </div>
     )
 }

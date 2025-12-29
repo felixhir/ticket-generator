@@ -27,7 +27,7 @@
     --accent: #2b7fff;
 
     /* Ticket Color Variables */
-    --ticket-primary: #daab2d;
+    --ticket-primary: #262626;
     --ticket-primary-muted: color-mix(in srgb, var(--ticket-primary) 70%, transparent);
     --ticket-secondary: #a57a03;
     --ticket-secondary-muted: color-mix(in srgb, var(--ticket-secondary) 70%, transparent);
@@ -36,6 +36,8 @@
     --ticket-text-light: #ffffff;
     --ticket-text-dark: #020b13;
     --ticket-background: #262626;
+
+    --logo-size: 1;
 }
 
 @media print {
@@ -76,8 +78,35 @@ label {
     @apply text-sm font-medium flex flex-col;
 }
 
+.react-datepicker,
+.react-datepicker__header,
 input,
 textarea,
 select {
-    @apply text-sm rounded-lg p-2 border dark:bg-gray-800;
+    @apply text-sm rounded-lg p-2 border dark:bg-gray-800 bg-white;
+}
+
+.react-datepicker__header {
+    border: none;
+}
+
+.react-datepicker-time__header,
+.react-datepicker__year-select,
+.react-datepicker__month-select,
+.react-datepicker__day-name,
+.react-datepicker-time__caption,
+.react-datepicker-time__input,
+.react-datepicker__day {
+    color: var(--color);
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__day--selected {
+    background-color: var(--accent) !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+    display: none;
 }

@@ -1,29 +1,12 @@
 import { useTicket } from '@/app/contexts/TicketContext'
+import useObserveCssVariableChange from '@/app/functions/useObserveCssVariableChange'
 import bwipjs from '@bwip-js/browser'
-
-import { useEffect, useState } from 'react'
 
 export default function DataMatrix() {
     const { data } = useTicket()
     const value = data.barcode
 
-    const [color, setColor] = useState('#FFFFFF')
-
-    useEffect(() => {
-        const target = document.documentElement
-
-        const observer = new MutationObserver(() => {
-            const newColor = getComputedStyle(target).getPropertyValue('--ticket-text-light')
-            setColor(newColor)
-        })
-
-        observer.observe(target, {
-            attributes: true,
-            attributeFilter: ['style']
-        })
-
-        return () => observer.disconnect()
-    }, [])
+    const color = useObserveCssVariableChange('ticket-text-dark')
 
     return (
         <div className='scale-[0.75]'>

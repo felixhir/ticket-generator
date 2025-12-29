@@ -1,25 +1,6 @@
-#default-layout .background-gradient {
-    --size: 100px;
-    --color-1: var(--ticket-secondary);
-    --color-2: var(--ticket-background);
-    --g:
-        var(--color-2) 6% 14%, var(--color-1) 16% 24%, var(--color-2) 26% 34%, var(--color-1) 36% 44%,
-        var(--color-2) 46% 54%, var(--color-1) 56% 64%, var(--color-2) 66% 74%, var(--color-1) 76% 84%,
-        var(--color-2) 86% 94%;
-
-    background:
-        linear-gradient(to right, var(--color-2) 0%, transparent 100%),
-        radial-gradient(100% 100% at 100% 0, var(--color-1) 4%, var(--g), #0008 96%, #0000),
-        radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--g), var(--color-1) 96%) var(--color-1);
-    background-size:
-        100% 100%,
-        var(--size) var(--size),
-        var(--size) var(--size);
-}
-
 #default-layout .barcode-gradient {
     background-color: var(--ticket-secondary);
-    opacity: 0.8;
+    opacity: 1;
     background-image:
         radial-gradient(var(--ticket-primary) 0.5px, transparent 0.5px),
         radial-gradient(var(--ticket-primary) 0.5px, var(--ticket-background) 0.5px);
@@ -27,4 +8,17 @@
     background-position:
         0 0,
         10px 10px;
+}
+
+.bg-fade {
+    position: relative;
+}
+
+.bg-fade::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, var(--color-1) 0%, transparent 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
