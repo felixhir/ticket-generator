@@ -40,7 +40,7 @@ export default function SidebarContentSection() {
                     className='w-full'
                     showTimeInput
                     selected={data.datetime}
-                    onChange={date => setData({ datetime: date })}
+                    onChange={(date: Date | null) => setData({ datetime: date })}
                     showMonthDropdown
                     showYearDropdown
                     popperPlacement='left'
