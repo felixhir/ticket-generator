@@ -1,6 +1,6 @@
 'use client'
 
-import { getSupportedSite, importEventFromUrl } from '@/app/functions/importEventFromUrl'
+import { importEventFromUrl, isValidUrl } from '../../functions/importEventFromUrl'
 import { Link } from 'lucide-react'
 
 import { useState } from 'react'
@@ -19,12 +19,8 @@ export default function ImportFromUrlButton() {
         const trimmed = url.trim()
         if (!trimmed) return
 
-        if (!getSupportedSite(trimmed)) {
-            setStatus({
-                type: 'error',
-                message:
-                    'Only eventim, ticketmaster, and reservix URLs are supported right now. Other websites coming soon!'
-            })
+        if (!isValidUrl(trimmed)) {
+            setStatus({ type: 'error', message: 'Please enter a valid URL' })
             return
         }
 

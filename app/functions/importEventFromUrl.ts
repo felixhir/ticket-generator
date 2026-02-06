@@ -2,22 +2,12 @@ import { currency } from '../contexts/TicketContext'
 
 const CORS_PROXY = 'https://corsproxy.io/?'
 
-const SUPPORTED_HOSTNAMES = [
-    'eventim.de',
-    'eventim.com',
-    'ticketmaster.de',
-    'ticketmaster.com',
-    'ticketmaster.co.uk',
-    'reservix.de',
-    'reservix.com'
-]
-
-export function getSupportedSite(url: string): string | null {
+export function isValidUrl(url: string): boolean {
     try {
-        const { hostname } = new URL(url)
-        return SUPPORTED_HOSTNAMES.some(h => hostname.endsWith(h)) ? hostname : null
+        new URL(url)
+        return true
     } catch {
-        return null
+        return false
     }
 }
 
