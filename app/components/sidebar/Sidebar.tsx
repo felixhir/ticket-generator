@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import ExportButton from './ExportButton'
+import ImportFromUrlButton from './ImportFromUrlButton'
 import SidebarContentSection from './SidebarContentSection'
 import SidebarDesignSection from './SidebarDesignSection'
 
@@ -22,7 +23,8 @@ export default function Sidebar() {
                 {activeTab === 'design' && <SidebarDesignSection />}
             </div>
 
-            <div className='mt-auto p-4'>
+            <div className='mt-auto p-4 space-y-2'>
+                <ImportFromUrlButton />
                 <ExportButton />
             </div>
         </div>
