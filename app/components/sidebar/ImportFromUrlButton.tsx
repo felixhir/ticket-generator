@@ -1,11 +1,11 @@
 'use client'
 
-import { importEventFromUrl, isValidUrl } from '../../functions/importEventFromUrl'
 import { Link } from 'lucide-react'
 
 import { useState } from 'react'
 
 import { useTicket } from '../../contexts/TicketContext'
+import { importEventFromUrl, isValidUrl } from '../../functions/importEventFromUrl'
 
 type Status = { type: 'idle' } | { type: 'loading' } | { type: 'error'; message: string } | { type: 'success' }
 
