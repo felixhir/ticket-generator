@@ -1,0 +1,4 @@
+[    3558ms] [ERROR] Permissions policy violation: accelerometer is not allowed in this document. @ https://www.fansale.de/mw_wO/Auu/NUUk/JSi2/2hjy/5VDatfktu3zLJL/ZRlOJA/V3Z8FB/dhCw0C:0
+[    3558ms] [WARNING] The deviceorientation events are blocked by permissions policy. See https://github.com/w3c/webappsec-permissions-policy/blob/master/features.md#sensor-features @ https://www.fansale.de/mw_wO/Auu/NUUk/JSi2/2hjy/5VDatfktu3zLJL/ZRlOJA/V3Z8FB/dhCw0C:0
+[    3558ms] [ERROR] Permissions policy violation: accelerometer is not allowed in this document. @ https://www.fansale.de/mw_wO/Auu/NUUk/JSi2/2hjy/5VDatfktu3zLJL/ZRlOJA/V3Z8FB/dhCw0C:0
+[    3558ms] [WARNING] The devicemotion events are blocked by permissions policy. See https://github.com/w3c/webappsec-permissions-policy/blob/master/features.md#sensor-features @ https://www.fansale.de/mw_wO/Auu/NUUk/JSi2/2hjy/5VDatfktu3zLJL/ZRlOJA/V3Z8FB/dhCw0C:0
