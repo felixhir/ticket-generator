@@ -2,6 +2,9 @@
     "name": "ticket-generator",
     "version": "0.1.0",
     "private": true,
+    "engines": {
+        "node": ">=20.19.0"
+    },
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build --turbopack",
@@ -32,7 +35,7 @@
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "baseline-browser-mapping": "^2.9.19",
-        "eslint": "^10",
+        "eslint": "^9.39.3",
         "eslint-config-next": "^16.1.6",
         "gh-pages": "^6.3.0",
         "husky": "^9.1.7",
