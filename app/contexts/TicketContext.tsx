@@ -1,10 +1,8 @@
 import { createContext, useCallback, useContext, useState } from 'react'
 
-export enum currency {
-    EUR,
-    USD,
-    SEK
-}
+import { currency } from '../lib/currency'
+
+export { currency }
 
 interface TicketContent {
     title: string
@@ -20,7 +18,7 @@ interface TicketContent {
 
 const TicketContext = createContext<{
     data: TicketContent
-    setData: (d: Partial<TicketContent>) => void
+    setData: (d: Partial) => void
 } | null>(null)
 
 export function TicketProvider({ children }: { children: React.ReactNode }) {
@@ -36,10 +34,7 @@ export function TicketProvider({ children }: { children: React.ReactNode }) {
         currency: currency.EUR
     })
 
-    const setData = useCallback(
-        (d: Partial<TicketContent>) => setDataState(prev => ({ ...prev, ...d })),
-        [setDataState]
-    )
+    const setData = useCallback((d: Partial) => setDataState(prev => ({ ...prev, ...d })), [setDataState])
 
     return <TicketContext.Provider value={{ data, setData }}>{children}</TicketContext.Provider>
 }

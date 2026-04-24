@@ -15,11 +15,7 @@ export const metadata: Metadata = {
     description: 'Create personalized concert tickets as keepsakes'
 }
 
-export default function RootLayout({
-    children
-}: Readonly<{
-    children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly) {
     return (
         <html lang='en'>
             <body className={`${inter.className}`}>{children}</body>

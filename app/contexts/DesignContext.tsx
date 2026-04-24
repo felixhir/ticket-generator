@@ -26,7 +26,7 @@ interface Design {
 
 const DesignContext = createContext<{
     design: Design
-    setDesign: (d: Partial<Design>) => void
+    setDesign: (d: Partial) => void
 } | null>(null)
 
 export function DesignProvider({ children }: { children: React.ReactNode }) {
@@ -43,7 +43,7 @@ export function DesignProvider({ children }: { children: React.ReactNode }) {
         }
     })
 
-    const setData = useCallback((d: Partial<Design>) => {
+    const setData = useCallback((d: Partial) => {
         setDataState(prev => {
             const newData = { ...prev, ...d }
             if (d.layout) {

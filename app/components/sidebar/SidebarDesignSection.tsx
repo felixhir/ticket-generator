@@ -157,7 +157,7 @@ function ImageInput({ propertyName, useGrayScale = false }: { propertyName: stri
 
     const getProperty = () => design[propertyName as keyof typeof design]
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = (event: React.ChangeEvent) => {
         const file = event.target.files?.[0]
         if (!file) return
 

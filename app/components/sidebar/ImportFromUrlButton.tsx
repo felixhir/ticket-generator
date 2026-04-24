@@ -54,6 +54,8 @@ export default function ImportFromUrlButton() {
 
     return (
         <div className='space-y-2'>
+            {status.type === 'error' && <p className='text-xs text-red-500'>{status.message}</p>}
+            {status.type === 'success' && <p className='text-xs text-green-500'>Event data imported!</p>}
             <div className='flex gap-2'>
                 <input
                     type='url'
@@ -83,9 +85,6 @@ export default function ImportFromUrlButton() {
                     {status.type === 'loading' ? '…' : 'Import'}
                 </button>
             </div>
-
-            {status.type === 'error' && <p className='text-xs text-red-500'>{status.message}</p>}
-            {status.type === 'success' && <p className='text-xs text-green-500'>Event data imported!</p>}
         </div>
     )
 }

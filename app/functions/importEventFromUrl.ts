@@ -1,6 +1,19 @@
-import { currency } from '../contexts/TicketContext'
+import { currency } from '../lib/currency'
 
-const CORS_PROXY = 'https://corsproxy.io/?'
+type ImportedTicketData = {
+    title: string
+    subtitle?: string
+    venue: string
+    address: string
+    datetime: Date | null
+    price: number
+    currency: currency
+    seatType: string
+}
+
+type ImportedTicketResponse = Omit<ImportedTicketData, 'datetime'> & {
+    datetime: string | null
+}
 
 export function isValidUrl(url: string): boolean {
     try {
@@ -11,69 +24,22 @@ export function isValidUrl(url: string): boolean {
     }
 }
 
-export async function importEventFromUrl(url: string) {
-    const cleanUrl = new URL(url)
-    cleanUrl.search = ''
-    const res = await fetch(CORS_PROXY + encodeURIComponent(cleanUrl.toString()))
-    if (!res.ok) throw new Error(`Failed to fetch page (${res.status})`)
+export async function importEventFromUrl(url: string): Promise<ImportedTicketData> {
+    const res = await fetch('/api/import-from-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+    })
 
-    const html = await res.text()
-    return extractEventData(html)
-}
+    const data = (await res.json()) as ImportedTicketResponse | { error?: string }
 
-function extractEventData(html: string) {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(html, 'text/html')
-    const scripts = doc.querySelectorAll('script[type="application/ld+json"]')
-
-    for (const script of scripts) {
-        try {
-            const data = JSON.parse(script.textContent || '')
-            if (data['@type']?.includes('Event')) return mapToTicketData(data)
-        } catch {
-            continue
-        }
+    if (!res.ok) {
+        throw new Error('error' in data && data.error ? data.error : `Failed to import event (${res.status})`)
     }
 
-    throw new Error('No event data found on this page')
-}
-
-function mapCurrency(code: string | undefined): currency {
-    switch (code?.toUpperCase()) {
-        case 'USD':
-            return currency.USD
-        case 'SEK':
-            return currency.SEK
-        default:
-            return currency.EUR
-    }
-}
-
-function mapToTicketData(data: Record<string, unknown>) {
-    const location = data.location as Record<string, unknown> | undefined
-    const address = location?.address as Record<string, string> | undefined
-
-    const addressParts = [
-        address?.streetAddress,
-        [address?.postalCode, address?.addressLocality].filter(Boolean).join(' ')
-    ]
-        .filter(Boolean)
-        .join('\n')
-
-    const rawOffers = data.offers
-    const firstOffer = Array.isArray(rawOffers) ? rawOffers[0] : rawOffers
-    const typed = firstOffer as Record<string, unknown> | undefined
-    const itemOffered = typed?.itemOffered as Record<string, unknown> | undefined
-    const innerOffers = itemOffered?.offers as Record<string, unknown>[] | undefined
-    const offer = innerOffers?.[0] ?? typed
-
+    const ticketData = data as ImportedTicketResponse
     return {
-        title: (data.name as string) || '',
-        venue: (location?.name as string) || '',
-        address: addressParts,
-        datetime: data.startDate ? new Date(data.startDate as string) : null,
-        price: offer?.price ? Number(offer.price) : 0,
-        currency: mapCurrency(offer?.priceCurrency as string | undefined),
-        seatType: (offer?.category as string) || ''
+        ...ticketData,
+        datetime: ticketData.datetime ? new Date(ticketData.datetime) : null
     }
 }
