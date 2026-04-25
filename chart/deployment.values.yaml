@@ -11,5 +11,5 @@ istioRouting:
 certificate:
   enabled: true
   namespace: istio-system
-  issuerName: letsencrypt-prod
+  issuerName: letsencrypt
   issuerKind: ClusterIssuer
