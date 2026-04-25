@@ -297,39 +297,13 @@ export default function TicketPreviewCanvas({
         return () => window.removeEventListener('resize', syncCanvasLayout)
     }, [syncCanvasLayout])
 
-    const resizeWidthFitViewport = useCallback(
-        (nextScale: number) => {
-            if (!shouldFitWidth) return
-            const vp = viewportRef.current
-            const content = getPrintContentEl()
-            if (!vp || !content) return
-            const nextHeight = Math.min(MAX_VIEWPORT_HEIGHT_PX, Math.ceil(content.offsetHeight * nextScale))
-            setX((vp.clientWidth - content.offsetWidth * nextScale) / 2)
-            setY(0)
-            setWidthFitViewportHeight(current => (current === nextHeight ? current : nextHeight))
-        },
-        [getPrintContentEl, shouldFitWidth]
-    )
-
-    useEffect(() => {
-        resizeWidthFitViewport(scale)
-    }, [resizeWidthFitViewport, scale])
-
     const zoomIn = useCallback(() => {
-        setScale(s => {
-            const next = Math.min(MAX_ZOOM, s * 1.15)
-            resizeWidthFitViewport(next)
-            return next
-        })
-    }, [resizeWidthFitViewport])
+        setScale(s => Math.min(MAX_ZOOM, s * 1.15))
+    }, [])
 
     const zoomOut = useCallback(() => {
-        setScale(s => {
-            const next = Math.max(MIN_ZOOM, s / 1.15)
-            resizeWidthFitViewport(next)
-            return next
-        })
-    }, [resizeWidthFitViewport])
+        setScale(s => Math.max(MIN_ZOOM, s / 1.15))
+    }, [])
 
     function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
         if (e.button !== 0) return
