@@ -17,7 +17,9 @@ const buttonVariants = cva(
                 ghost: 'text-muted-foreground hover:bg-secondary hover:text-foreground aria-expanded:bg-secondary aria-expanded:text-foreground',
                 destructive:
                     'bg-destructive text-primary-foreground hover:opacity-90 focus-visible:border-destructive/40 focus-visible:ring-destructive/20',
-                link: 'text-primary underline-offset-4 hover:underline'
+                link: 'text-primary underline-offset-4 hover:underline',
+                segmented:
+                    'text-muted-foreground hover:text-foreground aria-expanded:bg-secondary aria-expanded:text-foreground h-app-nav-control flex-none relative z-10'
             },
             size: {
                 default:
