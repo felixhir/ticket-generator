@@ -13,7 +13,7 @@
     "footer": {
         "legalLabel": "Rechtliche Links",
         "build": "Build {{version}}",
-        "hobbyNote": "Diese App ist Open-Source und in der Freizeit als Hobby-Projekt entwickelt. Sie ist nicht kommerziell und wird es auch nicht werden. Es gibt keine Benutzerkonten: Ihre Daten verbleiben nur in diesem Browser und werden an keinen Server übertragen oder dort gespeichert."
+        "hobbyNote": "Diese App ist Open-Source Hobby-Projekt. Sie ist nicht kommerziell und wird es auch nicht werden. Es gibt keine Benutzerkonten: Ihre Daten verbleiben nur in diesem Browser und werden an keinen Server übertragen oder dort gespeichert."
     },
     "legal": {
         "privacy": "Datenschutz",
@@ -202,7 +202,6 @@
         "printoutClose": "Schließen",
         "printoutCaptureFailed": "Druck konnte nicht vorbereitet werden. Probiere ein anderes Bild oder Logo.",
         "printoutNoPreview": "Keine Ticketvorschau gefunden. Öffne zuerst ein Ticket in der Designansicht.",
-        "showAllTickets": "Alle Tickets anzeigen",
         "configurationTabs": "Ticketkonfiguration",
         "delete": "Löschen"
     },

@@ -9,6 +9,10 @@ COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
 
 COPY . ./
+ARG NEXT_PUBLIC_BUILD_NUMBER
+ARG NEXT_PUBLIC_GIT_SHA
+ENV NEXT_PUBLIC_BUILD_NUMBER=$NEXT_PUBLIC_BUILD_NUMBER
+ENV NEXT_PUBLIC_GIT_SHA=$NEXT_PUBLIC_GIT_SHA
 RUN npm run build
 
 FROM node:25-alpine AS runner

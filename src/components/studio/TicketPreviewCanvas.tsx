@@ -1,7 +1,7 @@
 'use client'
 
 import { Expand, Maximize2, Minus, Plus, X } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AppSurface } from '@/components/ui/app-primitives'
 import { Button } from '@/components/ui/button'
@@ -33,58 +33,65 @@ export default function TicketPreviewCanvas({
     const stateRef = useRef({ scale: 1, x: 0, y: 0 })
     const pan = useRef<PanState | null>(null)
     const shouldFitWidth = fitMode === 'width' && !isExpanded
+    const lastRenderScaleRef = useRef(scale)
+    lastRenderScaleRef.current = scale
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         stateRef.current = { scale, x, y }
     }, [scale, x, y])
 
     const getPrintContentEl = useCallback((): HTMLElement | null => {
-        return document.querySelector<HTMLElement>('#print-wrapper')
+        return containerRef.current?.querySelector<HTMLElement>('#print-wrapper') ?? null
     }, [])
 
-    const fitToView = useCallback(() => {
+    const fitToView = useCallback((): boolean => {
         const vp = viewportRef.current
         const content = getPrintContentEl()
-        if (!vp || !content) return
+        if (!vp || !content) return false
         setWidthFitViewportHeight(null)
         const w = content.offsetWidth
         const h = content.offsetHeight
-        if (w < 1 || h < 1) return
+        if (w < 1 || h < 1) return false
         const vw = vp.clientWidth
         const vh = vp.clientHeight
-        if (vw < 1 || vh < 1) return
+        if (vw < 1 || vh < 1) return false
         const margin = 0.92
         const s = Math.min((vw * margin) / w, (vh * margin) / h, 1)
+        const nextX = (vw - w * s) / 2
+        const nextY = (vh - h * s) / 2
+        stateRef.current = { scale: s, x: nextX, y: nextY }
         setScale(s)
-        setX((vw - w * s) / 2)
-        setY((vh - h * s) / 2)
+        setX(nextX)
+        setY(nextY)
+        return true
     }, [getPrintContentEl])
 
-    const fitToWidth = useCallback(() => {
+    const fitToWidth = useCallback((): boolean => {
         const vp = viewportRef.current
         const content = getPrintContentEl()
-        if (!vp || !content) return
+        if (!vp || !content) return false
         const w = content.offsetWidth
         const h = content.offsetHeight
-        if (w < 1 || h < 1) return
+        if (w < 1 || h < 1) return false
         const vw = vp.clientWidth
-        if (vw < 1) return
+        if (vw < 1) return false
         const margin = 0.96
         const s = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, (vw * margin) / w))
         const nextHeight = Math.min(MAX_VIEWPORT_HEIGHT_PX, Math.ceil(h * s))
+        const nextX = (vw - w * s) / 2
+        stateRef.current = { scale: s, x: nextX, y: 0 }
         setScale(s)
-        setX((vw - w * s) / 2)
+        setX(nextX)
         setY(0)
         setWidthFitViewportHeight(current => (current === nextHeight ? current : nextHeight))
+        return true
     }, [getPrintContentEl])
 
-    const fitForMode = useCallback(() => {
+    const fitForMode = useCallback((): boolean => {
         if (shouldFitWidth) {
-            fitToWidth()
-            return
+            return fitToWidth()
         }
-
-        fitToView()
+        return fitToView()
     }, [fitToView, fitToWidth, shouldFitWidth])
 
     const centerAtHundredPercent = useCallback(() => {
@@ -96,16 +103,21 @@ export default function TicketPreviewCanvas({
         if (w < 1 || h < 1) return
         const vw = vp.clientWidth
         if (vw < 1) return
+        const nx = (vw - w) / 2
         setScale(1)
-        setX((vw - w) / 2)
         if (shouldFitWidth) {
             setY(0)
             const nextHeight = Math.min(MAX_VIEWPORT_HEIGHT_PX, Math.ceil(h))
             setWidthFitViewportHeight(c => (c === nextHeight ? c : nextHeight))
+            stateRef.current = { scale: 1, x: nx, y: 0 }
+            setX(nx)
         } else {
             const vh = vp.clientHeight
             if (vh < 1) return
-            setY((vh - h) / 2)
+            const ny = (vh - h) / 2
+            stateRef.current = { scale: 1, x: nx, y: ny }
+            setX(nx)
+            setY(ny)
         }
     }, [getPrintContentEl, shouldFitWidth])
 
@@ -119,7 +131,7 @@ export default function TicketPreviewCanvas({
         if (w < 1 || h < 1) return
         const vw = vp.clientWidth
         if (vw < 1) return
-        const s = stateRef.current.scale
+        const s = lastRenderScaleRef.current
         setX((vw - w * s) / 2)
         if (shouldFitWidth) {
             setY(0)
@@ -134,6 +146,20 @@ export default function TicketPreviewCanvas({
 
     const wasExpandedRef = useRef(false)
     const blockAutoFitRef = useRef(false)
+    const initialFitRef = useRef(true)
+
+    const syncCanvasLayout = useCallback(() => {
+        requestAnimationFrame(() => {
+            if (blockAutoFitRef.current) return
+            if (initialFitRef.current) {
+                if (fitForMode()) {
+                    initialFitRef.current = false
+                }
+            } else {
+                reframeAtCurrentScale()
+            }
+        })
+    }, [fitForMode, reframeAtCurrentScale])
 
     useEffect(() => {
         if (isExpanded) {
@@ -216,12 +242,11 @@ export default function TicketPreviewCanvas({
     useEffect(() => {
         const id = requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                if (blockAutoFitRef.current) return
-                centerAtHundredPercent()
+                syncCanvasLayout()
             })
         })
         return () => cancelAnimationFrame(id)
-    }, [centerAtHundredPercent])
+    }, [syncCanvasLayout])
 
     useEffect(() => {
         if (!isExpanded) return
@@ -236,24 +261,41 @@ export default function TicketPreviewCanvas({
 
     useEffect(() => {
         let ro: ResizeObserver | undefined
-        const raf = requestAnimationFrame(() => {
+        let cancelled = false
+        const attach = () => {
+            if (cancelled) return
             const el = getPrintContentEl()
-            if (!el) return
+            if (!el) {
+                requestAnimationFrame(attach)
+                return
+            }
             ro = new ResizeObserver(() => {
-                requestAnimationFrame(() => reframeAtCurrentScale())
+                syncCanvasLayout()
             })
             ro.observe(el)
-        })
+        }
+        const raf = requestAnimationFrame(attach)
         return () => {
+            cancelled = true
             cancelAnimationFrame(raf)
             ro?.disconnect()
         }
-    }, [getPrintContentEl, reframeAtCurrentScale])
+    }, [getPrintContentEl, syncCanvasLayout])
 
     useEffect(() => {
-        window.addEventListener('resize', reframeAtCurrentScale)
-        return () => window.removeEventListener('resize', reframeAtCurrentScale)
-    }, [reframeAtCurrentScale])
+        const vp = viewportRef.current
+        if (!vp) return
+        const ro = new ResizeObserver(() => {
+            syncCanvasLayout()
+        })
+        ro.observe(vp)
+        return () => ro.disconnect()
+    }, [syncCanvasLayout])
+
+    useEffect(() => {
+        window.addEventListener('resize', syncCanvasLayout)
+        return () => window.removeEventListener('resize', syncCanvasLayout)
+    }, [syncCanvasLayout])
 
     const resizeWidthFitViewport = useCallback(
         (nextScale: number) => {
@@ -367,7 +409,17 @@ export default function TicketPreviewCanvas({
             </div>
             <div className='print:hidden flex min-h-0 shrink-0 items-center justify-between gap-app-card border-t border-app-border px-app-section pb-app-card pt-app-card sm:flex-nowrap'>
                 <div className='flex min-w-0 justify-start'>
-                    <Button type='button' size='sm' variant='outline' className='gap-1.5' onClick={fitForMode}>
+                    <Button
+                        type='button'
+                        size='sm'
+                        variant='outline'
+                        className='gap-1.5'
+                        onClick={() => {
+                            if (fitForMode()) {
+                                initialFitRef.current = false
+                            }
+                        }}
+                    >
                         <Expand className='size-3.5' aria-hidden />
                         {t('ticketPreview.fit')}
                     </Button>

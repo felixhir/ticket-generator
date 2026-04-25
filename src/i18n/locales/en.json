@@ -13,7 +13,7 @@
     "footer": {
         "legalLabel": "Legal links",
         "build": "Build {{version}}",
-        "hobbyNote": "This app is open source and developed as a free-time hobby project. It is not commercial and will not become commercial. There are no user accounts: your data stays only in this browser and is not sent to or stored on any server."
+        "hobbyNote": "This app is an open source hobby project. It is not commercial and will not become commercial. There are no user accounts: your data stays only in this browser and is not sent to or stored on any server."
     },
     "legal": {
         "privacy": "Privacy",
@@ -202,7 +202,6 @@
         "printoutClose": "Close",
         "printoutCaptureFailed": "Could not prepare the printout. Try a different image or logo.",
         "printoutNoPreview": "No ticket preview was found. Open a ticket in the design view first.",
-        "showAllTickets": "Show all tickets",
         "configurationTabs": "Ticket configuration",
         "delete": "Deleted"
     },

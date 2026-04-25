@@ -74,7 +74,9 @@ export default function StoredTicketPreview({ href, onDelete, ticket }: StoredTi
                         {date ? date.toLocaleDateString(language) : t('storedTicket.noDate')}
                     </SectionEyebrow>
                     <div className='flex flex-col gap-1'>
-                        <h3 className='line-clamp-2 text-app-heading text-app-text-primary'>{ticket.content.title}</h3>
+                        <h3 className='line-clamp-2 text-app-heading leading-tight text-app-text-primary'>
+                            {ticket.content.title}
+                        </h3>
                         <div className='flex min-h-5 items-baseline gap-1'>
                             <p className='line-clamp-1 text-app-small text-app-text-secondary'>
                                 {ticket.content.venue || t('storedTicket.noVenue')}

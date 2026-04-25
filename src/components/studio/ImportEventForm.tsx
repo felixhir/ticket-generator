@@ -52,10 +52,10 @@ export default function ImportEventForm({
                     <FieldLabel htmlFor='event-url' className='sr-only'>
                         {t('import.urlLabel')}
                     </FieldLabel>
-                    <div className='grid gap-app-card sm:flex sm:items-center'>
+                    <div className='flex min-w-0 items-center gap-app-card'>
                         <Input
                             id='event-url'
-                            className='min-w-0 w-full sm:flex-1'
+                            className='min-w-0 flex-1'
                             type='url'
                             value={url}
                             onChange={event => {
@@ -69,7 +69,7 @@ export default function ImportEventForm({
                             type='submit'
                             variant='default'
                             size='icon'
-                            className='justify-self-end sm:justify-self-auto'
+                            className='shrink-0'
                             disabled={status.type === 'loading' || !url.trim()}
                             aria-label={status.type === 'loading' ? t('import.importing') : t('import.action')}
                         >

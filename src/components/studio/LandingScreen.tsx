@@ -17,10 +17,10 @@ export default function LandingScreen({
     return (
         <div className='mx-auto flex w-full max-w-app-narrow flex-1 items-center py-app-section sm:py-app-frame'>
             <Card className='w-full border-transparent p-app-section text-center'>
-                <h2 className='mx-auto max-w-2xl text-nowrap text-app-display leading-none text-app-text-primary'>
+                <h2 className='mx-auto max-w-2xl text-nowrap font-bold text-app-display-hero leading-none text-app-text-primary sm:text-app-display'>
                     {t('landing.title')}
                 </h2>
-                <p className='mx-auto mt-app-card max-w-xl text-pretty text-app-body text-app-text-secondary sm:mt-app-control-y'>
+                <p className='mx-auto mt-2 max-w-xl text-pretty text-app-small text-app-text-secondary sm:mt-app-control-y sm:text-app-body'>
                     {t('landing.description')}
                 </p>
                 <div className='mx-auto mt-app-frame grid w-full max-w-2xl gap-app-card sm:mt-12'>

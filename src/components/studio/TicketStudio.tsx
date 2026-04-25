@@ -1,6 +1,6 @@
 'use client'
 
-import { FileJson, Printer, Tickets, Trash2 } from 'lucide-react'
+import { FileJson, Printer, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -134,12 +134,16 @@ export default function TicketStudio({
     return (
         <div className='flex flex-1 flex-col print:block'>
             <header className='flex items-center justify-between gap-app-card border-b border-app-border p-app-card sm:flex-wrap sm:gap-app-section sm:p-app-section print:hidden'>
-                <div className='min-w-0'>
+                <Link
+                    href={getLocalizedPath(locale, '/create')}
+                    className='min-w-0 max-w-full rounded-sm text-left no-underline outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-app-ring focus-visible:ring-offset-2 focus-visible:ring-offset-app-background'
+                    aria-label={`${t('app.name')}: ${t('nav.create')}`}
+                >
                     <SectionEyebrow>{t('app.name')}</SectionEyebrow>
                     <h1 className='text-app-body font-bold text-app-text-primary/90 sm:text-app-heading'>
                         {t('app.title')}
                     </h1>
-                </div>
+                </Link>
                 <AppNavigation activePage={page} currentPath={navigationPath} locale={locale} />
             </header>
 
@@ -246,24 +250,28 @@ function TicketDetailWorkspace({
 
     return (
         <div className='flex flex-1 flex-col gap-app-section py-app-section pb-[calc(var(--spacing-app-frame)*4)] print:py-0'>
-            <header className='flex w-full min-w-0 flex-col items-stretch gap-2 sm:flex-row sm:items-start sm:justify-between print:hidden'>
-                <h2 className='min-w-0 flex-1 break-words text-app-title font-bold leading-tight text-app-text-primary [overflow-wrap:anywhere] sm:pr-2'>
+            <header className='flex w-full min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-2 print:hidden'>
+                <h2 className='order-2 min-w-0 flex-1 break-words text-app-title font-bold leading-tight text-app-text-primary [overflow-wrap:anywhere] sm:order-1 sm:pr-2'>
                     {title}
                 </h2>
-                <div className='flex shrink-0 flex-wrap items-center justify-end gap-1.5 sm:justify-end'>
-                    <Button type='button' variant='default' onClick={() => setIsPrintoutOpen(true)}>
+                <div className='order-1 flex w-full flex-row flex-wrap gap-2 sm:order-2 sm:w-auto sm:shrink-0 sm:items-center sm:justify-end sm:gap-1.5'>
+                    <Button
+                        type='button'
+                        variant='default'
+                        className='max-sm:min-h-10 max-sm:min-w-0 max-sm:flex-1 max-sm:basis-[calc(50%-0.25rem)] sm:flex-initial'
+                        onClick={() => setIsPrintoutOpen(true)}
+                    >
                         <Printer className='size-4' aria-hidden />
                         {t('ticketDetail.printout')}
                     </Button>
-                    <Button type='button' variant='outline' onClick={exportJson}>
+                    <Button
+                        type='button'
+                        variant='outline'
+                        className='max-sm:min-h-10 max-sm:min-w-0 max-sm:flex-1 max-sm:basis-[calc(50%-0.25rem)] sm:flex-initial'
+                        onClick={exportJson}
+                    >
                         <FileJson className='size-4' aria-hidden />
                         {t('ticketDetail.export')}
-                    </Button>
-                    <Button asChild variant='secondary'>
-                        <Link href={getLocalizedPath(locale, '/stored')}>
-                            <Tickets className='size-4' aria-hidden />
-                            {t('ticketDetail.showAllTickets')}
-                        </Link>
                     </Button>
                 </div>
             </header>

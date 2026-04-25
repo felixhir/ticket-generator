@@ -20,15 +20,32 @@ interface DateTimePickerProps {
 const monthIndexes = Array.from({ length: 12 }, (_, index) => index)
 const defaultTimeOption = '17:00'
 
-function syncDateTimePickerPanelHeight() {
+function formatTimeListLabel(date: Date) {
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+}
+
+function shouldUseDefaultTimeScroll(value: Date | null) {
+    if (!value) return true
+    return value.getHours() === 0 && value.getMinutes() === 0
+}
+
+function applyDateTimePickerPanelHeight() {
+    const picker = document.querySelector<HTMLElement>('.app-date-time-picker')
+    const monthContainer = picker?.querySelector<HTMLElement>('.react-datepicker__month-container')
+    if (!picker || !monthContainer) return
+
+    const fromOffset = monthContainer.offsetHeight
+    const fromRect = Math.ceil(monthContainer.getBoundingClientRect().height)
+    const height = Math.max(fromOffset, fromRect)
+    if (height > 0) {
+        picker.style.setProperty('--app-date-time-picker-panel-height', `${height}px`)
+    }
+}
+
+function requestApplyDateTimePickerPanelHeight(onComplete?: () => void) {
     window.requestAnimationFrame(() => {
-        const picker = document.querySelector<HTMLElement>('.app-date-time-picker')
-        const monthContainer = picker?.querySelector<HTMLElement>('.react-datepicker__month-container')
-        const height = monthContainer?.getBoundingClientRect().height
-
-        if (!picker || !height) return
-
-        picker.style.setProperty('--app-date-time-picker-panel-height', `${Math.ceil(height)}px`)
+        applyDateTimePickerPanelHeight()
+        onComplete?.()
     })
 }
 
@@ -48,29 +65,93 @@ function useNarrowViewport() {
 
 export function DateTimePicker({ id, language, onChange, placeholder, timeLabel, value }: DateTimePickerProps) {
     const isNarrow = useNarrowViewport()
+    const monthPanelObserverRef = React.useRef<ResizeObserver | null>(null)
 
-    const scrollToDefaultTime = React.useCallback(() => {
-        syncDateTimePickerPanelHeight()
-        if (value) return
+    const stopMonthPanelHeightSync = React.useCallback(() => {
+        monthPanelObserverRef.current?.disconnect()
+        monthPanelObserverRef.current = null
+    }, [])
 
-        window.setTimeout(() => {
+    const startMonthPanelHeightSync = React.useCallback(() => {
+        stopMonthPanelHeightSync()
+        window.requestAnimationFrame(() => {
+            const picker = document.querySelector<HTMLElement>('.app-date-time-picker')
+            const monthContainer = picker?.querySelector<HTMLElement>('.react-datepicker__month-container')
+            if (!picker || !monthContainer) return
+
+            applyDateTimePickerPanelHeight()
+            const observer = new ResizeObserver(() => {
+                applyDateTimePickerPanelHeight()
+            })
+            observer.observe(monthContainer)
+            monthPanelObserverRef.current = observer
+            applyDateTimePickerPanelHeight()
+        })
+    }, [stopMonthPanelHeightSync])
+
+    React.useEffect(() => () => stopMonthPanelHeightSync(), [stopMonthPanelHeightSync])
+
+    const scrollTimeListToSelection = React.useCallback(() => {
+        const align = () => {
             const timeList = document.querySelector<HTMLElement>('.app-date-time-picker .react-datepicker__time-list')
-            const defaultOption = Array.from(
-                timeList?.querySelectorAll<HTMLElement>('.react-datepicker__time-list-item') ?? []
-            ).find(item => item.textContent?.trim() === defaultTimeOption)
+            if (!timeList || timeList.clientHeight === 0) return
 
-            if (!timeList || !defaultOption) return
+            let target: HTMLElement | undefined
 
-            timeList.scrollTop = defaultOption.offsetTop - timeList.clientHeight / 2 + defaultOption.clientHeight / 2
-        }, 0)
-    }, [value])
+            if (value && !shouldUseDefaultTimeScroll(value)) {
+                target = timeList.querySelector<HTMLElement>('.react-datepicker__time-list-item--selected') ?? undefined
+                if (!target) {
+                    const label = formatTimeListLabel(value)
+                    target = Array.from(
+                        timeList.querySelectorAll<HTMLElement>('.react-datepicker__time-list-item')
+                    ).find(item => item.textContent?.trim() === label)
+                }
+            }
+
+            if (!target) {
+                target = Array.from(timeList.querySelectorAll<HTMLElement>('.react-datepicker__time-list-item')).find(
+                    item => item.textContent?.trim() === defaultTimeOption
+                )
+            }
+
+            if (!target) return
+
+            const nextTop = target.offsetTop - timeList.clientHeight / 2 + target.clientHeight / 2
+            timeList.scrollTop = Math.max(0, nextTop)
+        }
+
+        startMonthPanelHeightSync()
+        window.requestAnimationFrame(() => {
+            applyDateTimePickerPanelHeight()
+            window.requestAnimationFrame(() => {
+                applyDateTimePickerPanelHeight()
+                window.requestAnimationFrame(() => {
+                    align()
+                    window.requestAnimationFrame(align)
+                })
+            })
+        })
+    }, [value, startMonthPanelHeightSync])
+
+    const handleCalendarClose = React.useCallback(() => {
+        stopMonthPanelHeightSync()
+        document
+            .querySelector<HTMLElement>('.app-date-time-picker')
+            ?.style.removeProperty('--app-date-time-picker-panel-height')
+    }, [stopMonthPanelHeightSync])
+
+    const handleMonthChange = React.useCallback(() => {
+        requestApplyDateTimePickerPanelHeight()
+    }, [])
 
     return (
         <DatePicker
             id={id}
             selected={value}
             onChange={(date: Date | null) => onChange(date)}
-            onCalendarOpen={scrollToDefaultTime}
+            onCalendarOpen={scrollTimeListToSelection}
+            onCalendarClose={handleCalendarClose}
+            onMonthChange={handleMonthChange}
             placeholderText={placeholder}
             customInput={<DateTimePickerInput />}
             calendarClassName='app-date-time-picker'
@@ -144,7 +225,7 @@ function DatePickerHeader({
                     value={String(date.getMonth())}
                     onValueChange={value => {
                         changeMonth(Number(value))
-                        syncDateTimePickerPanelHeight()
+                        requestApplyDateTimePickerPanelHeight()
                     }}
                 >
                     <SelectTrigger
@@ -165,7 +246,7 @@ function DatePickerHeader({
                     value={String(selectedYear)}
                     onValueChange={value => {
                         changeYear(Number(value))
-                        syncDateTimePickerPanelHeight()
+                        requestApplyDateTimePickerPanelHeight()
                     }}
                 >
                     <SelectTrigger
