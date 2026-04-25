@@ -29,7 +29,7 @@ helm.sh/chart: {{ include "ticket-generator.chart" . }}
 
 {{- define "ticket-generator.image" -}}
 {{- if .Values.image.registry }}
-{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag }}
+{{- printf "%s/%s:sha-%s" .Values.image.registry .Values.image.repository .Values.image.tag }}
 {{- else }}
 {{- printf "%s:%s" .Values.image.repository .Values.image.tag }}
 {{- end }}

@@ -19,30 +19,8 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  ci:
-    name: Check and build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 1
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: npm
-      - name: Install dependencies
-        run: npm ci
-      - name: Check
-        run: npm run check
-      - name: Build
-        run: npm run build
-
   image:
-    name: Container image
-    needs: [ ci ]
-    if: success()
+    name: Build & Push Docker Image
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -91,7 +69,8 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          platforms: ${{ github.event_name == 'pull_request' && 'linux/amd64' || 'linux/amd64,linux/arm64' }}
+          platforms: ${{ github.event_name == 'pull_request' && 'linux/amd64' ||
+            'linux/amd64,linux/arm64' }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
