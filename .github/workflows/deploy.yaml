@@ -1,4 +1,4 @@
-# Bumps `image.tag` in `chart/values.yaml` to point at a published ghcr image.
+# Bumps `image.tag` in `chart/deployment.values.yaml` to point at a published ghcr image.
 # Run "Use workflow from" with `master` to deploy the tag for that ref’s commit, or
 # set "Image tag" to a full SHA (or other tag) that already exists in the registry.
 name: Deploy (Helm image tag)
@@ -53,7 +53,7 @@ jobs:
           yq --version
 
       - name: Set image.tag
-        run: yq e -i '.image.tag = strenv(DEPLOY_TAG)' chart/values.yaml
+        run: yq e -i '.image.tag = strenv(DEPLOY_TAG)' chart/deployment.values.yaml
         env:
           DEPLOY_TAG: ${{ steps.tag.outputs.value }}
 
@@ -63,7 +63,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- chart/values.yaml; then
+          if git diff --quiet -- chart/deployment.values.yaml; then
             echo "No change to image.tag; nothing to commit."
             exit 0
           fi
