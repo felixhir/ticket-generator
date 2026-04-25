@@ -1,10 +1,8 @@
-# ArgoCD / Helm: source of truth for the deployed app. Image matches
-# .github/workflows/build.yml (ghcr.io, repo path = lowercase GitHub name).
 replicaCount: 1
 image:
   registry: ghcr.io
   repository: felixhir/ticket-generator
-  tag: 2196dbb9824a805e8f32b5429ed3797154fa3926
+  tag: latest
   pullPolicy: IfNotPresent
   pullSecrets: []
 nameOverride: ""
@@ -45,7 +43,7 @@ ingress:
   className: ""
   annotations: {}
   hosts:
-    - host: ticket-generator.example.com
+    - host: app.example.com
       paths:
         - path: /
           pathType: Prefix
@@ -53,18 +51,24 @@ ingress:
 nodeSelector: {}
 tolerations: []
 affinity: {}
-# See src/components/layout/AppShell.tsx (footer) and
-# src/lib/server/import/import-event-from-url.ts (Ticketmaster import).
-# Deployment template also sets NODE_ENV=production, NEXT_TELEMETRY_DISABLED=1.
-# The image Dockerfile sets PORT=3000, HOSTNAME=0.0.0.0 (see chart containerPort).
 app:
-  # Runtime build label for the footer. Empty = AppShell default "1.0.0".
   buildVersion: ""
-# Optional extra key/value env entries (e.g. overrides). Prefer secrets below for keys.
 env: []
-# Optional: load TICKETMASTER_API_KEY from a Secret (and other keys).
-# Example:
-#   extraEnvFrom:
-#     - secretRef:
-#         name: ticket-generator-secrets
 extraEnvFrom: []
+istioRouting:
+  enabled: false
+  domain: ""
+  gateway:
+    selector:
+      app: istio-ingress
+  acmeChallenge:
+    host: acme-solver.istio-system.svc.cluster.local
+    port: 8089
+  httpsRedirect: true
+certificate:
+  enabled: false
+  namespace: istio-system
+  dnsNames: []
+  issuerName: ""
+  issuerKind: ClusterIssuer
+  includeWwwSan: false

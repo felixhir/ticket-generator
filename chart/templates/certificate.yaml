@@ -1,0 +1,26 @@
+{{- if .Values.certificate.enabled -}}
+{{- $root := . }}
+{{- $name := include "ticket-generator.fullname" . }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ $name | quote }}
+  namespace: {{ .Values.certificate.namespace | quote }}
+spec:
+  secretName: "{{ $name }}-certificate"
+  dnsNames:
+    {{- if .Values.certificate.dnsNames }}
+    {{- range .Values.certificate.dnsNames }}
+    - {{ . | quote }}
+    {{- end }}
+    {{- else }}
+    - {{ required "istioRouting.domain (or certificate.dnsNames) is required when certificate.enabled" $root.Values.istioRouting.domain | quote }}
+    {{- if .Values.certificate.includeWwwSan }}
+    - {{ printf "www.%s" $root.Values.istioRouting.domain | quote }}
+    {{- end }}
+    {{- end }}
+  issuerRef:
+    name: {{ required "certificate.issuerName is required when certificate.enabled" $root.Values.certificate.issuerName | quote }}
+    kind: {{ $root.Values.certificate.issuerKind | quote }}
+    group: cert-manager.io
+{{- end }}

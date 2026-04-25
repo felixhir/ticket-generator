@@ -1,0 +1,62 @@
+{{- if .Values.istioRouting.enabled -}}
+{{- $root := . }}
+{{- $name := include "ticket-generator.fullname" . }}
+{{- $domain := required "istioRouting.domain is required when istioRouting.enabled" .Values.istioRouting.domain -}}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ $name | quote }}
+spec:
+  selector:
+    {{- toYaml .Values.istioRouting.gateway.selector | nindent 4 }}
+  servers:
+    - port:
+        number: 80
+        name: http-{{ $name }}
+        protocol: HTTP
+      hosts:
+        - {{ $domain | quote }}
+    - port:
+        number: 443
+        name: https-{{ $name }}
+        protocol: HTTPS
+      hosts:
+        - {{ $domain | quote }}
+      tls:
+        mode: SIMPLE
+        credentialName: "{{ $name }}-certificate"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ $name | quote }}
+spec:
+  hosts:
+    - {{ $domain | quote }}
+  gateways:
+    - "{{ $root.Release.Namespace }}/{{ $name }}"
+  http:
+    - match:
+        - uri:
+            prefix: /.well-known/acme-challenge/
+      route:
+        - destination:
+            host: {{ .Values.istioRouting.acmeChallenge.host | quote }}
+            port:
+              number: {{ .Values.istioRouting.acmeChallenge.port }}
+    {{- if .Values.istioRouting.httpsRedirect }}
+    - match:
+        - port: 80
+      redirect:
+        scheme: https
+        redirectCode: 301
+    {{- end }}
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: "{{ $name }}.{{ $root.Release.Namespace }}.svc.cluster.local"
+            port:
+              number: {{ .Values.service.port }}
+{{- end }}
