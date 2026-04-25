@@ -18,7 +18,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
-import { AppSurface, EmptyState, PreviewFrame, SectionEyebrow } from '@/components/ui/app-primitives'
+import { AppSurface, EmptyState, PreviewFrame } from '@/components/ui/app-primitives'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { cloneDesign, type Design, defaultDesign } from '@/lib/domain/design'
@@ -36,7 +36,7 @@ import { cloneTicketContent, defaultTicketContent } from '@/lib/domain/ticket'
 import type { Locale } from '@/lib/i18n/routing'
 import { getLocalizedPath } from '@/lib/i18n/routing'
 import { readStoredTickets, writeStoredTickets } from '@/lib/storage/tickets'
-import AppNavigation, { type StudioPage } from './AppNavigation'
+import type { StudioPage } from './AppNavigation'
 import CreateTicketWizard from './CreateTicketWizard'
 import LandingScreen from './LandingScreen'
 import PrintoutDialog from './PrintoutDialog'
@@ -62,7 +62,6 @@ export default function TicketStudio({
     const [currentTicket, setCurrentTicket] = useState<StoredTicket | null>(null)
     const [draftTicket, setDraftTicket] = useState<StoredTicket | null>(null)
     const [isStorageReady, setIsStorageReady] = useState(false)
-    const navigationPath = page === 'ticket' && ticketId ? `/ticket/${ticketId}` : `/${page}`
     const siteName = t('app.name')
     const pageTitle = getStudioPageTitle(page, currentTicket, t)
 
@@ -131,56 +130,41 @@ export default function TicketStudio({
         setStoredTickets(prev => upsertStoredTicket(prev, ticket))
     }, [])
 
-    return (
-        <div className='flex flex-1 flex-col print:block'>
-            <header className='flex items-center justify-between gap-app-card border-b border-app-border p-app-card sm:flex-wrap sm:gap-app-section sm:p-app-section print:hidden'>
-                <Link
-                    href={getLocalizedPath(locale, '/create')}
-                    className='min-w-0 max-w-full rounded-sm text-left no-underline outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-app-ring focus-visible:ring-offset-2 focus-visible:ring-offset-app-background'
-                    aria-label={`${t('app.name')}: ${t('nav.create')}`}
-                >
-                    <SectionEyebrow>{t('app.name')}</SectionEyebrow>
-                    <h1 className='text-app-body font-bold text-app-text-primary/90 sm:text-app-heading'>
-                        {t('app.title')}
-                    </h1>
-                </Link>
-                <AppNavigation activePage={page} currentPath={navigationPath} locale={locale} />
-            </header>
+    if (!isStorageReady) return <LoadingState />
 
-            <section className='flex flex-1 flex-col p-app-card sm:p-app-section print:p-0'>
-                {!isStorageReady && <LoadingState />}
-                {isStorageReady && page === 'create' && createFlow === 'landing' && (
-                    <LandingScreen
-                        onCreateImportedTicket={createImportedTicket}
-                        onCreateManualTicket={createManualTicket}
-                    />
-                )}
-                {isStorageReady && page === 'create' && createFlow === 'wizard' && draftTicket && (
-                    <CreateTicketWizard
-                        initialTicket={draftTicket}
-                        onBackToLanding={() => setCreateFlow('landing')}
-                        onComplete={finishCreatedTicket}
-                    />
-                )}
-                {isStorageReady && page === 'stored' && (
-                    <StoredTicketsScreen
-                        locale={locale}
-                        onDeleteTicket={deleteTicket}
-                        onImportTicket={importJsonTicket}
-                        storedTickets={storedTickets}
-                    />
-                )}
-                {isStorageReady && page === 'ticket' && currentTicket && (
-                    <EditableTicketWorkspace
-                        currentTicket={currentTicket}
-                        locale={locale}
-                        onDeleteTicket={deleteTicket}
-                        onTicketChange={updateCurrentTicket}
-                    />
-                )}
-                {isStorageReady && page === 'ticket' && !currentTicket && <MissingTicket locale={locale} />}
-            </section>
-        </div>
+    return (
+        <>
+            {page === 'create' && createFlow === 'landing' && (
+                <LandingScreen
+                    onCreateImportedTicket={createImportedTicket}
+                    onCreateManualTicket={createManualTicket}
+                />
+            )}
+            {page === 'create' && createFlow === 'wizard' && draftTicket && (
+                <CreateTicketWizard
+                    initialTicket={draftTicket}
+                    onBackToLanding={() => setCreateFlow('landing')}
+                    onComplete={finishCreatedTicket}
+                />
+            )}
+            {page === 'stored' && (
+                <StoredTicketsScreen
+                    locale={locale}
+                    onDeleteTicket={deleteTicket}
+                    onImportTicket={importJsonTicket}
+                    storedTickets={storedTickets}
+                />
+            )}
+            {page === 'ticket' && currentTicket && (
+                <EditableTicketWorkspace
+                    currentTicket={currentTicket}
+                    locale={locale}
+                    onDeleteTicket={deleteTicket}
+                    onTicketChange={updateCurrentTicket}
+                />
+            )}
+            {page === 'ticket' && !currentTicket && <MissingTicket locale={locale} />}
+        </>
     )
 }
 
