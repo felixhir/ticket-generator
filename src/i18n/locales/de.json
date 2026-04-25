@@ -13,7 +13,7 @@
     "footer": {
         "legalLabel": "Rechtliche Links",
         "build": "Build {{version}}",
-        "hobbyNote": "Diese App ist Open-Source Hobby-Projekt. Sie ist nicht kommerziell und wird es auch nicht werden. Es gibt keine Benutzerkonten: Ihre Daten verbleiben nur in diesem Browser und werden an keinen Server übertragen oder dort gespeichert."
+        "hobbyNote": "Diese App ist ein Open-Source Hobby-Projekt. Sie ist nicht kommerziell und wird es auch nicht werden. Es gibt keine Benutzerkonten: Ihre Daten verbleiben nur in diesem Browser und werden an keinen Server übertragen oder dort gespeichert."
     },
     "legal": {
         "privacy": "Datenschutz",
