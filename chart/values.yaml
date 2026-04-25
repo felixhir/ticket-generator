@@ -16,10 +16,10 @@ containerPort: 3000
 resources:
   limits:
     cpu: "1"
-    memory: 512Mi
+    memory: 256Mi
   requests:
     cpu: 100m
-    memory: 256Mi
+    memory: 192Mi
 revisionHistoryLimit: 3
 livenessProbe:
   path: /
