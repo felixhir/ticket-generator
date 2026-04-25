@@ -1,0 +1,474 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme {
+    --color-app-background: var(--app-background);
+    --color-app-surface: var(--app-surface);
+    --color-app-surface-elevated: var(--app-surface-elevated);
+    --color-app-text-primary: var(--app-text-primary);
+    --color-app-text-secondary: var(--app-text-secondary);
+    --color-app-border: var(--app-border);
+    --color-app-accent: var(--app-accent);
+    --color-app-accent-foreground: var(--app-accent-foreground);
+    --color-app-danger: var(--app-danger);
+    --color-app-success: var(--app-success);
+    --color-ticket-primary: var(--ticket-primary);
+    --color-ticket-primary-muted: var(--ticket-primary-muted);
+    --color-ticket-secondary: var(--ticket-secondary);
+    --color-ticket-secondary-muted: var(--ticket-secondary-muted);
+    --color-ticket-tertiary: var(--ticket-tertiary);
+    --color-ticket-tertiary-muted: var(--ticket-tertiary-muted);
+    --color-ticket-text-light: var(--ticket-text-light);
+    --color-ticket-text-dark: var(--ticket-text-dark);
+    --color-ticket-background: var(--ticket-background);
+    --font-app: var(--font-ogg);
+    --text-app-display: clamp(2.25rem, 9vw, 4.5rem);
+    --text-app-title: 2rem;
+    --text-app-title-lg: 2.35rem;
+    --text-app-heading: 1.25rem;
+    --text-app-body: 1rem;
+    --text-app-small: 0.875rem;
+    --text-app-caption: 0.75rem;
+    --text-app-micro: 0.625rem;
+    --text-ticket-sm: 0.5rem;
+    --text-ticket-md: 1rem;
+    --text-ticket-lg: 1.5rem;
+    --text-ticket-xl: 2rem;
+    --text-ticket-2xl: 3rem;
+    --text-ticket-display: 3.75rem;
+    --text-ticket-display--line-height: 1;
+    --text-ticket-body: 0.9375rem;
+    --tracking-app-label: 0.2em;
+    --radius-app-shell: 2rem;
+    --radius-app-card: 1.25rem;
+    --radius-app-inner: 0.75rem;
+    --radius-app-control: 9999px;
+    --shadow-app-shell: 0 1.25rem 4rem rgb(0 0 0 / 0.45);
+    --shadow-app-overlay: 0 1rem 3rem rgb(0 0 0 / 0.5), 0 0.375rem 1.25rem rgb(0 0 0 / 0.35);
+    --shadow-app-floating-bar: 0 1.5rem 5rem rgb(0 0 0 / 0.6), 0 0.5rem 1.75rem rgb(0 0 0 / 0.35);
+    --shadow-ticket-preview: 0 0.5rem 1.25rem rgb(0 0 0 / 0.25);
+    --spacing-app-frame: 2rem;
+    --spacing-app-section: 1.5rem;
+    --spacing-app-card: 1rem;
+    --spacing-app-control-x: 1rem;
+    --spacing-app-control-y: 0.625rem;
+    --spacing-app-nav-control: 2.5rem;
+    --spacing-app-nav-outer: 3rem;
+    --spacing-app-menu-offset: 0.75rem;
+    --spacing-app-preview-max: 37.5rem;
+    --spacing-ticket-side-rail: 5rem;
+    --spacing-ticket-barcode-max: 11.25rem;
+    --spacing-ticket-picture-marker-left: 1.5625rem;
+    --spacing-ticket-picture-marker-width: 3.75rem;
+    --spacing-ticket-picture-marker-height: 4.25rem;
+    --spacing-ticket-thumbnail-rail: 16%;
+    --spacing-ticket-thumbnail-narrow-rail: 14%;
+    --spacing-ticket-thumbnail-logo-offset: 36%;
+    --spacing-ticket-thumbnail-logo-size: 32%;
+    --container-app-shell: 80rem;
+    --container-app-narrow: 48rem;
+    --container-app-content: 64rem;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+.vertical-text {
+    writing-mode: sideways-lr;
+}
+
+:root {
+    --font-ogg: "Ogg", "Iowan Old Style", "Times New Roman", serif;
+
+    --app-background: #121212;
+    --app-surface: #181818;
+    --app-surface-elevated: #202020;
+    --app-text-primary: #e0e0e0;
+    --app-text-secondary: #b0b0b0;
+    --app-border: #444444;
+    --app-accent: #888888;
+    --app-accent-foreground: #121212;
+    --app-danger: #d78b8b;
+    --app-success: #9ac8a0;
+
+    --ticket-primary: #0a1b33;
+    --ticket-primary-muted: color-mix(in srgb, var(--ticket-primary) 70%, transparent);
+    --ticket-secondary: #07041c;
+    --ticket-secondary-muted: color-mix(in srgb, var(--ticket-secondary) 70%, transparent);
+    --ticket-tertiary: #dcc9a1;
+    --ticket-tertiary-muted: color-mix(in srgb, var(--ticket-tertiary) 70%, transparent);
+    --ticket-text-light: #f7f3e8;
+    --ticket-text-dark: #084dae;
+    --ticket-background: #121212;
+
+    --logo-size: 1;
+
+    --background: var(--app-background);
+    --foreground: var(--app-text-primary);
+    --card: var(--app-surface);
+    --card-foreground: var(--app-text-primary);
+    --popover: var(--app-surface);
+    --popover-foreground: var(--app-text-primary);
+    --primary: var(--app-accent);
+    --primary-foreground: var(--app-accent-foreground);
+    --secondary: var(--app-surface-elevated);
+    --secondary-foreground: var(--app-text-primary);
+    --muted: var(--app-surface-elevated);
+    --muted-foreground: var(--app-text-secondary);
+    --accent: var(--app-surface-elevated);
+    --accent-foreground: var(--app-text-primary);
+    --destructive: var(--app-danger);
+    --border: var(--app-border);
+    --input: var(--app-border);
+    --ring: var(--app-accent);
+    --chart-1: var(--app-accent);
+    --chart-2: var(--app-success);
+    --chart-3: var(--app-danger);
+    --chart-4: var(--app-text-secondary);
+    --chart-5: var(--app-border);
+    --radius: var(--radius-app-card);
+    --sidebar: var(--app-surface);
+    --sidebar-foreground: var(--app-text-primary);
+    --sidebar-primary: var(--app-accent);
+    --sidebar-primary-foreground: var(--app-accent-foreground);
+    --sidebar-accent: var(--app-surface-elevated);
+    --sidebar-accent-foreground: var(--app-text-primary);
+    --sidebar-border: var(--app-border);
+    --sidebar-ring: var(--app-accent);
+}
+
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    html[data-printout="1"] body > *:not(#printout-root) {
+        display: none !important;
+    }
+
+    html[data-printout="1"] #printout-root {
+        display: block !important;
+    }
+
+    html[data-printout="1"] #printout-root * {
+        visibility: visible !important;
+    }
+
+    html:not([data-printout="1"]) body * {
+        visibility: hidden !important;
+    }
+
+    html:not([data-printout="1"]) #print-wrapper,
+    html:not([data-printout="1"]) #print-wrapper * {
+        visibility: visible !important;
+    }
+
+    .printout-a4-page {
+        box-sizing: border-box;
+        display: flex;
+        width: 210mm;
+        min-height: 297mm;
+        align-items: center;
+        justify-content: center;
+        padding: 12mm;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .printout-a4-page:last-of-type {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .ticket-preview-viewport {
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+    }
+
+    .ticket-preview-canvas-layer {
+        transform: none !important;
+    }
+}
+
+body {
+    background: var(--app-background);
+    color: var(--app-text-primary);
+    accent-color: var(--app-accent);
+    font-family: var(--font-app);
+}
+
+button:not(:disabled),
+a[href],
+[role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+.legal-content {
+    @apply space-y-16 text-app-body leading-7 text-app-text-secondary;
+}
+
+.legal-content h1 {
+    @apply text-app-title-lg font-bold leading-tight text-app-text-primary;
+}
+
+.legal-content h2 {
+    @apply mb-app-section text-app-heading font-semibold leading-tight text-app-text-primary;
+}
+
+.legal-content h3 {
+    @apply mt-app-section mb-3 text-app-body font-semibold text-app-text-primary;
+}
+
+.legal-content h4 {
+    @apply mt-app-card mb-2 text-app-small font-semibold text-app-text-primary;
+}
+
+.legal-content p {
+    @apply my-3;
+}
+
+.legal-content address {
+    @apply my-3 not-italic text-app-text-primary;
+}
+
+.legal-content a {
+    @apply text-app-text-primary underline decoration-app-border underline-offset-4 transition hover:text-app-accent;
+}
+
+.legal-content ul {
+    @apply my-3 list-disc space-y-2 pl-6;
+}
+
+.legal-emphasis {
+    @apply rounded-app-card border border-app-border bg-app-surface px-app-card py-app-card text-app-small uppercase tracking-wide text-app-text-primary;
+}
+
+input::placeholder,
+textarea::placeholder {
+    @apply text-app-text-secondary;
+}
+
+.app-date-time-picker-wrapper {
+    @apply block h-app-nav-control w-full leading-none;
+}
+
+.app-date-time-picker-wrapper .react-datepicker__input-container {
+    @apply block h-full w-full leading-none;
+}
+
+.app-date-time-picker-wrapper input {
+    @apply h-full leading-none;
+}
+
+.app-date-time-picker-popper {
+    @apply z-50 max-w-[calc(100vw-1rem)] pt-2 sm:max-w-none;
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+}
+
+.app-date-time-picker {
+    @apply flex max-w-full items-start overflow-hidden rounded-app-card border border-app-border bg-app-surface-elevated p-0 font-app text-app-small text-app-text-primary shadow-app-overlay;
+    touch-action: manipulation;
+}
+
+.app-date-time-picker .react-datepicker__triangle,
+.app-date-time-picker .react-datepicker__navigation,
+.app-date-time-picker .react-datepicker__current-month {
+    @apply hidden;
+}
+
+.app-date-time-picker .react-datepicker__month-container {
+    @apply min-w-0 p-2 sm:p-app-card;
+}
+
+.app-date-time-picker .react-datepicker__header {
+    @apply border-0 bg-transparent p-0;
+}
+
+.app-date-time-picker .react-datepicker__day-names {
+    @apply mt-2 grid grid-cols-7 gap-1 px-0 sm:mt-app-card;
+}
+
+.app-date-time-picker .react-datepicker__month {
+    @apply m-0 grid gap-1 px-0 pb-2 sm:pb-app-card;
+}
+
+.app-date-time-picker .react-datepicker__week {
+    @apply grid grid-cols-7 gap-1;
+}
+
+.app-date-time-picker .react-datepicker__day-name,
+.app-date-time-picker .react-datepicker__day {
+    @apply m-0 flex aspect-square min-h-8 min-w-0 w-full items-center justify-center rounded-app-control text-app-caption leading-none text-app-text-primary sm:text-app-small;
+}
+
+.app-date-time-picker .react-datepicker__day-name {
+    @apply font-semibold text-app-text-secondary;
+}
+
+.app-date-time-picker .react-datepicker__day {
+    @apply transition hover:bg-app-surface hover:text-app-text-primary;
+}
+
+.app-date-time-picker .react-datepicker__day--outside-month {
+    @apply text-app-text-secondary opacity-60;
+}
+
+.app-date-time-picker .react-datepicker__day--today {
+    @apply border border-app-border;
+}
+
+.app-date-time-picker .react-datepicker__day--keyboard-selected,
+.app-date-time-picker .react-datepicker__day--selected {
+    @apply bg-app-text-primary text-app-background hover:bg-app-text-primary hover:text-app-background;
+}
+
+.app-date-time-picker .react-datepicker__time-container {
+    @apply float-none flex w-28 min-w-0 flex-col overflow-hidden border-l border-app-border p-2 sm:p-app-card;
+    height: var(--app-date-time-picker-panel-height, auto);
+    max-height: var(--app-date-time-picker-panel-height, none);
+}
+
+.app-date-time-picker .react-datepicker-time__header {
+    @apply mb-2 text-app-small font-semibold text-app-text-secondary sm:mb-app-card;
+}
+
+.app-date-time-picker .react-datepicker__time {
+    @apply min-h-0 flex-1 bg-transparent;
+}
+
+.app-date-time-picker .react-datepicker__time-box {
+    @apply flex min-h-0 w-full flex-1 flex-col;
+}
+
+.app-date-time-picker
+    .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    .react-datepicker__time-list {
+    @apply flex h-auto max-h-none min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-1;
+}
+
+.app-date-time-picker .react-datepicker__time-list-item {
+    @apply grid h-auto min-h-8 place-items-center rounded-app-control px-app-control-x py-app-control-y text-app-small text-app-text-primary transition;
+}
+
+.app-date-time-picker
+    .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    .react-datepicker__time-list
+    .react-datepicker__time-list-item:hover {
+    @apply bg-app-surface text-app-text-primary;
+}
+
+.app-date-time-picker
+    .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    .react-datepicker__time-list
+    .react-datepicker__time-list-item--selected,
+.app-date-time-picker
+    .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    .react-datepicker__time-list
+    .react-datepicker__time-list-item--selected:hover {
+    @apply bg-app-text-primary text-app-background;
+}
+
+@media (max-width: 640px) {
+    .app-date-time-picker {
+        display: flex !important;
+        flex-direction: column;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-height: min(90dvh, 36rem);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .app-date-time-picker .react-datepicker__month-container {
+        width: 100%;
+    }
+
+    .app-date-time-picker .react-datepicker__time-container {
+        width: 100% !important;
+        border-left-width: 0 !important;
+        border-top: 1px solid var(--app-border);
+    }
+}
+
+@theme inline {
+    --font-heading: var(--font-app);
+    --font-sans: var(--font-app);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+
+    html {
+        @apply font-sans;
+    }
+}

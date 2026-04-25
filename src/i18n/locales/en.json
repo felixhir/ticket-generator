@@ -1,0 +1,301 @@
+{
+    "app": {
+        "name": "Ticket Generator",
+        "title": "Printed Event Nostalgia Information Sheets"
+    },
+    "nav": {
+        "closeMenu": "Close navigation menu",
+        "openMenu": "Open navigation menu",
+        "create": "Create",
+        "stored": "Stored",
+        "github": "Open GitHub repository"
+    },
+    "footer": {
+        "legalLabel": "Legal links",
+        "build": "Build {{version}}",
+        "hobbyNote": "This app is open source and developed as a free-time hobby project. It is not commercial and will not become commercial. There are no user accounts: your data stays only in this browser and is not sent to or stored on any server."
+    },
+    "legal": {
+        "privacy": "Privacy",
+        "imprint": "Imprint",
+        "email": "Email"
+    },
+    "imprint": {
+        "title": "Imprint",
+        "provider": {
+            "heading": "Information according to § 5 DDG"
+        },
+        "contact": {
+            "heading": "Contact"
+        },
+        "content": {
+            "heading": "Responsible for content"
+        }
+    },
+    "privacy": {
+        "title": "Privacy Policy",
+        "overview": {
+            "title": "1. Data protection at a glance",
+            "general": {
+                "heading": "General information",
+                "description": "The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data that can personally identify you. Detailed information about data protection can be found in the privacy policy below."
+            },
+            "collection": {
+                "heading": "Data collection on this website",
+                "responsibleQuestion": "Who is responsible for data collection on this website?",
+                "responsibleAnswer": "Data processing on this website is carried out by the website operator. Contact details can be found in the section \"Information about the responsible controller\" in this privacy policy.",
+                "howQuestion": "How do we collect your data?",
+                "howAnswerOne": "This website does not use a contact form, user account, analytics, or tracking tools.",
+                "howAnswerTwo": "Technical data is collected automatically by our IT systems when you visit the website. This primarily includes data such as browser, operating system, IP address, or time of page access. This data is collected automatically as soon as you enter this website.",
+                "purposeQuestion": "What do we use your data for?",
+                "purposeAnswer": "This data is collected to provide the website reliably, keep it secure, and diagnose technical problems.",
+                "rightsQuestion": "What rights do you have regarding your data?",
+                "rightsAnswer": "You have the right to receive information free of charge at any time about the origin, recipient, and purpose of your stored personal data. You also have the right to request correction or deletion of this data. If you have given consent to data processing, you can revoke this consent at any time for the future. You also have the right, under certain circumstances, to request restriction of processing of your personal data. You also have the right to lodge a complaint with the competent supervisory authority.",
+                "contactAnswer": "You can contact us at any time about this and other data protection questions."
+            }
+        },
+        "hosting": {
+            "title": "2. Hosting",
+            "intro": "We host the content of our website with the following provider:",
+            "hetzner": {
+                "heading": "Hetzner",
+                "provider": "The provider is Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Germany (hereinafter Hetzner).",
+                "details": "Details can be found in Hetzner’s privacy policy:",
+                "legalBasis": "Hetzner is used on the basis of Art. 6(1)(f) GDPR. We have a legitimate interest in presenting our website as reliably as possible. If consent has been requested, processing is carried out exclusively on the basis of Art. 6(1)(a) GDPR and § 25(1) TDDDG, insofar as the consent covers the storage of cookies or access to information on the user’s device, such as device fingerprinting, within the meaning of the TDDDG. Consent can be revoked at any time."
+            },
+            "dpa": {
+                "heading": "Data processing agreement",
+                "description": "We have concluded a data processing agreement for the use of the service named above. This is a contract required by data protection law and ensures that the provider processes personal data of our website visitors only according to our instructions and in compliance with the GDPR."
+            }
+        },
+        "general": {
+            "title": "3. General information and mandatory information",
+            "dataProtection": {
+                "heading": "Data protection",
+                "descriptionOne": "The operators of this website take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with statutory data protection regulations and this privacy policy.",
+                "descriptionTwo": "When you use this website, various personal data is collected. Personal data is data that can personally identify you. This privacy policy explains what data we collect, what we use it for, and how and for what purpose this happens.",
+                "descriptionThree": "Please note that data transmission on the internet, for example communication by email, may have security gaps. Complete protection of data against access by third parties is not possible."
+            },
+            "controller": {
+                "heading": "Information about the responsible controller",
+                "intro": "The responsible controller for data processing on this website is:",
+                "description": "The responsible controller is the natural or legal person who alone or jointly with others determines the purposes and means of processing personal data, such as names or email addresses."
+            },
+            "storage": {
+                "heading": "Storage period",
+                "description": "Unless a more specific storage period is stated in this privacy policy, your personal data remains with us until the purpose for data processing no longer applies. If you make a legitimate deletion request or revoke consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing it, such as tax or commercial retention periods. In the latter case, deletion takes place after these reasons no longer apply."
+            },
+            "legalBases": {
+                "heading": "General information about the legal bases for data processing on this website",
+                "description": "If you have consented to data processing, we process your personal data on the basis of Art. 6(1)(a) GDPR or Art. 9(2)(a) GDPR if special categories of data according to Art. 9(1) GDPR are processed. In the event of explicit consent to the transfer of personal data to third countries, processing is also based on Art. 49(1)(a) GDPR. If you have consented to the storage of cookies or access to information on your device, processing is additionally based on § 25(1) TDDDG. Consent can be revoked at any time. If your data is required to fulfill a contract or carry out pre-contractual measures, we process it on the basis of Art. 6(1)(b) GDPR. If processing is necessary to fulfill a legal obligation, it is based on Art. 6(1)(c) GDPR. Processing may also be based on our legitimate interest according to Art. 6(1)(f) GDPR. The relevant legal bases in each individual case are explained in this privacy policy."
+            },
+            "recipients": {
+                "heading": "Recipients of personal data",
+                "description": "As part of our activities, we work with various external parties. In some cases, personal data must be transferred to these external parties. We only pass on personal data when this is necessary to fulfill a contract, when we are legally obliged to do so, when we have a legitimate interest under Art. 6(1)(f) GDPR, or when another legal basis permits the transfer. When using processors, we only pass on personal data on the basis of a valid data processing agreement. In cases of joint processing, a joint processing agreement is concluded."
+            },
+            "consent": {
+                "heading": "Revocation of your consent to data processing",
+                "description": "Many data processing operations are only possible with your explicit consent. You can revoke consent you have already given at any time. The legality of data processing carried out before revocation remains unaffected."
+            },
+            "objection": {
+                "heading": "Right to object to data collection in special cases and to direct advertising (Art. 21 GDPR)",
+                "caseSpecific": "IF DATA PROCESSING IS BASED ON ART. 6(1)(E) OR (F) GDPR, YOU HAVE THE RIGHT AT ANY TIME TO OBJECT TO THE PROCESSING OF YOUR PERSONAL DATA ON GROUNDS RELATING TO YOUR PARTICULAR SITUATION; THIS ALSO APPLIES TO PROFILING BASED ON THESE PROVISIONS. THE RESPECTIVE LEGAL BASIS FOR PROCESSING CAN BE FOUND IN THIS PRIVACY POLICY. IF YOU OBJECT, WE WILL NO LONGER PROCESS YOUR AFFECTED PERSONAL DATA UNLESS WE CAN DEMONSTRATE COMPELLING LEGITIMATE GROUNDS FOR PROCESSING THAT OVERRIDE YOUR INTERESTS, RIGHTS, AND FREEDOMS, OR PROCESSING SERVES THE ASSERTION, EXERCISE, OR DEFENSE OF LEGAL CLAIMS.",
+                "directMarketing": "IF YOUR PERSONAL DATA IS PROCESSED FOR DIRECT ADVERTISING, YOU HAVE THE RIGHT TO OBJECT AT ANY TIME TO THE PROCESSING OF PERSONAL DATA CONCERNING YOU FOR SUCH ADVERTISING; THIS ALSO APPLIES TO PROFILING INSOFAR AS IT IS RELATED TO DIRECT ADVERTISING. IF YOU OBJECT, YOUR PERSONAL DATA WILL NO LONGER BE USED FOR DIRECT ADVERTISING."
+            },
+            "complaint": {
+                "heading": "Right to lodge a complaint with the competent supervisory authority",
+                "description": "In the event of GDPR violations, data subjects have the right to lodge a complaint with a supervisory authority, in particular in the member state of their habitual residence, workplace, or the place of the alleged violation. This right exists without prejudice to other administrative or judicial remedies."
+            },
+            "portability": {
+                "heading": "Right to data portability",
+                "description": "You have the right to receive data that we process automatically on the basis of your consent or in fulfillment of a contract in a commonly used, machine-readable format, or to have it transferred to a third party. If you request direct transfer to another controller, this will only happen where technically feasible."
+            },
+            "access": {
+                "heading": "Access, correction, and deletion",
+                "description": "Within the scope of applicable law, you have the right at any time to receive free information about your stored personal data, its origin and recipients, and the purpose of data processing, and where applicable a right to correction or deletion. You can contact us at any time about this and other questions regarding personal data."
+            },
+            "restriction": {
+                "heading": "Right to restriction of processing",
+                "description": "You have the right to request restriction of processing of your personal data. You can contact us at any time for this. The right to restriction exists in the following cases:",
+                "itemAccuracy": "If you dispute the accuracy of your personal data stored by us, we usually need time to verify this. For the duration of the review, you have the right to request restriction of processing of your personal data.",
+                "itemUnlawful": "If processing of your personal data was or is unlawful, you can request restriction of processing instead of deletion.",
+                "itemClaims": "If we no longer need your personal data but you need it to exercise, defend, or assert legal claims, you have the right to request restriction of processing instead of deletion.",
+                "itemObjection": "If you have objected under Art. 21(1) GDPR, a balancing of your and our interests must be carried out. Until it has been determined whose interests prevail, you have the right to request restriction of processing of your personal data.",
+                "final": "If you have restricted the processing of your personal data, this data may, apart from storage, only be processed with your consent, for the assertion, exercise, or defense of legal claims, for the protection of the rights of another natural or legal person, or for reasons of important public interest of the European Union or a member state."
+            },
+            "ssl": {
+                "heading": "SSL or TLS encryption",
+                "descriptionOne": "This site uses SSL or TLS encryption for security reasons and to protect the transmission of confidential content, such as orders or inquiries you send to us as the site operator. You can recognize an encrypted connection when the browser address changes from \"http://\" to \"https://\" and by the lock symbol in your browser bar.",
+                "descriptionTwo": "When SSL or TLS encryption is activated, data you transmit to us cannot be read by third parties."
+            }
+        },
+        "source": {
+            "label": "Source"
+        }
+    },
+    "landing": {
+        "title": "Create a ticket",
+        "description": "Import event details from the ticket website or enter the information manually. Everything stays in this browser.",
+        "enterManually": "Enter manually"
+    },
+    "import": {
+        "action": "Import",
+        "importing": "Importing",
+        "invalidUrl": "Enter a valid URL.",
+        "failed": "Import failed.",
+        "urlLabel": "Event URL",
+        "placeholder": "https://event.example"
+    },
+    "createWizard": {
+        "stepsLabel": "Create ticket steps",
+        "steps": {
+            "data": {
+                "label": "Data",
+                "description": "Event details"
+            },
+            "layout": {
+                "label": "Layout",
+                "description": "Dimensions, patterns, and media"
+            },
+            "colors": {
+                "label": "Colors",
+                "description": "Ticket palette"
+            }
+        },
+        "actions": {
+            "back": "Back",
+            "next": "Next",
+            "create": "Create ticket"
+        }
+    },
+    "storedTickets": {
+        "title": "Stored tickets",
+        "description": "Tickets saved in local browser storage.",
+        "savedCount_one": "{{count}} saved",
+        "savedCount_other": "{{count}} saved",
+        "importJsonLabel": "Import ticket JSON",
+        "importUnsupportedFile": "Choose a .json file exported from this app.",
+        "importTooLarge": "Choose a ticket JSON file smaller than 15 MB.",
+        "importFailed": "Import failed. Choose a valid ticket JSON file.",
+        "empty": "No tickets are stored yet. Create one to see it here."
+    },
+    "ticketDetail": {
+        "pageTitle": "Ticket details",
+        "loading": "Loading ticket...",
+        "notFoundTitle": "Ticket not found",
+        "notFoundDescription": "This ticket is not stored in this browser anymore.",
+        "backToStored": "View stored tickets",
+        "createNew": "Create new ticket",
+        "unsavedChanges": "You have unsaved changes.",
+        "discardChanges": "Discard",
+        "saveChanges": "Save changes",
+        "export": "Export",
+        "printout": "Printout",
+        "printoutTitle": "Printout",
+        "printoutDescription": "Each file is a full DIN A4 page. When several tickets fit, they are packed to use the page efficiently.",
+        "printoutFormat": "Format",
+        "printoutTabPdf": "PDF",
+        "printoutTabPng": "PNG",
+        "printoutDownload": "Download",
+        "printoutPrint": "Print",
+        "printoutCount": "Number of tickets",
+        "printoutClose": "Close",
+        "printoutCaptureFailed": "Could not prepare the printout. Try a different image or logo.",
+        "printoutNoPreview": "No ticket preview was found. Open a ticket in the design view first.",
+        "showAllTickets": "Show all tickets",
+        "configurationTabs": "Ticket configuration",
+        "delete": "Deleted"
+    },
+    "storedTicket": {
+        "fallbackName": "stored ticket",
+        "noDate": "No date",
+        "noVenue": "No venue yet",
+        "updated": "updated {{date}}",
+        "openLabel": "Open {{title}}",
+        "deleteLabel": "Delete {{title}}",
+        "deleteConfirmTitle": "Delete this ticket?",
+        "deleteConfirmMessage": "“{{title}}” will be removed from this browser. This cannot be undone.",
+        "deleteConfirm": "Delete",
+        "deleteCancel": "Cancel"
+    },
+    "content": {
+        "section": "Content",
+        "heading": "Ticket details",
+        "title": "Title",
+        "subtitle": "Subtitle",
+        "venue": "Venue",
+        "address": "Address",
+        "dateTime": "Date and time",
+        "time": "Time",
+        "price": "Price",
+        "currency": "Currency",
+        "area": "Area",
+        "barcode": "Barcode",
+        "placeholders": {
+            "title": "Event name",
+            "subtitle": "Tour or subtitle",
+            "venue": "Venue name",
+            "address": "Street, city",
+            "dateTime": "Select date and time",
+            "price": "0.00",
+            "area": "Standing, balcony, row 12",
+            "barcode": "Code text"
+        }
+    },
+    "design": {
+        "section": "Design",
+        "heading": "Visual system",
+        "layout": "Layout",
+        "dimensions": "Dimensions",
+        "colors": "Ticket colors",
+        "patternMedia": "Pattern and media",
+        "standard": "Standard",
+        "picture": "Picture",
+        "band": "Band",
+        "layoutLabel": "{{label}} layout",
+        "shortSide": "Short side (cm)",
+        "longSide": "Long side (cm)",
+        "primary": "Primary",
+        "secondary": "Secondary",
+        "tertiary": "Tertiary",
+        "lightText": "Light text",
+        "darkText": "Dark text",
+        "background": "Background",
+        "backgroundPattern": "Background pattern",
+        "backgroundPatternOptions": {
+            "Waves": "Waves",
+            "Lines": "Lines",
+            "Blocks": "Blocks",
+            "Hearts": "Hearts"
+        },
+        "patternSize": "Pattern size",
+        "ticketImage": "Ticket image",
+        "bandLogo": "Band logo",
+        "logoSize": "Logo size",
+        "uploadLabel": "Upload {{label}}",
+        "removeLabel": "Remove {{label}}"
+    },
+    "ticketPreview": {
+        "canvas": "Ticket preview — drag to move, scroll to pan, Ctrl+scroll to zoom",
+        "zoomIn": "Zoom in",
+        "zoomOut": "Zoom out",
+        "fit": "Fit to view",
+        "openExpanded": "Open large preview",
+        "closeExpanded": "Close large preview"
+    },
+    "settings": {
+        "section": "Settings",
+        "heading": "Export and print",
+        "description": "Tickets are stored locally in this browser. Use Printout for DIN A4 pages from the current preview, or export JSON for backup.",
+        "exportPng": "Printout",
+        "print": "Print",
+        "openPreview": "Open a ticket preview before using printout or export.",
+        "exported": "Exported ticket.png"
+    },
+    "colorPicker": {
+        "changeColor": "Change {{name}} color"
+    },
+    "ticket": {
+        "missingLayout": "Did you forget to register your layout in Ticket.tsx?"
+    }
+}

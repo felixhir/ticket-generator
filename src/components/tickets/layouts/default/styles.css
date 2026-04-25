@@ -1,0 +1,24 @@
+#default-layout .barcode-gradient {
+    background-color: var(--ticket-secondary);
+    opacity: 1;
+    background-image:
+        radial-gradient(var(--ticket-primary) 0.5px, transparent 0.5px),
+        radial-gradient(var(--ticket-primary) 0.5px, var(--ticket-background) 0.5px);
+    background-size: 20px 20px;
+    background-position:
+        0 0,
+        10px 10px;
+}
+
+.bg-fade {
+    position: relative;
+}
+
+.bg-fade::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, var(--color-1) 0%, transparent 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}

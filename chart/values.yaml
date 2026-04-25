@@ -1,0 +1,85 @@
+# ArgoCD / Helm: source of truth for the deployed app. Image matches
+# .github/workflows/build.yml (ghcr.io, repo path = lowercase GitHub name).
+replicaCount: 1
+
+image:
+  registry: ghcr.io
+  repository: felixhir/ticket-generator
+  tag: latest
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: http
+
+containerPort: 3000
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+revisionHistoryLimit: 3
+
+livenessProbe:
+  path: /
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+readinessProbe:
+  path: /
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: ticket-generator.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# See src/components/layout/AppShell.tsx (footer) and
+# src/lib/server/import/import-event-from-url.ts (Ticketmaster import).
+# Deployment template also sets NODE_ENV=production, NEXT_TELEMETRY_DISABLED=1.
+# The image Dockerfile sets PORT=3000, HOSTNAME=0.0.0.0 (see chart containerPort).
+app:
+  # Runtime build label for the footer. Empty = AppShell default "1.0.0".
+  buildVersion: ""
+
+# Optional extra key/value env entries (e.g. overrides). Prefer secrets below for keys.
+env: []
+
+# Optional: load TICKETMASTER_API_KEY from a Secret (and other keys).
+# Example:
+#   extraEnvFrom:
+#     - secretRef:
+#         name: ticket-generator-secrets
+extraEnvFrom: []

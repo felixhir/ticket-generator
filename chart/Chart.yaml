@@ -1,0 +1,7 @@
+apiVersion: v2
+name: ticket-generator
+description: Local-first event ticket design studio (Next.js)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+home: https://github.com/felixhir/ticket-generator

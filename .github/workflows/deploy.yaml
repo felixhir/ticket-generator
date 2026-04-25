@@ -1,0 +1,70 @@
+# Bumps `image.tag` in `chart/values.yaml` to point at a published ghcr image.
+# Run "Use workflow from" with `master` to deploy the tag for that ref’s commit, or
+# set "Image tag" to a full SHA (or other tag) that already exists in the registry.
+name: Deploy (Helm image tag)
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Override image tag in the registry (full git SHA, sha-…, or another tag). Leave empty to use this run’s commit SHA (40 chars) — select branch below."
+        required: false
+        type: string
+
+concurrency:
+  group: deploy-helm
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-chart:
+    name: Set chart image tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: Resolve image tag
+        id: tag
+        env:
+          INPUT_TAG: ${{ github.event.inputs.image_tag }}
+        run: |
+          t=$(printf '%s' "$INPUT_TAG" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          if [ -n "$t" ]; then
+            echo "value=$t" >> "$GITHUB_OUTPUT"
+            echo "Using override tag: $t"
+          else
+            echo "value=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+            echo "Using commit SHA: ${{ github.sha }}"
+          fi
+
+      - name: Install yq
+        run: |
+          curl -fsSL "https://github.com/mikefarah/yq/releases/download/v4.44.3/yq_linux_amd64" -o yq
+          sudo install -m 0755 yq /usr/local/bin/yq
+          yq --version
+
+      - name: Set image.tag
+        run: yq e -i '.image.tag = strenv(DEPLOY_TAG)' chart/values.yaml
+        env:
+          DEPLOY_TAG: ${{ steps.tag.outputs.value }}
+
+      - name: Commit and push
+        env:
+          DEPLOY_TAG: ${{ steps.tag.outputs.value }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- chart/values.yaml; then
+            echo "No change to image.tag; nothing to commit."
+            exit 0
+          fi
+          git add chart/values.yaml
+          git commit -m "chore(chart): set image tag to ${DEPLOY_TAG}"
+          git push

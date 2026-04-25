@@ -1,0 +1,39 @@
+{
+    "files.insertFinalNewline": true,
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "tailwindCSS.experimental.configFile": "src/app/globals.css",
+    "tailwindCSS.validate": true,
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.biome": "explicit"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[tailwindcss]": {
+        "editor.defaultFormatter": "numso.prettier-standard-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+        "editor.formatOnSave": false
+    },
+    "[css]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    }
+}
