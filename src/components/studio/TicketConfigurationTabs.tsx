@@ -1,5 +1,4 @@
-'use client'
-
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PreviewFrame, SegmentedControl } from '@/components/ui/app-primitives'
 import { Button } from '@/components/ui/button'
@@ -24,16 +23,20 @@ export default function TicketConfigurationTabs({
 }) {
     const { t } = useTranslation()
 
+    const tabIndex = useCallback(() => {
+        return ticketConfigurationTabs.indexOf(activeTab)
+    }, [activeTab])
+
     return (
         <div className={cn('flex w-full flex-col gap-app-section', className)}>
             <nav aria-label={t('ticketDetail.configurationTabs')} className='flex justify-center'>
-                <SegmentedControl>
+                <SegmentedControl activeTab={tabIndex()}>
                     {ticketConfigurationTabs.map(tab => (
                         <Button
                             key={tab}
                             type='button'
-                            variant={activeTab === tab ? 'default' : 'ghost'}
-                            className='h-app-nav-control flex-none'
+                            variant='segmented'
+                            className={cn({ 'text-primary-foreground': activeTab === tab })}
                             aria-current={activeTab === tab ? 'page' : undefined}
                             onClick={() => onActiveTabChange(tab)}
                         >
@@ -47,7 +50,6 @@ export default function TicketConfigurationTabs({
         </div>
     )
 }
-
 export function TicketConfigurationContent({
     activeTab,
     includePreview = false
@@ -55,19 +57,38 @@ export function TicketConfigurationContent({
     activeTab: TicketConfigurationTab
     includePreview?: boolean
 }) {
-    if (activeTab === 'data') {
-        return (
-            <div className='mx-auto w-full max-w-3xl'>
-                <TicketEditor variant='plain' stackGap='section' />
-            </div>
-        )
-    }
+    const [displayTab, setDisplayTab] = useState(activeTab)
+    const [visible, setVisible] = useState(true)
 
-    if (activeTab === 'layout') {
-        return <LayoutConfiguration includePreview={includePreview} />
-    }
+    useEffect(() => {
+        setVisible(false)
 
-    return <ColorsConfiguration includePreview={includePreview} />
+        const timeout = setTimeout(() => {
+            setDisplayTab(activeTab)
+            setVisible(true)
+        }, 150)
+
+        return () => clearTimeout(timeout)
+    }, [activeTab])
+
+    return (
+        <div
+            className={cn('transition-all duration-150', {
+                'opacity-100 translate-y-0': visible,
+                'opacity-0 translate-y-1': !visible
+            })}
+        >
+            {displayTab === 'data' && (
+                <div className='mx-auto w-full max-w-3xl'>
+                    <TicketEditor variant='plain' stackGap='section' />
+                </div>
+            )}
+
+            {displayTab === 'layout' && <LayoutConfiguration includePreview={includePreview} />}
+
+            {displayTab === 'colors' && <ColorsConfiguration includePreview={includePreview} />}
+        </div>
+    )
 }
 
 function LayoutConfiguration({ includePreview }: { includePreview: boolean }) {

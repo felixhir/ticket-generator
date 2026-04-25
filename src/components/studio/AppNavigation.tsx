@@ -5,13 +5,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { ReactNode } from 'react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AppSurface, SegmentedControl } from '@/components/ui/app-primitives'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { Locale } from '@/lib/i18n/routing'
 import { getLocalizedPath, supportedLanguages } from '@/lib/i18n/routing'
+import { cn } from '@/lib/utils'
 
 export type StudioPage = 'create' | 'stored' | 'ticket'
 
@@ -28,6 +29,10 @@ export default function AppNavigation({
     const { t } = useTranslation()
     const isStoredArea = activePage === 'stored' || activePage === 'ticket'
 
+    const tabIndex = useCallback(() => {
+        return activePage === 'create' ? 0 : 1
+    }, [activePage])
+
     return (
         <nav className='relative flex items-center gap-app-card'>
             <Button
@@ -42,7 +47,7 @@ export default function AppNavigation({
                 {isOpen ? <X className='size-5' /> : <Menu className='size-5' />}
             </Button>
 
-            <SegmentedControl className='hidden sm:flex'>
+            <SegmentedControl className='hidden sm:flex' activeTab={tabIndex()}>
                 <NavigationLink href={getLocalizedPath(locale, '/create')} active={activePage === 'create'}>
                     {t('nav.create')}
                 </NavigationLink>
@@ -152,7 +157,7 @@ function LanguageSelect({
 
 function NavigationLink({ active, children, href }: { active: boolean; children: ReactNode; href: string }) {
     return (
-        <Button asChild variant={active ? 'default' : 'ghost'} className='h-app-nav-control'>
+        <Button asChild variant='segmented' className={cn({ 'text-primary-foreground': active })}>
             <Link href={href} aria-current={active ? 'page' : undefined}>
                 {children}
             </Link>

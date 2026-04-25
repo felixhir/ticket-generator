@@ -1,8 +1,11 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import type * as React from 'react'
+'use client'
 
+import { cva, type VariantProps } from 'class-variance-authority'
+import * as React from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { TicketConfigurationTab, ticketConfigurationTabs } from '../studio/TicketConfigurationTabs'
 
 const appSurfaceVariants = cva('text-app-text-primary', {
     variants: {
@@ -84,15 +87,52 @@ function SectionHeader({
     )
 }
 
-function SegmentedControl({ className, ...props }: React.ComponentProps<'div'>) {
+function SegmentedControl({
+    className,
+    activeTab,
+    children,
+    ...props
+}: React.ComponentProps<'div'> & {
+    activeTab?: number
+}) {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [position, setPosition] = useState({ left: 0, width: 0 })
+
+    useLayoutEffect(() => {
+        if (activeTab === undefined) return
+        const container = containerRef.current
+        if (!container) return
+
+        const buttons = container.querySelectorAll('[data-slot="button"]')
+
+        const el = buttons[activeTab] as HTMLElement
+
+        if (!el) return
+
+        setPosition({
+            left: el.offsetLeft,
+            width: el.offsetWidth
+        })
+    }, [activeTab])
+
     return (
         <div
             className={cn(
-                'flex w-fit max-w-full items-center justify-center gap-1 overflow-x-auto rounded-app-control border border-app-border bg-app-surface p-1',
+                'relative flex w-fit max-w-full items-center justify-center gap-1 overflow-x-auto rounded-app-control border border-app-border bg-app-surface p-1',
                 className
             )}
             {...props}
-        />
+        >
+            {activeTab !== undefined && (
+                <div
+                    className='absolute top-1 bottom-1 rounded-app-control bg-primary transition-all duration-300'
+                    style={position}
+                />
+            )}
+            <div ref={containerRef} className='flex gap-1'>
+                {children}
+            </div>
+        </div>
     )
 }
 
