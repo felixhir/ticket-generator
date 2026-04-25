@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   registry: ghcr.io
   repository: felixhir/ticket-generator
-  tag: latest
+  tag: eb8ad7346a80b7dec06252f1f5e003885987ae49
   pullPolicy: IfNotPresent
   pullSecrets: []
 nameOverride: ""
