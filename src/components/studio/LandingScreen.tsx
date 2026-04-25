@@ -23,7 +23,7 @@ export default function LandingScreen({
                 <p className='mx-auto mt-app-card max-w-xl text-pretty text-app-body text-app-text-secondary sm:mt-app-control-y'>
                     {t('landing.description')}
                 </p>
-                <div className='mx-auto mt-app-frame grid max-w-xl gap-app-card sm:mt-12'>
+                <div className='mx-auto mt-app-frame grid w-full max-w-2xl gap-app-card sm:mt-12'>
                     <ImportEventForm onImported={onCreateImportedTicket} onCreateManualTicket={onCreateManualTicket} />
                 </div>
             </Card>
