@@ -1,19 +1,16 @@
 image:
   registry: ghcr.io
   repository: felixhir/ticket-generator
-  tag: 4059126e17c7c1bbc4aa3a7d262205e7bf5f5bdd
+  tag: 0060ea216b5b2eb286b650786e4019579be8e7b4
   pullPolicy: IfNotPresent
-
 istioRouting:
   enabled: true
   domain: ticket-generator.scholl.tech
-
 certificate:
   enabled: true
   namespace: istio-system
   issuerName: letsencrypt
   issuerKind: ClusterIssuer
-
 secretEnv:
   - name: ALTCHA_HMAC_SECRET
     existingSecret: ticket-generator
