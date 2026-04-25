@@ -143,6 +143,13 @@
         "importing": "Importing",
         "invalidUrl": "Enter a valid URL.",
         "failed": "Import failed.",
+        "errors": {
+            "link_not_found": "This link is invalid or the event is no longer available.",
+            "provider_unsupported": "This ticket provider is not supported yet.",
+            "page_fetch_failed": "Could not load this page. Please try again later.",
+            "no_event_data": "No event data could be read from this page.",
+            "verification_failed": "Could not verify this import request. Please try again."
+        },
         "urlLabel": "Event URL",
         "placeholder": "https://event.example"
     },

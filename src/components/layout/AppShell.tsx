@@ -5,7 +5,11 @@ import type { Locale } from '@/lib/i18n/routing'
 import AppFooter from './AppFooter'
 import AppHobbyNote from './AppHobbyNote'
 
-const buildVersion = process.env.NEXT_PUBLIC_BUILD_VERSION ?? process.env.BUILD_VERSION ?? '1.0.0'
+const gitSha = process.env.NEXT_PUBLIC_GIT_SHA?.trim()
+const buildVersion =
+    gitSha && gitSha.length > 0
+        ? gitSha
+        : process.env.NEXT_PUBLIC_BUILD_VERSION?.trim() || process.env.BUILD_VERSION?.trim() || 'local'
 
 export default function AppShell({ children, locale }: { children: ReactNode; locale: Locale }) {
     return (

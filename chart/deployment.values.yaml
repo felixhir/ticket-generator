@@ -13,3 +13,9 @@ certificate:
   namespace: istio-system
   issuerName: letsencrypt
   issuerKind: ClusterIssuer
+
+secretEnv:
+  - name: ALTCHA_HMAC_SECRET
+    existingSecret: ticket-generator
+  - name: TICKETMASTER_API_KEY
+    existingSecret: ticket-generator

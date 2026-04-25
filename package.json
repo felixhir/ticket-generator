@@ -9,10 +9,7 @@
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build --turbopack",
-        "deploy": "next build && cd . > dist/.nojekyll && gh-pages -d dist --dotfiles",
         "start": "next start",
-        "docker:build": "docker build -t ticket-generator:local .",
-        "docker:run": "docker run --rm -p 3000:3000 ticket-generator:local",
         "check": "biome check .",
         "lint": "biome check .",
         "format": "biome check --write .",
@@ -20,6 +17,8 @@
     },
     "dependencies": {
         "@bwip-js/browser": "4.10.1",
+        "altcha": "^3.0.4",
+        "altcha-lib": "^2.0.3",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "html-to-image": "1.11.13",

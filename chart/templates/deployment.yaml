@@ -50,11 +50,23 @@ spec:
           env:
             - name: NODE_ENV
               value: production
+            - name: TICKET_GENERATOR_JSON_LOGS
+              value: "1"
             - name: NEXT_TELEMETRY_DISABLED
               value: "1"
             {{- with .Values.app.buildVersion }}
             - name: BUILD_VERSION
               value: {{ . | quote }}
+            {{- end }}
+            {{- range $index, $secretEnv := .Values.secretEnv }}
+            - name: {{ required (printf "secretEnv[%d].name is required" $index) $secretEnv.name | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required (printf "secretEnv[%d].existingSecret is required" $index) $secretEnv.existingSecret | quote }}
+                  key: {{ default $secretEnv.name $secretEnv.existingSecretKey | quote }}
+                  {{- if hasKey $secretEnv "optional" }}
+                  optional: {{ $secretEnv.optional }}
+                  {{- end }}
             {{- end }}
             {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}

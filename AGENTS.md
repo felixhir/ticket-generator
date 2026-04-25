@@ -25,7 +25,7 @@ Important areas:
 - `src/app/`: App Router routes, layouts, route handlers, route metadata, `favicon.ico`, and `globals.css` only.
 - `src/app/[locale]/`: localized user-facing routes. The locale layout owns the server-rendered `<html lang>`.
 - `src/app/(redirects)/`: legacy root/current URL redirects such as `/`, `/create`, `/privacy`, and `/imprint`.
-- `src/app/api/import-from-url/route.ts`: thin API route wrapper for URL import requests.
+- `src/app/api/import/route.ts`: thin API route wrapper for URL import requests.
 - `src/components/app/`: server-rendered app frame components such as `AppShell` and footer.
 - `src/components/ui/`: shadcn/ui registry components and shared UI primitives such as buttons, cards, fields, dialogs, popovers, and tabs.
 - `src/components/providers/`: scoped client providers. Mount providers as deep as possible.
@@ -33,7 +33,6 @@ Important areas:
 - `src/components/studio/`: ticket studio orchestration, screens, editor workspace, panels, and studio providers.
 - `src/components/tickets/`: printable ticket renderer, ticket layouts, and ticket building blocks.
 - `src/lib/domain/`: serializable domain types, defaults, enums, and pure domain helpers.
-- `src/lib/import-event/`: browser-facing import client for `/api/import-from-url`.
 - `src/lib/i18n/`: server translation and locale routing helpers.
 - `src/lib/ticket/`: pure ticket layout, sizing, color, and CSS helper functions.
 - `src/lib/storage/`: browser storage helpers. These must only be imported from client components or client hooks.

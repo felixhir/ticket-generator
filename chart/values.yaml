@@ -54,6 +54,7 @@ affinity: {}
 app:
   buildVersion: ""
 env: []
+secretEnv: []
 extraEnvFrom: []
 istioRouting:
   enabled: false

@@ -143,6 +143,13 @@
         "importing": "Importiert",
         "invalidUrl": "Gib eine gültige URL ein.",
         "failed": "Import fehlgeschlagen.",
+        "errors": {
+            "link_not_found": "Dieser Link ist ungültig oder das Event ist nicht mehr verfügbar.",
+            "provider_unsupported": "Dieser Ticketanbieter wird noch nicht unterstützt.",
+            "page_fetch_failed": "Diese Seite konnte nicht geladen werden. Bitte versuche es später erneut.",
+            "no_event_data": "Auf dieser Seite konnten keine Eventdaten gelesen werden.",
+            "verification_failed": "Diese Importanfrage konnte nicht verifiziert werden. Bitte versuche es erneut."
+        },
         "urlLabel": "Event-URL",
         "placeholder": "https://event.example"
     },

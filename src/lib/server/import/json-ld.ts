@@ -1,17 +1,21 @@
-import { currency } from '@/lib/domain/currency'
+import type { ImportedTicketData } from '@/lib/server/import/types'
+import { mapCurrency } from '@/lib/server/import/utils'
 
-export function mapCurrency(code: string | undefined): currency {
-    switch (code?.toUpperCase()) {
-        case 'USD':
-            return currency.USD
-        case 'SEK':
-            return currency.SEK
-        default:
-            return currency.EUR
+export function findEventInHtml(html: string) {
+    for (const json of findJsonLdScriptContents(html)) {
+        try {
+            const data = JSON.parse(json)
+            const event = findEventInJsonLd(data)
+            if (event) return event
+        } catch {
+            continue
+        }
     }
+
+    return null
 }
 
-export function mapEventToTicketData(data: Record<string, unknown>) {
+export function mapJsonLdEventToTicketData(data: Record<string, unknown>): ImportedTicketData {
     const location = data.location as Record<string, unknown> | undefined
     const address = location?.address as Record<string, string> | undefined
 
@@ -31,6 +35,7 @@ export function mapEventToTicketData(data: Record<string, unknown>) {
 
     return {
         title: (data.name as string) || '',
+        subtitle: '',
         venue: (location?.name as string) || '',
         address: addressParts,
         datetime: data.startDate ? new Date(data.startDate as string) : null,
@@ -40,7 +45,7 @@ export function mapEventToTicketData(data: Record<string, unknown>) {
     }
 }
 
-export function findEventInJsonLd(data: unknown): Record<string, unknown> | null {
+function findEventInJsonLd(data: unknown): Record<string, unknown> | null {
     if (Array.isArray(data)) {
         for (const item of data) {
             const found = findEventInJsonLd(item)
@@ -60,4 +65,19 @@ export function findEventInJsonLd(data: unknown): Record<string, unknown> | null
         }
     }
     return null
+}
+
+function findJsonLdScriptContents(html: string) {
+    return [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(match =>
+        decodeHtmlEntities(match[1].trim())
+    )
+}
+
+function decodeHtmlEntities(value: string) {
+    return value
+        .replaceAll('&quot;', '"')
+        .replaceAll('&#34;', '"')
+        .replaceAll('&amp;', '&')
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
 }
