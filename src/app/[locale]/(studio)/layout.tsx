@@ -3,15 +3,16 @@ import type { ReactNode } from 'react'
 import AppShell from '@/components/layout/AppShell'
 import I18nProvider from '@/components/providers/I18nProvider'
 import StudioPageFrame from '@/components/studio/StudioPageFrame'
-import type { Locale } from '@/lib/i18n/routing'
+import { normalizeLocale } from '@/lib/i18n/routing'
 
 interface StudioLayoutProps {
     children: ReactNode
-    params: Promise<{ locale: Locale }>
+    params: Promise<{ locale: string }>
 }
 
 export default async function StudioLayout({ children, params }: StudioLayoutProps) {
-    const { locale } = await params
+    const { locale: rawLocale } = await params
+    const locale = normalizeLocale(rawLocale)
 
     return (
         <AppShell locale={locale}>
