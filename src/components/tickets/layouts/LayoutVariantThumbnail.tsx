@@ -1,21 +1,19 @@
 'use client'
 
-import { type CSSProperties, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useDesign } from '@/components/studio/providers/DesignContext'
 import { TicketPreviewSlice, TicketThumbnail } from '@/components/tickets/ticket-primitives'
 import type { Layout } from '@/lib/domain/design'
+
 import getPatternClass from '@/lib/ticket/getPatternClass'
 import { cn } from '@/lib/utils'
 
 import './band/styles.css'
 import './default/styles.css'
 import './patterns.css'
+import useBandLogoMask from '@/lib/hooks/useBandLogoMask'
 
 const BAND_CELLS = 25
-
-const bandPreviewLogoToLight: CSSProperties = {
-    filter: 'brightness(0) invert(1)'
-}
 
 export default function LayoutVariantThumbnail({ layout }: { layout: Layout }) {
     return (
@@ -63,8 +61,8 @@ function PictureThumbnail() {
 }
 
 function BandThumbnail() {
-    const { design } = useDesign()
-    const src = design.bandLogo
+    const normalizedLogo = useBandLogoMask()
+    const src = normalizedLogo?.url
 
     return (
         <TicketPreviewSlice className='min-w-0'>
@@ -83,7 +81,6 @@ function BandThumbnail() {
                                     alt=''
                                     className='h-full w-full object-contain opacity-25'
                                     style={{
-                                        ...bandPreviewLogoToLight,
                                         WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
                                         WebkitMaskRepeat: 'no-repeat',
                                         WebkitMaskSize: '100% 100%',
@@ -98,7 +95,7 @@ function BandThumbnail() {
                 </div>
                 {src && (
                     <div className='absolute top-1/2 left-ticket-thumbnail-logo-offset z-10 h-ticket-thumbnail-logo-size w-ticket-thumbnail-logo-size -translate-x-1/2 -translate-y-1/2 drop-shadow-sm'>
-                        <img src={src} alt='' className='h-full w-full object-contain' style={bandPreviewLogoToLight} />
+                        <img src={src} alt='' className='h-full w-full object-contain' />
                     </div>
                 )}
             </div>
