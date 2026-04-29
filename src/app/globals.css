@@ -67,8 +67,8 @@
     --spacing-ticket-picture-marker-height: 4.25rem;
     --spacing-ticket-thumbnail-rail: 16%;
     --spacing-ticket-thumbnail-narrow-rail: 14%;
-    --spacing-ticket-thumbnail-logo-offset: 36%;
-    --spacing-ticket-thumbnail-logo-size: 32%;
+    --spacing-ticket-thumbnail-logo-offset: 50%;
+    --spacing-ticket-thumbnail-logo-size: 50%;
     --container-app-shell: 80rem;
     --container-app-narrow: 48rem;
     --container-app-content: 64rem;
@@ -78,6 +78,20 @@
 
 .vertical-text {
     writing-mode: sideways-lr;
+}
+
+.layout-options-section {
+    container-type: inline-size;
+}
+
+.layout-options-grid {
+    @apply grid min-w-0 grid-cols-2 gap-app-card;
+}
+
+@container (min-width: 28rem) {
+    .layout-options-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
 
 :root {

@@ -1,21 +1,19 @@
 'use client'
 
-import { type CSSProperties, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useDesign } from '@/components/studio/providers/DesignContext'
 import { TicketPreviewSlice, TicketThumbnail } from '@/components/tickets/ticket-primitives'
 import type { Layout } from '@/lib/domain/design'
+
 import getPatternClass from '@/lib/ticket/getPatternClass'
 import { cn } from '@/lib/utils'
 
 import './band/styles.css'
 import './default/styles.css'
 import './patterns.css'
+import useBandLogoMask from '@/lib/hooks/useBandLogoMask'
 
 const BAND_CELLS = 25
-
-const bandPreviewLogoToLight: CSSProperties = {
-    filter: 'brightness(0) invert(1)'
-}
 
 export default function LayoutVariantThumbnail({ layout }: { layout: Layout }) {
     return (
@@ -63,14 +61,14 @@ function PictureThumbnail() {
 }
 
 function BandThumbnail() {
-    const { design } = useDesign()
-    const src = design.bandLogo
+    const normalizedLogo = useBandLogoMask()
+    const src = normalizedLogo?.url
 
     return (
         <TicketPreviewSlice className='min-w-0'>
-            <div className='relative min-w-0 flex-1'>
+            <div className='relative min-w-0 flex-1 '>
                 <div className='background absolute inset-0' />
-                <div className='absolute inset-0 grid grid-cols-5 gap-0.5 p-0.5'>
+                <div className='absolute inset-0 grid grid-cols-5 gap-0.5 p-1 opacity-50'>
                     {Array.from({ length: BAND_CELLS }).map((_, i) => (
                         <div
                             key={i}
@@ -81,9 +79,8 @@ function BandThumbnail() {
                                 <img
                                     src={src}
                                     alt=''
-                                    className='h-full w-full object-contain opacity-25'
+                                    className='h-full w-full object-contain opacity-30'
                                     style={{
-                                        ...bandPreviewLogoToLight,
                                         WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
                                         WebkitMaskRepeat: 'no-repeat',
                                         WebkitMaskSize: '100% 100%',
@@ -96,13 +93,13 @@ function BandThumbnail() {
                         </div>
                     ))}
                 </div>
+                <div className='absolute inset-y-0 right-0 z-0 w-ticket-thumbnail-narrow-rail border-l border-ticket-tertiary/12 bg-ticket-secondary/35' />
                 {src && (
                     <div className='absolute top-1/2 left-ticket-thumbnail-logo-offset z-10 h-ticket-thumbnail-logo-size w-ticket-thumbnail-logo-size -translate-x-1/2 -translate-y-1/2 drop-shadow-sm'>
-                        <img src={src} alt='' className='h-full w-full object-contain' style={bandPreviewLogoToLight} />
+                        <img src={src} alt='' className='h-full w-full object-contain' />
                     </div>
                 )}
             </div>
-            <div className='relative z-20 w-ticket-thumbnail-narrow-rail shrink-0 border-l border-ticket-tertiary/10 bg-ticket-secondary/80' />
         </TicketPreviewSlice>
     )
 }

@@ -18,11 +18,12 @@ import {
     DialogHeader,
     DialogTitle
 } from '@/components/ui/dialog'
-import { FieldLabel } from '@/components/ui/field'
+import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { buildA4PackPlan } from '@/lib/ticket/packA4'
 import { renderA4PackToPngDataUrls } from '@/lib/ticket/renderA4Page'
+import { renderBorderlessSheetToPngDataUrl } from '@/lib/ticket/renderBorderlessSheet'
 import { ticketOuterSizeMm } from '@/lib/ticket/ticketSizeMm'
 
 const MIN_COUNT = 1
@@ -68,6 +69,7 @@ export default function PrintoutDialog({
     const { design } = useDesign()
     const [ticketCount, setTicketCount] = useState(String(MIN_COUNT))
     const [exportMode, setExportMode] = useState<ExportMode>('pdf')
+    const [borderless, setBorderless] = useState(false)
     const [exportError, setExportError] = useState<string | null>(null)
     const [isWorking, setIsWorking] = useState(false)
     const [printJob, setPrintJob] = useState<PrintJob | null>(null)
@@ -83,6 +85,7 @@ export default function PrintoutDialog({
             setExportError(null)
             setTicketCount(String(MIN_COUNT))
             setExportMode('pdf')
+            setBorderless(false)
         }
     }, [open])
 
@@ -110,6 +113,12 @@ export default function PrintoutDialog({
         },
         [design.layout, design.dimensions]
     )
+
+    const buildBorderlessSheetPng = useCallback(async (el: HTMLElement, totalTickets: number) => {
+        const dataUrl = await toPng(el, { cacheBust: true, pixelRatio: 4 })
+        const { w, h } = await loadImageSize(dataUrl)
+        return renderBorderlessSheetToPngDataUrl(dataUrl, w, h, totalTickets)
+    }, [])
 
     const runPdf = useCallback(async () => {
         const el = document.querySelector<HTMLElement>('#preview-ticket')
@@ -150,33 +159,42 @@ export default function PrintoutDialog({
         setIsWorking(true)
         setExportError(null)
         try {
+            if (borderless) {
+                const borderlessPng = await buildBorderlessSheetPng(el, n)
+                const res = await fetch(borderlessPng)
+                const blob = await res.blob()
+                downloadBlob(blob, `${fileBaseName}-borderless.png`)
+                return
+            }
+
             const pagePngs = await buildA4PagePngs(el, n)
             if (pagePngs.length === 1) {
                 const res = await fetch(pagePngs[0]!)
                 const blob = await res.blob()
                 downloadBlob(blob, `${fileBaseName}.png`)
-            } else {
-                const zip = new JSZip()
-                for (let p = 0; p < pagePngs.length; p += 1) {
-                    const url = pagePngs[p]!
-                    const base64 = url.includes('base64,') ? (url.split('base64,')[1] ?? '') : url
-                    if (!base64) {
-                        throw new Error('png data')
-                    }
-                    const index = p + 1
-                    const padded = index < 10 ? `0${String(index)}` : String(index)
-                    zip.file(`${fileBaseName}-a4-${padded}.png`, base64, { base64: true })
-                }
-                const blob = await zip.generateAsync({ type: 'blob' })
-                downloadBlob(blob, `${fileBaseName}-a4.zip`)
+                return
             }
+
+            const zip = new JSZip()
+            for (let p = 0; p < pagePngs.length; p += 1) {
+                const url = pagePngs[p]!
+                const base64 = url.includes('base64,') ? (url.split('base64,')[1] ?? '') : url
+                if (!base64) {
+                    throw new Error('png data')
+                }
+                const index = p + 1
+                const padded = index < 10 ? `0${String(index)}` : String(index)
+                zip.file(`${fileBaseName}-a4-${padded}.png`, base64, { base64: true })
+            }
+            const blob = await zip.generateAsync({ type: 'blob' })
+            downloadBlob(blob, `${fileBaseName}-a4.zip`)
         } catch (error) {
             console.error(error)
             setExportError(t('ticketDetail.printoutCaptureFailed'))
         } finally {
             setIsWorking(false)
         }
-    }, [buildA4PagePngs, fileBaseName, getResolvedCount, t])
+    }, [borderless, buildA4PagePngs, buildBorderlessSheetPng, fileBaseName, getResolvedCount, t])
 
     const runPrint = useCallback(async () => {
         const el = document.querySelector<HTMLElement>('#preview-ticket')
@@ -254,7 +272,11 @@ export default function PrintoutDialog({
                                             aria-labelledby={`${formId}-format`}
                                         >
                                             <TabsList className='grid w-full grid-cols-2' variant='default'>
-                                                <TabsTrigger className='text-app-caption' value='pdf'>
+                                                <TabsTrigger
+                                                    className='text-app-caption'
+                                                    value='pdf'
+                                                    disabled={borderless}
+                                                >
                                                     {t('ticketDetail.printoutTabPdf')}
                                                 </TabsTrigger>
                                                 <TabsTrigger className='text-app-caption' value='png'>
@@ -283,6 +305,29 @@ export default function PrintoutDialog({
                                         }}
                                     />
                                 </div>
+                                <Field orientation='horizontal' className='items-start sm:col-span-2'>
+                                    <input
+                                        id='printout-borderless'
+                                        type='checkbox'
+                                        className='mt-0.5 size-4 shrink-0 rounded-sm border border-input bg-background accent-(--app-accent)'
+                                        checked={borderless}
+                                        onChange={event => {
+                                            const nextBorderless = event.target.checked
+                                            setBorderless(nextBorderless)
+                                            if (nextBorderless) {
+                                                setExportMode('png')
+                                            }
+                                        }}
+                                    />
+                                    <FieldContent>
+                                        <FieldLabel htmlFor='printout-borderless'>
+                                            <FieldTitle>{t('ticketDetail.printoutBorderless')}</FieldTitle>
+                                        </FieldLabel>
+                                        <FieldDescription>
+                                            {t('ticketDetail.printoutBorderlessDescription')}
+                                        </FieldDescription>
+                                    </FieldContent>
+                                </Field>
                                 {exportError && (
                                     <p className='text-app-small text-app-danger' role='status'>
                                         {exportError}

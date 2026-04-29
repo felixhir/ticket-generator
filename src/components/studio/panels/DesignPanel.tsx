@@ -53,9 +53,12 @@ function LayoutSection({ showTitle = true }: { showTitle?: boolean }) {
     const { t } = useTranslation()
 
     return (
-        <section className='grid gap-app-card' {...(!showTitle ? { 'aria-label': t('design.layout') } : undefined)}>
+        <section
+            className='layout-options-section grid gap-app-card'
+            {...(!showTitle ? { 'aria-label': t('design.layout') } : undefined)}
+        >
             {showTitle && <h3 className='text-app-body text-app-text-primary'>{t('design.layout')}</h3>}
-            <div className='grid min-w-0 grid-cols-3 gap-app-card'>
+            <div className='layout-options-grid'>
                 <LayoutOption layout='default' label={t('design.standard')} icon={<LayoutIcon layout='default' />} />
                 <LayoutOption layout='picture' label={t('design.picture')} icon={<LayoutIcon layout='picture' />} />
                 <LayoutOption layout='band' label={t('design.band')} icon={<LayoutIcon layout='band' />} />
@@ -64,7 +67,7 @@ function LayoutSection({ showTitle = true }: { showTitle?: boolean }) {
     )
 }
 
-function DimensionsSection({ showTitle = true }: { showTitle?: boolean }) {
+export function DimensionsSection({ showTitle = true }: { showTitle?: boolean }) {
     const { t } = useTranslation()
     const { design, setDesign } = useDesign()
 
@@ -117,12 +120,13 @@ function ColorsSection({ showTitle = true }: { showTitle?: boolean }) {
     )
 }
 
-export function PatternMediaSection() {
+export function PatternMediaSection({ includeDimensions = false }: { includeDimensions?: boolean }) {
     const { t } = useTranslation()
     const { design, setDesign } = useDesign()
 
     return (
         <section className='grid gap-y-app-frame' aria-label={t('design.patternMedia')}>
+            {includeDimensions && <DimensionsSection showTitle />}
             <div className='grid grid-cols-1 gap-x-app-section gap-y-app-section sm:grid-cols-2'>
                 <Field>
                     <FieldLabel htmlFor='design-background-pattern'>{t('design.backgroundPattern')}</FieldLabel>

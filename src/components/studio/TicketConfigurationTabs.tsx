@@ -111,13 +111,13 @@ function LayoutConfiguration({ includePreview }: { includePreview: boolean }) {
                 </PreviewFrame>
                 <DesignPanel
                     className='h-full min-h-0'
-                    sections={['layout', 'dimensions']}
+                    sections={['layout']}
                     showHeader={false}
                     showSectionTitles={false}
                 />
             </div>
             <Card className='w-full px-app-section py-app-frame'>
-                <PatternMediaSection />
+                <PatternMediaSection includeDimensions />
             </Card>
         </div>
     )
