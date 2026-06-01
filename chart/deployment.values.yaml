@@ -1,7 +1,7 @@
 image:
   registry: ghcr.io
   repository: felixhir/ticket-generator
-  tag: 0060ea216b5b2eb286b650786e4019579be8e7b4
+  tag: 8ca50b494450d345fffdb8ce68ca3a9415bdd8c8
   pullPolicy: IfNotPresent
 istioRouting:
   enabled: true
