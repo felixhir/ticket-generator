@@ -1,4 +1,4 @@
-FROM node:25-alpine AS builder
+FROM node:26-alpine AS builder
 
 RUN apk add --no-cache libc6-compat
 
@@ -15,7 +15,7 @@ ENV NEXT_PUBLIC_BUILD_NUMBER=$NEXT_PUBLIC_BUILD_NUMBER
 ENV NEXT_PUBLIC_GIT_SHA=$NEXT_PUBLIC_GIT_SHA
 RUN npm run build
 
-FROM node:25-alpine AS runner
+FROM node:26-alpine AS runner
 
 RUN apk add --no-cache libc6-compat
 
