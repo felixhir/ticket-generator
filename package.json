@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@bwip-js/browser": "4.11.1",
-        "altcha": "^3.0.11",
+        "altcha": "^3.1.0",
         "altcha-lib": "^2.2.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -26,9 +26,9 @@
         "i18next-browser-languagedetector": "^8.2.1",
         "jspdf": "^4.2.1",
         "jszip": "^3.10.1",
-        "lucide-react": "^1.17.0",
+        "lucide-react": "^1.18.0",
         "moment": "2.30.1",
-        "next": "16.2.7",
+        "next": "16.2.9",
         "radix-ui": "^1.5.0",
         "react": "19.2.7",
         "react-barcode": "1.6.1",
@@ -37,19 +37,19 @@
         "react-dom": "19.2.7",
         "react-i18next": "^17.0.8",
         "rgb-hex": "4.1.0",
-        "shadcn": "^4.10.0",
+        "shadcn": "^4.11.0",
         "tailwind-merge": "^3.6.0",
         "tw-animate-css": "^1.4.0"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.4.16",
-        "@tailwindcss/postcss": "4.3.0",
-        "@types/node": "25.9.2",
+        "@biomejs/biome": "2.5.0",
+        "@tailwindcss/postcss": "4.3.1",
+        "@types/node": "25.9.3",
         "@types/react": "19.2.17",
         "@types/react-dom": "19.2.3",
         "gh-pages": "6.3.0",
         "husky": "9.1.7",
-        "tailwindcss": "4.3.0",
+        "tailwindcss": "4.3.1",
         "typescript": "6.0.3"
     }
 }
