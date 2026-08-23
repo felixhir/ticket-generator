@@ -62,9 +62,6 @@ istioRouting:
   gateway:
     selector:
       app: istio-ingress
-  acmeChallenge:
-    host: acme-solver.istio-system.svc.cluster.local
-    port: 8089
   httpsRedirect: true
 certificate:
   enabled: false

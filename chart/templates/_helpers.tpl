@@ -34,3 +34,7 @@ helm.sh/chart: {{ include "ticket-generator.chart" . }}
 {{- printf "%s:%s" .Values.image.repository .Values.image.tag }}
 {{- end }}
 {{- end }}
+
+{{- define "ticket-generator.acmeSolverServiceName" -}}
+{{- printf "%s-acme-%s" .prefix (adler32sum .domain) }}
+{{- end }}

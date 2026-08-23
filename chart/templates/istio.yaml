@@ -2,6 +2,10 @@
 {{- $root := . }}
 {{- $name := include "ticket-generator.fullname" . }}
 {{- $domain := required "istioRouting.domain is required when istioRouting.enabled" .Values.istioRouting.domain -}}
+{{- $acmeDomains := list $domain }}
+{{- if $root.Values.certificate.includeWwwSan }}
+{{- $acmeDomains = append $acmeDomains (printf "www.%s" $domain) }}
+{{- end }}
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
@@ -15,16 +19,36 @@ spec:
         name: http-{{ $name }}
         protocol: HTTP
       hosts:
-        - {{ $domain | quote }}
+        {{- range $acmeDomains }}
+        - {{ . | quote }}
+        {{- end }}
     - port:
         number: 443
         name: https-{{ $name }}
         protocol: HTTPS
       hosts:
-        - {{ $domain | quote }}
+        {{- range $acmeDomains }}
+        - {{ . | quote }}
+        {{- end }}
       tls:
         mode: SIMPLE
         credentialName: "{{ $name }}-certificate"
+{{- range $acmeDomains }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ticket-generator.acmeSolverServiceName" (dict "prefix" $name "domain" .) | quote }}
+  namespace: istio-system
+spec:
+  selector:
+    acme.cert-manager.io/http01-solver: "true"
+    acme.cert-manager.io/http-domain: {{ adler32sum . | quote }}
+  ports:
+    - port: 8089
+      targetPort: 8089
+      protocol: TCP
+{{- end }}
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -32,24 +56,50 @@ metadata:
   name: {{ $name | quote }}
 spec:
   hosts:
-    - {{ $domain | quote }}
+    {{- range $acmeDomains }}
+    - {{ . | quote }}
+    {{- end }}
   gateways:
     - "{{ $root.Release.Namespace }}/{{ $name }}"
   http:
+    {{- range $acmeDomains }}
     - match:
         - uri:
             prefix: /.well-known/acme-challenge/
+          headers:
+            Host:
+              exact: {{ . | quote }}
       route:
         - destination:
-            host: {{ .Values.istioRouting.acmeChallenge.host | quote }}
+            host: {{ printf "%s.istio-system.svc.cluster.local" (include "ticket-generator.acmeSolverServiceName" (dict "prefix" $name "domain" .)) | quote }}
             port:
-              number: {{ .Values.istioRouting.acmeChallenge.port }}
+              number: 8089
+    {{- end }}
     {{- if .Values.istioRouting.httpsRedirect }}
     - match:
         - port: 80
+          uri:
+            exact: /
       redirect:
         scheme: https
         redirectCode: 301
+    - match:
+        - port: 80
+          uri:
+            regex: '^/[^.].*'
+      redirect:
+        scheme: https
+        redirectCode: 301
+    {{- end }}
+    {{- if .Values.certificate.includeWwwSan }}
+    - match:
+        - uri:
+            prefix: /
+          headers:
+            Host:
+              exact: {{ printf "www.%s" $domain | quote }}
+      redirect:
+        authority: {{ $domain | quote }}
     {{- end }}
     - match:
         - uri:
