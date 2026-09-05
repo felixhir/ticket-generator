@@ -56,6 +56,15 @@ app:
 env: []
 secretEnv: []
 extraEnvFrom: []
+secretStore: vault
+secretRemoteKey: ""
+externalCredentialsSecretStore: vault
+externalCredentialsRemoteKey: ""
+externalSecrets:
+  enabled: false
+  k8sSecretName: ticket-generator
+secrets: []
+externalCredentialSecrets: []
 istioRouting:
   enabled: false
   domain: ""

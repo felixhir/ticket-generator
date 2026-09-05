@@ -11,6 +11,18 @@ certificate:
   namespace: istio-system
   issuerName: letsencrypt
   issuerKind: ClusterIssuer
+secretStore: vault
+secretRemoteKey: artus-engineering-workload/ticket-generator/runtime
+externalCredentialsRemoteKey: artus-engineering-workload/ticket-generator/external
+externalSecrets:
+  enabled: true
+  k8sSecretName: ticket-generator
+secrets:
+  - secretKey: ALTCHA_HMAC_SECRET
+    remoteAttributeName: altchaHmacSecret
+externalCredentialSecrets:
+  - secretKey: TICKETMASTER_API_KEY
+    remoteAttributeName: ticketmasterApiKey
 secretEnv:
   - name: ALTCHA_HMAC_SECRET
     existingSecret: ticket-generator
