@@ -32,7 +32,7 @@ spec:
         runAsUser: 1001
         fsGroup: 1001
       containers:
-        - name: web
+        - name: {{ include "ticket-generator.fullname" . }}
           image: {{ include "ticket-generator.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           securityContext:
